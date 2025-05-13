@@ -1,1 +1,3 @@
-My Internship project
+# My Internship project
+
+## Project structure
