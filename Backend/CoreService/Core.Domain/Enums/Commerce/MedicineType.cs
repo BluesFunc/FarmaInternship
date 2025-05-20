@@ -2,9 +2,9 @@
 
 public enum MedicineType
 {
-     Tablet,
-     Liquid,
-     Capsule,
-     Drops,
-     Injection
+    Tablet,
+    Liquid,
+    Capsule,
+    Drops,
+    Injection
 }

@@ -5,5 +5,5 @@ public enum OrderStatus
     New,
     OnWay,
     Shipped,
-    Canceled
+    Cancelled
 }

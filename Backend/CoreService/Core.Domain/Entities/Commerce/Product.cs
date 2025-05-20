@@ -16,8 +16,6 @@ public class Product : AuditableEntity
         StockQuantity = stockQuantity;
     }
 
-    public IReadOnlyCollection<ProductCategory> Categories { get; private set; }
-    
     public string Name { get; set; }
     public string? Description { get; set; }
     public string? ImageUrl { get; set; }
@@ -28,12 +26,14 @@ public class Product : AuditableEntity
     public Merchant MerchantCompany { get; private set; }
     public decimal Price { get; set; }
     public int StockQuantity { get; set; }
-    
+    public IReadOnlyCollection<ProductCategory> Categories { get; private set; }
+
     public void SetMedicine(Medicine medicine)
     {
         MedicineId = medicine.Id;
         MedicineItem = medicine;
     }
+
     public void SetMerchant(Merchant merchant)
     {
         MerchantId = merchant.Id;

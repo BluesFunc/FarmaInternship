@@ -13,12 +13,10 @@ public class CartItem : AuditableEntity
         ProductId = product.Id;
         Quantity = quantity;
     }
-    
+
     public Guid CartId { get; private set; }
     public Cart CartObject { get; private set; }
     public Guid ProductId { get; private set; }
     public Product ProductObject { get; private set; }
     public int Quantity { get; set; }
-
-    
 }
