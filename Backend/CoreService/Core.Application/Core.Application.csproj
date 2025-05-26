@@ -7,37 +7,26 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Features\Commerce\Medicines\Commands\DeleteMedicineById\" />
-      <Folder Include="Features\Commerce\Medicines\Commands\UpdateMedicineCommand\" />
-      <Folder Include="Features\Commerce\Merchants\Commands\DeleteMerchantById\" />
-      <Folder Include="Features\Commerce\Merchants\Commands\UpdateMerchant\" />
-      <Folder Include="Features\Commerce\Merchants\Queries\GetPaginatedMedicine\" />
-      <Folder Include="Features\Commerce\ProductCategory\Commands\Commands\CreateProductCategory\" />
-      <Folder Include="Features\Commerce\ProductCategory\Commands\Commands\DeleteProductCategory\" />
-      <Folder Include="Features\Commerce\ProductCategory\Commands\Commands\UpdateProductCategory\" />
-      <Folder Include="Features\Commerce\ProductCategory\Queries\GetPaginatedProductCategories\" />
-      <Folder Include="Features\Commerce\ProductCategory\Queries\GetProductCategoryById\" />
-      <Folder Include="Features\Commerce\Products\Commands\CreateProduct\" />
-      <Folder Include="Features\Commerce\Products\Commands\DeleteProduct\" />
-      <Folder Include="Features\Commerce\Products\Commands\UpdateProduct\" />
-      <Folder Include="Features\Commerce\Products\Qureies\GetPaginatedProducts\" />
-      <Folder Include="Features\Commerce\Products\Qureies\GetProductById\" />
-      <Folder Include="Features\Trading\CartItems\" />
-      <Folder Include="Features\Trading\Carts\" />
-      <Folder Include="Features\Trading\OrderItems\" />
-      <Folder Include="Features\Trading\Orders\" />
+        <Folder Include="Features\Commerce\Medicines\Queries\GetPaginatedMedicine\"/>
+        <Folder Include="Features\Commerce\Merchants\Queries\GetPaginatedMedicine\"/>
+        <Folder Include="Features\Commerce\ProductCategories\Queries\GetPaginatedProductCategories\"/>
+        <Folder Include="Features\Commerce\Products\Qureies\GetPaginatedProducts\"/>
+        <Folder Include="Features\Trading\CartItems\"/>
+        <Folder Include="Features\Trading\Carts\"/>
+        <Folder Include="Features\Trading\OrderItems\"/>
+        <Folder Include="Features\Trading\Orders\"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Core.Domain\Core.Domain.csproj" />
+        <ProjectReference Include="..\Core.Domain\Core.Domain.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="FluentValidation" Version="12.0.0" />
-      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
-      <PackageReference Include="Mapster" Version="7.4.0" />
-      <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
-      <PackageReference Include="MediatR" Version="12.5.0" />
+        <PackageReference Include="FluentValidation" Version="12.0.0"/>
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0"/>
+        <PackageReference Include="Mapster" Version="7.4.0"/>
+        <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1"/>
+        <PackageReference Include="MediatR" Version="12.5.0"/>
     </ItemGroup>
 
 </Project>
