@@ -7,10 +7,25 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="DTOs\Trading\" />
-      <Folder Include="Features\Commerce\Medicines\Queries\" />
-      <Folder Include="Features\Commerce\Merchants\Queries\" />
-      <Folder Include="Features\Trading\" />
+      <Folder Include="Features\Commerce\Medicines\Commands\DeleteMedicineById\" />
+      <Folder Include="Features\Commerce\Medicines\Commands\UpdateMedicineCommand\" />
+      <Folder Include="Features\Commerce\Merchants\Commands\DeleteMerchantById\" />
+      <Folder Include="Features\Commerce\Merchants\Commands\UpdateMerchant\" />
+      <Folder Include="Features\Commerce\Merchants\Queries\GetPaginatedMedicine\" />
+      <Folder Include="Features\Commerce\ProductCategory\Commands\Commands\CreateProductCategory\" />
+      <Folder Include="Features\Commerce\ProductCategory\Commands\Commands\DeleteProductCategory\" />
+      <Folder Include="Features\Commerce\ProductCategory\Commands\Commands\UpdateProductCategory\" />
+      <Folder Include="Features\Commerce\ProductCategory\Queries\GetPaginatedProductCategories\" />
+      <Folder Include="Features\Commerce\ProductCategory\Queries\GetProductCategoryById\" />
+      <Folder Include="Features\Commerce\Products\Commands\CreateProduct\" />
+      <Folder Include="Features\Commerce\Products\Commands\DeleteProduct\" />
+      <Folder Include="Features\Commerce\Products\Commands\UpdateProduct\" />
+      <Folder Include="Features\Commerce\Products\Qureies\GetPaginatedProducts\" />
+      <Folder Include="Features\Commerce\Products\Qureies\GetProductById\" />
+      <Folder Include="Features\Trading\CartItems\" />
+      <Folder Include="Features\Trading\Carts\" />
+      <Folder Include="Features\Trading\OrderItems\" />
+      <Folder Include="Features\Trading\Orders\" />
     </ItemGroup>
 
     <ItemGroup>
