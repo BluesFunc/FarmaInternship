@@ -5,7 +5,7 @@ namespace Core.Domain.Entities.Commerce;
 
 public class Product : AuditableEntity
 {
-    public Product(string name, string description, string imageUrl, Medicine medicineItem, Merchant merchant,
+    public Product(string name, string description, Medicine medicineItem, Merchant merchant,
         decimal price, int stockQuantity)
     {
         Name = name;
@@ -19,7 +19,7 @@ public class Product : AuditableEntity
     public string Name { get; set; }
     public string? Description { get; set; }
     public string? ImageUrl { get; set; }
-    public ProductStatus Status { get; set; }
+    public ProductStatus Status { get; set; } = ProductStatus.OnPending;
     public Guid MedicineId { get; private set; }
     public Medicine MedicineItem { get; private set; }
     public Guid MerchantId { get; private set; }

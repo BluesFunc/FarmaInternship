@@ -7,7 +7,26 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="DTOs\" />
+        <Folder Include="Features\Commerce\Medicines\Queries\GetPaginatedMedicine\"/>
+        <Folder Include="Features\Commerce\Merchants\Queries\GetPaginatedMedicine\"/>
+        <Folder Include="Features\Commerce\ProductCategories\Queries\GetPaginatedProductCategories\"/>
+        <Folder Include="Features\Commerce\Products\Qureies\GetPaginatedProducts\"/>
+        <Folder Include="Features\Trading\CartItems\"/>
+        <Folder Include="Features\Trading\Carts\"/>
+        <Folder Include="Features\Trading\OrderItems\"/>
+        <Folder Include="Features\Trading\Orders\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Core.Domain\Core.Domain.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="12.0.0"/>
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0"/>
+        <PackageReference Include="Mapster" Version="7.4.0"/>
+        <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1"/>
+        <PackageReference Include="MediatR" Version="12.5.0"/>
     </ItemGroup>
 
 </Project>

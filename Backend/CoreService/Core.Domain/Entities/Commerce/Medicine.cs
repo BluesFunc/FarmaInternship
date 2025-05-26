@@ -1,4 +1,4 @@
-﻿using Core.Domain.Entities.Abstractions;
+﻿ using Core.Domain.Entities.Abstractions;
 using Core.Domain.Enums.Commerce;
 
 namespace Core.Domain.Entities.Commerce;
