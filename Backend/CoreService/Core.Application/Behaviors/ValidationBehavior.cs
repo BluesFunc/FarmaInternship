@@ -6,8 +6,8 @@ using MediatR;
 namespace Core.Application.Behaviors;
 
 public class ValidationBehavior<TRequset, TResponse> : IPipelineBehavior<TRequset, TResponse>
-where TRequset : notnull
-where TResponse : Result
+    where TRequset : notnull
+    where TResponse : Result
 {
     private IEnumerable<IValidator<IRequest>> Validators { get; init; }
 
@@ -21,10 +21,7 @@ where TResponse : Result
         RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
-        if (!Validators.Any())
-        {
-            return await next();
-        }
+        if (!Validators.Any()) return await next();
 
         var context = new ValidationContext<TRequset>(request);
         var validationResults = await Task.WhenAll(
@@ -36,22 +33,16 @@ where TResponse : Result
             .Select(r => r.ErrorMessage)
             .ToList();
 
-        if (failures.Count == 0)
-        {
-            return await next();
-        }
+        if (failures.Count == 0) return await next();
 
         var message = string.Join(" ", failures);
         return ToResultResponse<TResponse>(message, ErrorTypeCode.ValidationError);
     }
 
     private static TResponseType ToResultResponse<TResponseType>(string message, ErrorTypeCode code)
-    where TResponseType : Result
+        where TResponseType : Result
     {
-        if (typeof(TResponseType) == typeof(Result))
-        {
-            return (TResponseType)Result.Failed(code, message);
-        }
+        if (typeof(TResponseType) == typeof(Result)) return (TResponseType)Result.Failed(code, message);
 
         var result = typeof(Result<>)
             .GetGenericTypeDefinition()

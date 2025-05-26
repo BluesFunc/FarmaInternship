@@ -10,7 +10,7 @@ public abstract class SingleRepositoryHandlerBase<TRepository, TEntity>
     where TRepository : IGenericRepository<TEntity>
     where TEntity : Entity
 {
-    protected  readonly TRepository _repository;
+    protected readonly TRepository _repository;
     protected readonly IMapper _mapper;
 
     public SingleRepositoryHandlerBase(IMapper mapper, TRepository repository)

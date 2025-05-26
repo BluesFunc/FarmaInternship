@@ -5,7 +5,10 @@ namespace Core.Application.Wrappers;
 
 public record Result
 {
-    protected Result(){} 
+    protected Result()
+    {
+    }
+
     public string Message { get; protected init; } = null!;
     public bool IsSucceed { get; protected init; }
     public bool IsFailed => !IsSucceed;

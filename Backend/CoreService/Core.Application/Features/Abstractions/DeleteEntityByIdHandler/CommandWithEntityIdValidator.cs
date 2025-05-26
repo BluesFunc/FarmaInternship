@@ -5,7 +5,7 @@ namespace Core.Application.Features.Abstractions.DeleteEntityByIdHandler;
 
 public class CommandWithEntityIdValidator : AbstractValidator<CommandWithEntityId<Result>>
 {
-    CommandWithEntityIdValidator()
+    public CommandWithEntityIdValidator()
     {
         RuleFor(x => x.Id)
             .NotEmpty();
