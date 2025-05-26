@@ -2,7 +2,7 @@
 
 namespace Core.Domain.Interfaces.Repositories;
 
-public interface IPaginatedRepository<T> : IRepository<T>
+public interface IPaginatedRepository<T> : IGenericRepository<T>
     where T : Entity
 {
     public Task<IReadOnlyCollection<T>> GetPaginatedAsync(int pageNo = 1, int pageSize = 10,

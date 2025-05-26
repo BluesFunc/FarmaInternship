@@ -9,7 +9,7 @@ public record Result
     public string Message { get; protected init; } = null!;
     public bool IsSucceed { get; protected init; }
     public bool IsFailed => !IsSucceed;
-    public ErrorTypeCode ErrorCode { get; protected init; }
+    public ErrorTypeCode ErrorCode { get; protected init; } = ErrorTypeCode.None;
 
 
     public static Result Successful(string message = "Request Succeed")
