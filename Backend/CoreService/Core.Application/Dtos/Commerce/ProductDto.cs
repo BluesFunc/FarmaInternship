@@ -2,7 +2,7 @@
 using Core.Domain.Enums.Commerce;
 using Mapster;
 
-namespace Core.Application.DTOs.Commerce;
+namespace Core.Application.Dtos.Commerce;
 
 public class ProductDto : IMapFrom<Product>
 {

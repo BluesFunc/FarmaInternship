@@ -1,4 +1,4 @@
-﻿using Core.Application.Features.Abstractions.DeleteEntityByIdHandler;
+﻿using Core.Application.Features.Abstractions.Commands.DeleteEntityByIdHandler;
 using Core.Application.Wrappers;
 using MediatR;
 

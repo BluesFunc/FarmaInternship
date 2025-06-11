@@ -1,4 +1,4 @@
-﻿using Core.Application.DTOs.Commerce;
+﻿using Core.Application.Dtos.Commerce;
 using Core.Application.Features.Abstractions;
 using Core.Application.Wrappers;
 using Core.Application.Wrappers.Enums;
@@ -31,9 +31,15 @@ public class CreateMedicineHandler : SingleRepositoryHandlerBase<IMedicineReposi
         };
 
         var result = await _repository.AddAsync(newEntity, cancellationToken);
-        if (result == null) return Result<MedicineDto>.Failed(ErrorTypeCode.EntityConflict, "Can not create entity");
+        
+        if (result == null)
+        {
+            return Result<MedicineDto>
+                .Failed(ErrorTypeCode.EntityConflict, "Can not create entity");
+        }
 
         var responseData = _mapper.Map<MedicineDto>(result);
+        
         return Result<MedicineDto>.Successful(responseData);
     }
 }

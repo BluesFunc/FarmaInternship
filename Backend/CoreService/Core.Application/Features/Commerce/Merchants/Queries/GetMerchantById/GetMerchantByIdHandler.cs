@@ -1,4 +1,4 @@
-﻿using Core.Application.DTOs.Commerce;
+﻿using Core.Application.Dtos.Commerce;
 using Core.Application.Features.Abstractions;
 using Core.Application.Wrappers;
 using Core.Application.Wrappers.Enums;

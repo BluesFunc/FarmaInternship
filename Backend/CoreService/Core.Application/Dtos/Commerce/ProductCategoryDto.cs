@@ -1,7 +1,7 @@
 ﻿using Core.Domain.Entities.Commerce;
 using Mapster;
 
-namespace Core.Application.DTOs.Commerce;
+namespace Core.Application.Dtos.Commerce;
 
 public class ProductCategoryDto : IMapFrom<ProductCategory>
 {

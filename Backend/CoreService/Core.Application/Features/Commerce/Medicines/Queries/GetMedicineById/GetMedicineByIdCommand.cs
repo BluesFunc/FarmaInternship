@@ -1,4 +1,4 @@
-﻿using Core.Application.DTOs.Commerce;
+﻿using Core.Application.Dtos.Commerce;
 using Core.Application.Wrappers;
 using MediatR;
 

@@ -1,6 +1,6 @@
-﻿using Core.Application.DTOs.Commerce;
+﻿using Core.Application.Dtos.Commerce;
 using Core.Application.Features.Abstractions;
-using Core.Application.Features.Abstractions.DeleteEntityByIdHandler;
+using Core.Application.Features.Abstractions.Commands.DeleteEntityByIdHandler;
 using Core.Application.Wrappers;
 using Core.Domain.Entities.Commerce;
 using MediatR;

@@ -10,6 +10,7 @@ public class CreateMerchantValidator : AbstractValidator<CreateMerchantCommand>
             .NotEmpty()
             .MinimumLength(5)
             .MaximumLength(100);
+        
         RuleFor(x => x.Description);
     }
 }

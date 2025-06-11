@@ -1,4 +1,4 @@
-﻿using Core.Application.DTOs.Commerce;
+﻿using Core.Application.Dtos.Commerce;
 using Core.Application.Features.Abstractions;
 using Core.Application.Wrappers;
 using Core.Application.Wrappers.Enums;
@@ -20,9 +20,14 @@ public class GetProductByIdHandler :
     public async Task<Result<ProductDto>> Handle(GetProductByIdCommand request, CancellationToken cancellationToken)
     {
         var entity = await _repository.GetByIdAsync(request.Id, cancellationToken);
-        if (entity == null) return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
+
+        if (entity == null)
+        {
+            return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
+        }
 
         var data = _mapper.Map<ProductDto>(entity);
+        
         return Result<ProductDto>.Successful(data);
     }
 }

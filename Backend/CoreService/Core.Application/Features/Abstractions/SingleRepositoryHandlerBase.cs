@@ -1,12 +1,11 @@
-﻿using Core.Application.Wrappers;
-using Core.Domain.Entities.Abstractions;
+﻿using Core.Domain.Entities.Abstractions;
 using Core.Domain.Interfaces.Repositories;
 using MapsterMapper;
-using MediatR;
 
 namespace Core.Application.Features.Abstractions;
 
-public abstract class SingleRepositoryHandlerBase<TRepository, TEntity>
+public abstract class SingleRepositoryHandlerBase
+    <TRepository, TEntity>
     where TRepository : IGenericRepository<TEntity>
     where TEntity : Entity
 {

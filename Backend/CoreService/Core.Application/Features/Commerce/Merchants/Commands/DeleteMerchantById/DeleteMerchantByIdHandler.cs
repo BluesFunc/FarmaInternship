@@ -1,6 +1,6 @@
-﻿using Core.Application.DTOs.Commerce;
+﻿using Core.Application.Dtos.Commerce;
 using Core.Application.Features.Abstractions;
-using Core.Application.Features.Abstractions.DeleteEntityByIdHandler;
+using Core.Application.Features.Abstractions.Commands.DeleteEntityByIdHandler;
 using Core.Application.Wrappers;
 using Core.Domain.Entities.Commerce;
 using Core.Domain.Interfaces.Repositories.Commerce;
@@ -10,7 +10,7 @@ using MediatR;
 namespace Core.Application.Features.Commerce.Merchants.Commands.DeleteMerchantById;
 
 public class DeleteMerchantByIdHandler :
-    DeleteEntityByIdHandlerBase<IMerchantRepository, Merchant, Result<MedicineDto>>
+    DeleteEntityByIdHandlerBase<IMerchantRepository, Merchant, DeleteMerchantByIdCommand, Result>
 {
     public DeleteMerchantByIdHandler(IMapper mapper, IMerchantRepository repository) : base(mapper, repository)
     {

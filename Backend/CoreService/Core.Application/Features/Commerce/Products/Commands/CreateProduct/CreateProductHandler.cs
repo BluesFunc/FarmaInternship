@@ -1,4 +1,4 @@
-﻿using Core.Application.DTOs.Commerce;
+﻿using Core.Application.Dtos.Commerce;
 using Core.Application.Wrappers;
 using Core.Application.Wrappers.Enums;
 using Core.Domain.Entities.Commerce;
@@ -35,9 +35,19 @@ public class CreateProductHandler :
     public async Task<Result<ProductDto>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
         var medicine = await _medicineRepository.GetByIdAsync(request.MedicineId, cancellationToken);
-        if (medicine == null) return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
+
+        if (medicine == null)
+        {
+            return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
+        }
+        
         var merchant = await _merchantRepository.GetByIdAsync(request.MerchantId, cancellationToken);
-        if (merchant == null) return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
+
+        if (merchant == null)
+        {
+            return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
+        }
+        
         var product = new Product(
             request.Name,
             request.Description,
@@ -53,8 +63,14 @@ public class CreateProductHandler :
         };
 
         var entity = await _productRepository.AddAsync(product, cancellationToken);
-        if (entity == null) return Result<ProductDto>.Failed(ErrorTypeCode.EntityConflict);
+
+        if (entity == null)
+        {
+            return Result<ProductDto>.Failed(ErrorTypeCode.EntityConflict);
+        }
+        
         var data = _mapper.Map<ProductDto>(entity);
+        
         return Result<ProductDto>.Successful(data);
     }
 }

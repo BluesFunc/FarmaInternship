@@ -1,4 +1,4 @@
-﻿using Core.Application.DTOs.Commerce;
+﻿using Core.Application.Dtos.Commerce;
 using Core.Application.Features.Abstractions;
 using Core.Application.Wrappers;
 using Core.Application.Wrappers.Enums;
@@ -13,8 +13,8 @@ public class CreateProductCategoryHandler :
     SingleRepositoryHandlerBase<IProductCategoryRepository, ProductCategory>,
     IRequestHandler<CreateProductCategoryCommand, Result<ProductCategoryDto>>
 {
-    public CreateProductCategoryHandler(IMapper mapper, IProductCategoryRepository repository) : base(mapper,
-        repository)
+    public CreateProductCategoryHandler(IMapper mapper, IProductCategoryRepository repository)
+        : base(mapper, repository)
     {
     }
 
@@ -22,10 +22,16 @@ public class CreateProductCategoryHandler :
         CancellationToken cancellationToken)
     {
         var entity = new ProductCategory() { Name = request.Name };
+
         var newEntity = await _repository.AddAsync(entity, cancellationToken);
-        if (newEntity == null) return Result<ProductCategoryDto>.Failed(ErrorTypeCode.EntityConflict);
+
+        if (newEntity == null)
+        {
+            return Result<ProductCategoryDto>.Failed(ErrorTypeCode.EntityConflict);
+        }
 
         var data = _mapper.Map<ProductCategoryDto>(newEntity);
+
         return Result<ProductCategoryDto>.Successful(data);
     }
 }

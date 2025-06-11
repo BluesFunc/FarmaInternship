@@ -1,4 +1,4 @@
-﻿using Core.Application.DTOs.Commerce;
+﻿using Core.Application.Dtos.Commerce;
 using Core.Application.Features.Abstractions;
 using Core.Application.Features.Commerce.Merchants.Commands.UpdateMerchant;
 using Core.Application.Wrappers;
@@ -24,8 +24,10 @@ public class UpdateMerchantHandler :
         if (entity == null) return Result<MerchantDto>.Failed(ErrorTypeCode.NotFound);
 
         entity.Name = request.Name;
-        entity.Description = request.Description == null ? request.Description : entity.Description;
+        entity.Description =  request.Description ?? entity.Description;
+        
         var data = _mapper.Map<MerchantDto>(entity);
+        
         return Result<MerchantDto>.Successful(data);
     }
 }
