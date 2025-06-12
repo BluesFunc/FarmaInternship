@@ -7,17 +7,12 @@ public class Merchant : AuditableEntity
     public string Name { get; set; }
     public string? Description { get; set; }
     public Guid AdminId { get; private set; }
-    public User Admin { get; private set; }
-
-    public Merchant(string name, User user)
+  
+    public Merchant(string name, Guid userId)
     {
         Name = name;
-        SetAdmin(user);
+        AdminId = userId;
     }
 
-    public void SetAdmin(User user)
-    {
-        AdminId = user.Id;
-        Admin = user;
-    }
+   
 }

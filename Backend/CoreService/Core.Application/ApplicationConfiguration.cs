@@ -1,0 +1,20 @@
+﻿using System.Reflection;
+using Core.Application.Behaviors;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Core.Application;
+
+public static class ApplicationConfiguration
+{
+    public static IServiceCollection ConfigureApplicationLayer(this IServiceCollection serviceCollection)
+    {
+        serviceCollection.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            // Add behavior here. MediatR pipeline is placed like stack items
+        });
+        return serviceCollection;
+    }
+}
