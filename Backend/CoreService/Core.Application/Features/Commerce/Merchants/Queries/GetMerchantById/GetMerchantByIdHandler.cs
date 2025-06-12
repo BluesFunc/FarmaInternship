@@ -13,6 +13,10 @@ public class GetMerchantByIdHandler :
     SingleRepositoryHandlerBase<IMerchantRepository, Merchant>,
     IRequestHandler<GetMerchantByIdCommand, Result<MerchantDto>>
 {
+    public GetMerchantByIdHandler(IMapper mapper, IMerchantRepository repository) : base(mapper, repository)
+    {
+    }
+    
     public async Task<Result<MerchantDto>> Handle(GetMerchantByIdCommand request, CancellationToken cancellationToken)
     {
         var entity = await _repository.GetByIdAsync(request.Id, cancellationToken);
@@ -22,7 +26,5 @@ public class GetMerchantByIdHandler :
         return Result<MerchantDto>.Successful(data, "Successfully removed");
     }
 
-    public GetMerchantByIdHandler(IMapper mapper, IMerchantRepository repository) : base(mapper, repository)
-    {
-    }
+   
 }

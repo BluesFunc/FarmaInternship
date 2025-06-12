@@ -23,13 +23,14 @@ public abstract class DeleteEntityByIdHandlerBase<TRepository, TEntity, TCommand
     public async Task<TResponse> Handle(TCommand request, CancellationToken cancellationToken)
     {
         var entity = await _repository.GetByIdAsync(request.Id, cancellationToken);
+
         if (entity == null)
         {
             return (TResponse)Result.Failed(ErrorTypeCode.NotFound, "Entity does not exist");
         }
 
-
         var isRemoved = _repository.Delete(entity);
+
         return !isRemoved
             ? (TResponse)Result
                 .Failed(ErrorTypeCode.EntityConflict, "Can not delete entity")

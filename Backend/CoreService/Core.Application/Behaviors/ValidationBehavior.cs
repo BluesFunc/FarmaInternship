@@ -5,25 +5,25 @@ using MediatR;
 
 namespace Core.Application.Behaviors;
 
-public class ValidationBehavior<TRequset, TResponse> : IPipelineBehavior<TRequset, TResponse>
-    where TRequset : notnull
+public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : notnull
     where TResponse : Result
 {
-    private IEnumerable<IValidator<IRequest>> Validators { get; init; }
+    private IEnumerable<IValidator<TRequest>> Validators { get;  }
 
-    public ValidationBehavior(IEnumerable<IValidator<IRequest>> validators)
+    public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
     {
         Validators = validators;
     }
 
     public async Task<TResponse> Handle(
-        TRequset request,
+        TRequest request,
         RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
         if (!Validators.Any()) return await next();
 
-        var context = new ValidationContext<TRequset>(request);
+        var context = new ValidationContext<TRequest>(request);
         var validationResults = await Task.WhenAll(
             Validators.Select(v =>
                 v.ValidateAsync(context, cancellationToken)));

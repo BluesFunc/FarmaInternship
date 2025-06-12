@@ -22,10 +22,13 @@ public class GetMedicineByIdHandler : SingleRepositoryHandlerBase<IMedicineRepos
         var entity = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
         if (entity == null)
+        {
             return Result<MedicineDto>
                 .Failed(ErrorTypeCode.NotFound, "Entity does not exist");
+        }
 
         var data = _mapper.Map<MedicineDto>(entity);
+
         return Result<MedicineDto>.Successful(data, "Successfully removed");
     }
 }

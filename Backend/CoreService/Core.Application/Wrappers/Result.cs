@@ -5,15 +5,14 @@ namespace Core.Application.Wrappers;
 
 public record Result
 {
-    protected Result()
-    {
-    }
-
-    public string Message { get; protected init; } = null!;
+    public required string Message { get;  init; } 
     public bool IsSucceed { get; protected init; }
     public bool IsFailed => !IsSucceed;
     public ErrorTypeCode ErrorCode { get; protected init; } = ErrorTypeCode.None;
 
+    protected Result()
+    {
+    }
 
     public static Result Successful(string message = "Request Succeed")
     {
