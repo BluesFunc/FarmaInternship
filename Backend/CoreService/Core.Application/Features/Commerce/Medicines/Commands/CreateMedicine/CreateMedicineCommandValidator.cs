@@ -23,7 +23,7 @@ public class CreateMedicineCommandValidator : AbstractValidator<CreateMedicineCo
         RuleFor(x => x.ManufacturerName)
             .MaximumLength(50)
             .NotEmpty();
-        
+
         RuleFor(x => x.ManufacturerOrigin)
             .MaximumLength(50)
             .NotEmpty();

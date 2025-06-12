@@ -27,7 +27,7 @@ public class GetProductByIdHandler :
         }
 
         var data = _mapper.Map<ProductDto>(entity);
-        
+
         return Result<ProductDto>.Successful(data);
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Headers;
-using Core.Application.Dtos.Commerce;
+﻿using Core.Application.Dtos.Commerce;
 using Core.Application.Features.Abstractions;
 using Core.Application.Wrappers;
 using Core.Application.Wrappers.Enums;
@@ -23,14 +22,14 @@ public class CreateMerchantHandler : SingleRepositoryHandlerBase<IMerchantReposi
         {
             Description = request.Description
         };
-        
+
         var newEntity = await _repository.AddAsync(merchant, cancellationToken);
 
         if (newEntity == null)
         {
             return Result<MerchantDto>.Failed(ErrorTypeCode.EntityConflict, "Entity not created");
         }
-        
+
         var data = _mapper.Map<MerchantDto>(newEntity);
         return Result<MerchantDto>.Successful(data);
     }

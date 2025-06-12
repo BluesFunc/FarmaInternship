@@ -8,17 +8,17 @@ public class UpdateProductValidator : AbstractValidator<UpdateProductCommand>
     {
         RuleFor(x => x.Id)
             .NotEmpty();
-        
+
         RuleFor(x => x.Name)
             .MaximumLength(50)
             .MinimumLength(5);
-        
+
         RuleFor(x => x.MerchantId)
             .NotEmpty();
-        
+
         RuleFor(x => x.MedicineId)
             .NotEmpty();
-        
+
         RuleFor(x => x.Price)
             .NotEmpty()
             .GreaterThan(0);

@@ -24,18 +24,18 @@ public class UpdateMedicineHandler : SingleRepositoryHandlerBase<IMedicineReposi
         {
             return Result<MedicineDto>.Failed(ErrorTypeCode.NotFound);
         }
-            
+
         entity.Name = request.Name;
         entity.Type = request.Type;
         entity.MeasureUnit = request.MeasureUnit;
         entity.Volume = request.Volume;
         entity.ManufacturerName = request.ManufacturerName;
         entity.ManufacturerOrigin = request.ManufacturerOrigin;
-        
+
         var updatedEntity = _repository.Update(entity);
-        
+
         var data = _mapper.Map<MedicineDto>(updatedEntity);
-        
+
         return Result<MedicineDto>.Successful(data);
     }
 }

@@ -40,14 +40,14 @@ public class CreateProductHandler :
         {
             return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
         }
-        
+
         var merchant = await _merchantRepository.GetByIdAsync(request.MerchantId, cancellationToken);
 
         if (merchant == null)
         {
             return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
         }
-        
+
         var product = new Product(
             request.Name,
             request.Description,
@@ -68,9 +68,9 @@ public class CreateProductHandler :
         {
             return Result<ProductDto>.Failed(ErrorTypeCode.EntityConflict);
         }
-        
+
         var data = _mapper.Map<ProductDto>(entity);
-        
+
         return Result<ProductDto>.Successful(data);
     }
 }

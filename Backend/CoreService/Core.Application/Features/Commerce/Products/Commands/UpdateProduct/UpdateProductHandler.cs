@@ -1,7 +1,6 @@
 ﻿using Core.Application.Dtos.Commerce;
 using Core.Application.Wrappers;
 using Core.Application.Wrappers.Enums;
-using Core.Domain.Entities.Commerce;
 using Core.Domain.Interfaces.Repositories.Commerce;
 using MapsterMapper;
 using MediatR;
@@ -61,7 +60,7 @@ public class UpdateProductHandler :
         product.StockQuantity = request.StockQuantity;
 
         var data = _mapper.Map<ProductDto>(product);
-        
+
         return Result<ProductDto>.Successful(data);
     }
 }

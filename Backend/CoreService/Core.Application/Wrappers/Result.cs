@@ -1,11 +1,10 @@
 ﻿using Core.Application.Wrappers.Enums;
-using Core.Domain.Entities.Abstractions;
 
 namespace Core.Application.Wrappers;
 
 public record Result
 {
-    public required string Message { get;  init; } 
+    public required string Message { get; init; }
     public bool IsSucceed { get; protected init; }
     public bool IsFailed => !IsSucceed;
     public ErrorTypeCode ErrorCode { get; protected init; } = ErrorTypeCode.None;

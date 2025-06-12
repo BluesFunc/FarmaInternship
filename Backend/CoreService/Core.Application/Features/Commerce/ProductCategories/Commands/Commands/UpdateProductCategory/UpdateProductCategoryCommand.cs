@@ -7,5 +7,5 @@ namespace Core.Application.Features.Commerce.ProductCategories.Commands.Commands
 public record UpdateProductCategoryCommand : IRequest<Result<ProductCategoryDto>>
 {
     public Guid Id { get; init; }
-    public required string Name { get; init; } 
+    public required string Name { get; init; }
 }

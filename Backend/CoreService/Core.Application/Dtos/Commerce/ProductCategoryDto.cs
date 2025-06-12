@@ -5,5 +5,5 @@ namespace Core.Application.Dtos.Commerce;
 
 public class ProductCategoryDto : IMapFrom<ProductCategory>
 {
-    public required  string Name { get; set; } 
+    public required string Name { get; set; }
 }

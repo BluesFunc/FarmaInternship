@@ -31,7 +31,7 @@ public class CreateMedicineHandler : SingleRepositoryHandlerBase<IMedicineReposi
         };
 
         var result = await _repository.AddAsync(newEntity, cancellationToken);
-        
+
         if (result == null)
         {
             return Result<MedicineDto>
@@ -39,7 +39,7 @@ public class CreateMedicineHandler : SingleRepositoryHandlerBase<IMedicineReposi
         }
 
         var responseData = _mapper.Map<MedicineDto>(result);
-        
+
         return Result<MedicineDto>.Successful(responseData);
     }
 }

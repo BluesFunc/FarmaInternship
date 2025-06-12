@@ -6,7 +6,7 @@ namespace Core.Application.Features.Commerce.Merchants.Commands.CreateMerchant;
 
 public record CreateMerchantCommand : IRequest<Result<MerchantDto>>
 {
-    public required string Name { get; init; } 
+    public required string Name { get; init; }
     public string Description { get; init; } = "Merchant description";
     public Guid AdminId { get; init; }
 }
