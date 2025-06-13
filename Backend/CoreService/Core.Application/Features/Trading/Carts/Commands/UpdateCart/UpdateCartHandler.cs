@@ -19,7 +19,7 @@ public class UpdateCartHandler :
 
     public async Task<Result<CartDto>> Handle(UpdateCartCommand request, CancellationToken cancellationToken)
     {
-        var cart = await _repository.GetByIdAsync(request.Id,cancellationToken);
+        var cart = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
         if (cart == null)
         {
@@ -31,6 +31,5 @@ public class UpdateCartHandler :
         var data = _mapper.Map<CartDto>(cart);
 
         return Result<CartDto>.Successful(data);
-
     }
 }

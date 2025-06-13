@@ -19,7 +19,7 @@ public class CartItem : AuditableEntity
         ProductId = product.Id;
         Quantity = quantity;
     }
-    
+
     public void SetProduct(Product product)
     {
         ProductObject = product;

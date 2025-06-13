@@ -12,14 +12,9 @@
         <Folder Include="Features\Commerce\Merchants\Queries\GetPaginatedMedicine\"/>
         <Folder Include="Features\Commerce\ProductCategories\Queries\GetPaginatedProductCategories\"/>
         <Folder Include="Features\Commerce\Products\Qureies\GetPaginatedProducts\"/>
-        <Folder Include="Features\Trading\OrderItems\Commands\CreateOrderItem\"/>
         <Folder Include="Features\Trading\OrderItems\Commands\DeleteOrderItem\"/>
         <Folder Include="Features\Trading\OrderItems\Commands\UpdateOrderItem\"/>
         <Folder Include="Features\Trading\OrderItems\Queries\GetOrderItemById\"/>
-        <Folder Include="Features\Trading\Orders\Commands\CreateOrder\"/>
-        <Folder Include="Features\Trading\Orders\Commands\DeleteOrder\"/>
-        <Folder Include="Features\Trading\Orders\Commands\UpdateOrder\"/>
-        <Folder Include="Features\Trading\Orders\Queries\GetOrderById\"/>
     </ItemGroup>
 
     <ItemGroup>
