@@ -27,6 +27,7 @@ public class GetCartItemByIdHandler :
         }
 
         var data = _mapper.Map<CartItemDto>(cartItem);
+        
         return Result<CartItemDto>.Successful(data);
     }
 }
