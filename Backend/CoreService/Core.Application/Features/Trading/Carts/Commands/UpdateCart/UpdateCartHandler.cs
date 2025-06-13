@@ -21,7 +21,7 @@ public class UpdateCartHandler :
     {
         var cart = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
-        if (cart == null)
+        if (cart is null)
         {
             return Result<CartDto>.Failed(ErrorTypeCode.NotFound);
         }

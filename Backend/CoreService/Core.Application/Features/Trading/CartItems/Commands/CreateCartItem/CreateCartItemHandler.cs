@@ -29,14 +29,14 @@ public class CreateCartItemHandler : IRequestHandler<CreateCartItemCommand, Resu
     {
         var cart = await _cartRepository.GetByIdAsync(request.CartId, cancellationToken);
 
-        if (cart == null)
+        if (cart is null)
         {
             return Result<CartItemDto>.Failed(ErrorTypeCode.NotFound, $"Cart not found");
         }
 
         var product = await _productRepository.GetByIdAsync(request.ProductId, cancellationToken);
 
-        if (product == null)
+        if (product is null)
         {
             return Result<CartItemDto>
                 .Failed(ErrorTypeCode.NotFound, $"Product not found");
@@ -45,7 +45,7 @@ public class CreateCartItemHandler : IRequestHandler<CreateCartItemCommand, Resu
         var cartItem = new CartItem(cart, product, request.Quantity);
         var newEntity = await _cartItemRepository.AddAsync(cartItem, cancellationToken);
 
-        if (newEntity == null)
+        if (newEntity is null)
         {
             return Result<CartItemDto>
                 .Failed(ErrorTypeCode.EntityConflict, $"Entity conflict occurs");

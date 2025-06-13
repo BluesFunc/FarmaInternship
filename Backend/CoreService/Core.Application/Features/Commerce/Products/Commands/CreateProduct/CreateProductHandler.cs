@@ -36,14 +36,14 @@ public class CreateProductHandler :
     {
         var medicine = await _medicineRepository.GetByIdAsync(request.MedicineId, cancellationToken);
 
-        if (medicine == null)
+        if (medicine is null)
         {
             return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
         }
 
         var merchant = await _merchantRepository.GetByIdAsync(request.MerchantId, cancellationToken);
 
-        if (merchant == null)
+        if (merchant is null)
         {
             return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
         }
@@ -64,7 +64,7 @@ public class CreateProductHandler :
 
         var entity = await _productRepository.AddAsync(product, cancellationToken);
 
-        if (entity == null)
+        if (entity is null)
         {
             return Result<ProductDto>.Failed(ErrorTypeCode.EntityConflict);
         }

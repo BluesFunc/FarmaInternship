@@ -21,7 +21,7 @@ public class GetProductByIdHandler :
     {
         var entity = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
-        if (entity == null)
+        if (entity is null)
         {
             return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
         }

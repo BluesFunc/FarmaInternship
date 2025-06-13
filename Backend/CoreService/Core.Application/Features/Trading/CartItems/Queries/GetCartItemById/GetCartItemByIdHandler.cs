@@ -21,7 +21,7 @@ public class GetCartItemByIdHandler :
     {
         var cartItem = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
-        if (cartItem == null)
+        if (cartItem is null)
         {
             return Result<CartItemDto>.Failed(ErrorTypeCode.NotFound, $"CartItem not found");
         }

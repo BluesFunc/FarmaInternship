@@ -30,7 +30,7 @@ public class CreateOrderHandler :
     {
         var cart = await _cartRepository.GetByIdAsync(request.CartId, cancellationToken);
 
-        if (cart == null)
+        if (cart is null)
         {
             return Result<OrderDto>.Failed(ErrorTypeCode.NotFound);
         }
@@ -38,20 +38,10 @@ public class CreateOrderHandler :
         var order = new Order(cart);
 
         var orderItems = CreateOrderItems(order, cart.CartItems);
-
-        foreach (var item in orderItems)
-        {
-            var orderItem = await _orderItemRepository.AddAsync(item, cancellationToken);
-
-            if (orderItem == null)
-            {
-                return Result<OrderDto>.Failed(ErrorTypeCode.EntityConflict);
-            }
-        }
-
+        
         var newOrder = await _orderRepository.AddAsync(order, cancellationToken);
 
-        if (newOrder == null)
+        if (newOrder is null)
         {
             return Result<OrderDto>.Failed(ErrorTypeCode.EntityConflict);
         }
@@ -69,7 +59,7 @@ public class CreateOrderHandler :
         {
             var priceAtOrder = item.Quantity * item.ProductObject.Price;
             var orderItem = new OrderItem(order, item.ProductObject, item.Quantity, priceAtOrder);
-            orderItems.Add(orderItem);
+            orderItems.Add(orderItem); // LINQ  
         }
 
         return orderItems;

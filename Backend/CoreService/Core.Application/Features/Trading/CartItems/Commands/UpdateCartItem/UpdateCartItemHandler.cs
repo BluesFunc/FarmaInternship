@@ -28,7 +28,7 @@ public class UpdateCartItemHandler : IRequestHandler<UpdateCartItemCommand, Resu
     {
         var cartItem = await _cartItemRepository.GetByIdAsync(request.CartItemId, cancellationToken);
 
-        if (cartItem == null)
+        if (cartItem is null)
         {
             return Result<CartItemDto>.Failed(ErrorTypeCode.NotFound, $"CartItem not found");
         }
@@ -37,7 +37,7 @@ public class UpdateCartItemHandler : IRequestHandler<UpdateCartItemCommand, Resu
         {
             var cart = await _cartRepository.GetByIdAsync(request.CartId, cancellationToken);
 
-            if (cart == null)
+            if (cart is null)
             {
                 return Result<CartItemDto>.Failed(ErrorTypeCode.NotFound, $"Cart not found");
             }
@@ -47,7 +47,7 @@ public class UpdateCartItemHandler : IRequestHandler<UpdateCartItemCommand, Resu
         {
             var product = await _productRepository.GetByIdAsync(request.ProductId, cancellationToken);
 
-            if (product == null)
+            if (product is null)
             {
                 return Result<CartItemDto>
                     .Failed(ErrorTypeCode.NotFound, $"Product not found");

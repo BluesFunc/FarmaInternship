@@ -27,7 +27,7 @@ public class CreateCartHandler :
 
         var newEntity = await _repository.AddAsync(cart, cancellationToken);
 
-        if (newEntity == null)
+        if (newEntity is null)
         {
             return Result<CartDto>.Failed(ErrorTypeCode.EntityConflict);
         }

@@ -22,7 +22,7 @@ public class GetOrderByIdHandler :
     {
         var order = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
-        if (order == null)
+        if (order is null)
         {
             return Result<OrderDto>.Failed(ErrorTypeCode.NotFound);
         }

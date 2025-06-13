@@ -24,7 +24,7 @@ public abstract class DeleteEntityByIdHandlerBase<TRepository, TEntity, TCommand
     {
         var entity = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
-        if (entity == null)
+        if (entity is null)
         {
             return (TResponse)Result.Failed(ErrorTypeCode.NotFound, "Entity does not exist");
         }

@@ -25,7 +25,7 @@ public class CreateProductCategoryHandler :
 
         var newEntity = await _repository.AddAsync(entity, cancellationToken);
 
-        if (newEntity == null)
+        if (newEntity is null)
         {
             return Result<ProductCategoryDto>.Failed(ErrorTypeCode.EntityConflict);
         }
