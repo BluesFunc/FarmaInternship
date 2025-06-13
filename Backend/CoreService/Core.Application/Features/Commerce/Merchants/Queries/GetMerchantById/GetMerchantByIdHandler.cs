@@ -20,7 +20,7 @@ public class GetMerchantByIdHandler :
     public async Task<Result<MerchantDto>> Handle(GetMerchantByIdCommand request, CancellationToken cancellationToken)
     {
         var entity = await _repository.GetByIdAsync(request.Id, cancellationToken);
-        if (entity == null) return Result<MerchantDto>.Failed(ErrorTypeCode.NotFound, "Entity does not exist");
+        if (entity is null) return Result<MerchantDto>.Failed(ErrorTypeCode.NotFound, "Entity does not exist");
 
         var data = _mapper.Map<MerchantDto>(entity);
         return Result<MerchantDto>.Successful(data, "Successfully removed");

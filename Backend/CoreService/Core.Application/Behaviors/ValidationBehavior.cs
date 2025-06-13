@@ -9,7 +9,7 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
     where TRequest : notnull
     where TResponse : Result
 {
-    private IEnumerable<IValidator<TRequest>> Validators { get;  }
+    private IEnumerable<IValidator<TRequest>> Validators { get; }
 
     public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
     {

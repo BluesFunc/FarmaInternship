@@ -1,5 +1,8 @@
-﻿namespace Core.Application.Dtos.Trading;
+﻿using Core.Domain.Entities.Trading;
+using Mapster;
 
-public class CartItemDto
+namespace Core.Application.Dtos.Trading;
+
+public class CartItemDto : IMapFrom<CartItem>
 {
 }

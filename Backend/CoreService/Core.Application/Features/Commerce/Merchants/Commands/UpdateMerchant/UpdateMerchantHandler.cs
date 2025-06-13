@@ -20,7 +20,7 @@ public class UpdateMerchantHandler :
     public async Task<Result<MerchantDto>> Handle(UpdateMerchantCommand request, CancellationToken cancellationToken)
     {
         var entity = await _repository.GetByIdAsync(request.Id, cancellationToken);
-        if (entity == null) return Result<MerchantDto>.Failed(ErrorTypeCode.NotFound);
+        if (entity is null) return Result<MerchantDto>.Failed(ErrorTypeCode.NotFound);
 
         entity.Name = request.Name;
         entity.Description = request.Description ?? entity.Description;

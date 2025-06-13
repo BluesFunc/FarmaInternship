@@ -32,7 +32,7 @@ public class CreateMedicineHandler : SingleRepositoryHandlerBase<IMedicineReposi
 
         var result = await _repository.AddAsync(newEntity, cancellationToken);
 
-        if (result == null)
+        if (result is null)
         {
             return Result<MedicineDto>
                 .Failed(ErrorTypeCode.EntityConflict, "Can not create entity");
