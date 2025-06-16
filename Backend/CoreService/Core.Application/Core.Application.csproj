@@ -7,11 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Features\Abstractions\Commands\"/>
-        <Folder Include="Features\Commerce\Medicines\Queries\GetPaginatedMedicine\"/>
-        <Folder Include="Features\Commerce\Merchants\Queries\GetPaginatedMedicine\"/>
-        <Folder Include="Features\Commerce\ProductCategories\Queries\GetPaginatedProductCategories\"/>
-        <Folder Include="Features\Commerce\Products\Qureies\GetPaginatedProducts\"/>
+        <Folder Include="Features\Abstractions\Queries\"/>
         <Folder Include="Features\Trading\OrderItems\Commands\UpdateOrderItem\"/>
     </ItemGroup>
 

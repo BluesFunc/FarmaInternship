@@ -7,7 +7,7 @@ using Core.Domain.Interfaces.Repositories.Commerce;
 using MapsterMapper;
 using MediatR;
 
-namespace Core.Application.Features.Commerce.Products.Qureies.GetProductById;
+namespace Core.Application.Features.Commerce.Products.Queries.GetProductById;
 
 public class GetProductByIdHandler :
     SingleRepositoryHandlerBase<IProductRepository, Product>

@@ -35,10 +35,10 @@ public class CreateOrderHandler :
             return Result<OrderDto>.Failed(ErrorTypeCode.NotFound);
         }
 
-        var order = new Order(cart);
+        var order = new Order(cart, request.UserId);
 
         var orderItems = CreateOrderItems(order, cart.CartItems);
-        
+
         var newOrder = await _orderRepository.AddAsync(order, cancellationToken);
 
         if (newOrder is null)

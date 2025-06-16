@@ -11,13 +11,12 @@ namespace Core.Application.Features.Trading.OrderItems.Queries.GetOrderItemById;
 
 public class GetOrderItemByIdHandler :
     SingleRepositoryHandlerBase<IOrderItemRepository, OrderItem>,
-
-IRequestHandler<GetOrderItemByIdCommand, Result<OrderItemDto>>
+    IRequestHandler<GetOrderItemByIdCommand, Result<OrderItemDto>>
 {
     public GetOrderItemByIdHandler(IMapper mapper, IOrderItemRepository repository) : base(mapper, repository)
     {
     }
-    
+
     public async Task<Result<OrderItemDto>> Handle(GetOrderItemByIdCommand request, CancellationToken cancellationToken)
     {
         var orderItem = await _repository.GetByIdAsync(request.Id, cancellationToken);
@@ -28,9 +27,7 @@ IRequestHandler<GetOrderItemByIdCommand, Result<OrderItemDto>>
         }
 
         var data = _mapper.Map<OrderItemDto>(orderItem);
-        
+
         return Result<OrderItemDto>.Successful(data);
     }
-
-    
 }
