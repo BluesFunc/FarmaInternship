@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Core.Domain.EntitiesConstraints.Trading;
+using FluentValidation;
 
 namespace Core.Application.Features.Trading.CartItems.Commands.CreateCartItem;
 
@@ -7,7 +8,7 @@ public class CreateCartItemValidator : AbstractValidator<CreateCartItemCommand>
     public CreateCartItemValidator()
     {
         RuleFor(command => command.Quantity)
-            .GreaterThan(0)
-            .LessThan(50);
+            .GreaterThan(CartItemConstraint.QuantityGreaterThan)
+            .LessThan(CartItemConstraint.QuantityLessThan);
     }
 }

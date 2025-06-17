@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Core.Domain.EntitiesConstraints.Commerce;
+using FluentValidation;
 
 namespace Core.Application.Features.Commerce.Merchants.Commands.CreateMerchant;
 
@@ -8,8 +9,8 @@ public class CreateMerchantValidator : AbstractValidator<CreateMerchantCommand>
     {
         RuleFor(x => x.Name)
             .NotEmpty()
-            .MinimumLength(5)
-            .MaximumLength(100);
+            .MinimumLength(MerchantConstraint.MinNameLength)
+            .MaximumLength(MerchantConstraint.MaxNameLength);
 
         RuleFor(x => x.Description);
     }

@@ -2,7 +2,6 @@ using Core.Application.Wrappers;
 using Core.Application.Wrappers.Enums;
 using Core.Domain.Entities.Abstractions;
 using Core.Domain.Interfaces.Repositories;
-using Core.Domain.Models.QueryParams;
 using Core.Domain.Models.QueryParams.Abstractions;
 using Mapster;
 using MapsterMapper;
