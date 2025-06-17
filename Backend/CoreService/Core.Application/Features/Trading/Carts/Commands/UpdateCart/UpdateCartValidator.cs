@@ -6,7 +6,7 @@ public class UpdateCartValidator : AbstractValidator<UpdateCartCommand>
 {
     public UpdateCartValidator()
     {
-        RuleFor(x => x)
+        RuleFor(x => x.Id)
             .NotEmpty();
 
         RuleFor(x => x.Status)
