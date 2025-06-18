@@ -2,4 +2,4 @@
 
 namespace Core.Domain.Interfaces.Repositories.Trading;
 
-public interface IOrderRepository : IPaginatedRepository<Order>;
+public interface IOrderRepository : IFilteredRepository<Order>;

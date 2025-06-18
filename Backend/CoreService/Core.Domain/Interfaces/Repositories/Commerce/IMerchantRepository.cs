@@ -2,4 +2,4 @@
 
 namespace Core.Domain.Interfaces.Repositories.Commerce;
 
-public interface IMerchantRepository : IPaginatedRepository<Merchant>;
+public interface IMerchantRepository : IFilteredRepository<Merchant>;

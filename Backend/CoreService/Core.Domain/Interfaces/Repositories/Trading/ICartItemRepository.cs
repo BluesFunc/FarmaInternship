@@ -2,4 +2,4 @@
 
 namespace Core.Domain.Interfaces.Repositories.Trading;
 
-public interface ICartItemRepository : IPaginatedRepository<CartItem>;
+public interface ICartItemRepository : IFilteredRepository<CartItem>;

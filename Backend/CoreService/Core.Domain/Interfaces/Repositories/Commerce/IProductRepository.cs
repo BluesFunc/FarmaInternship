@@ -2,4 +2,4 @@
 
 namespace Core.Domain.Interfaces.Repositories.Commerce;
 
-public interface IProductRepository : IPaginatedRepository<Product>;
+public interface IProductRepository : IFilteredRepository<Product>;
