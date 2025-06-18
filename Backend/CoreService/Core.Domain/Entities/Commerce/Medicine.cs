@@ -10,5 +10,6 @@ public class Medicine : AuditableEntity
     public MedicineMeasureUnit MeasureUnit { get; set; }
     public int Volume { get; set; }
     public required string ManufacturerOrigin { get; set; } 
-    public required string ManufacturerName { get; set; } 
+    public required string ManufacturerName { get; set; }
+    public Product ProductItem { get; private set; }
 }

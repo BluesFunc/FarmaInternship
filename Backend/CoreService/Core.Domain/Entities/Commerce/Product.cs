@@ -5,6 +5,8 @@ namespace Core.Domain.Entities.Commerce;
 
 public class Product : AuditableEntity
 {
+    private Product(){}
+
     public Product(string name, string description, Medicine medicineItem, Merchant merchant,
         decimal price, int stockQuantity)
     {
