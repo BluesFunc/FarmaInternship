@@ -20,7 +20,7 @@ public class UpdateMedicineHandler : SingleRepositoryHandlerBase<IMedicineReposi
     {
         var entity = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
-        if (entity == null)
+        if (entity is null)
         {
             return Result<MedicineDto>.Failed(ErrorTypeCode.NotFound);
         }

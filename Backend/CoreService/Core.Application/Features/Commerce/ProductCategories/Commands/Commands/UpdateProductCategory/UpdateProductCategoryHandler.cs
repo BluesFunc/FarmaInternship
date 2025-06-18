@@ -22,7 +22,7 @@ public class UpdateProductCategoryHandler :
         CancellationToken cancellationToken)
     {
         var entity = await _repository.GetByIdAsync(request.Id, cancellationToken);
-        if (entity == null)
+        if (entity is null)
         {
             return Result<ProductCategoryDto>
                 .Failed(ErrorTypeCode.NotFound);

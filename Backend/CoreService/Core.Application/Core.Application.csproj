@@ -7,26 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Features\Abstractions\Commands\"/>
-        <Folder Include="Features\Commerce\Medicines\Queries\GetPaginatedMedicine\"/>
-        <Folder Include="Features\Commerce\Merchants\Queries\GetPaginatedMedicine\"/>
-        <Folder Include="Features\Commerce\ProductCategories\Queries\GetPaginatedProductCategories\"/>
-        <Folder Include="Features\Commerce\Products\Qureies\GetPaginatedProducts\"/>
-        <Folder Include="Features\Trading\CartItems\Commands\DeleteCartItem\"/>
-        <Folder Include="Features\Trading\CartItems\Commands\UpdateCartItem\"/>
-        <Folder Include="Features\Trading\CartItems\Queries\GetCartItemById\"/>
-        <Folder Include="Features\Trading\Carts\Commands\CreateCart\"/>
-        <Folder Include="Features\Trading\Carts\Commands\DeleteCart\"/>
-        <Folder Include="Features\Trading\Carts\Commands\UpdateCart\"/>
-        <Folder Include="Features\Trading\Carts\Queries\GetCartById\"/>
-        <Folder Include="Features\Trading\OrderItems\Commands\CreateOrderItem\"/>
-        <Folder Include="Features\Trading\OrderItems\Commands\DeleteOrderItem\"/>
+        <Folder Include="Features\Abstractions\Queries\"/>
         <Folder Include="Features\Trading\OrderItems\Commands\UpdateOrderItem\"/>
-        <Folder Include="Features\Trading\OrderItems\Queries\GetOrderItemById\"/>
-        <Folder Include="Features\Trading\Orders\Commands\CreateOrder\"/>
-        <Folder Include="Features\Trading\Orders\Commands\DeleteOrder\"/>
-        <Folder Include="Features\Trading\Orders\Commands\UpdateOrder\"/>
-        <Folder Include="Features\Trading\Orders\Queries\GetOrderById\"/>
     </ItemGroup>
 
     <ItemGroup>

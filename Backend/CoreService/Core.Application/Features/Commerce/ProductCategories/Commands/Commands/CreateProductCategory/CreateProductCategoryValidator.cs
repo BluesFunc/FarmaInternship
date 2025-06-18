@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Core.Domain.EntitiesConstraints.Commerce;
+using FluentValidation;
 
 namespace Core.Application.Features.Commerce.ProductCategories.Commands.Commands.CreateProductCategory;
 
@@ -7,7 +8,8 @@ public class CreateProductCategoryValidator : AbstractValidator<CreateProductCat
     private CreateProductCategoryValidator()
     {
         RuleFor(x => x.Name)
-            .MinimumLength(3)
-            .MaximumLength(30);
+            .NotEmpty()
+            .MinimumLength(ProductCategoryConstraint.MinNameLength)
+            .MaximumLength(ProductCategoryConstraint.MaxNameLength);
     }
 }

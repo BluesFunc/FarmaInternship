@@ -7,7 +7,7 @@ using Core.Domain.Interfaces.Repositories.Commerce;
 using MapsterMapper;
 using MediatR;
 
-namespace Core.Application.Features.Commerce.Products.Qureies.GetProductById;
+namespace Core.Application.Features.Commerce.Products.Queries.GetProductById;
 
 public class GetProductByIdHandler :
     SingleRepositoryHandlerBase<IProductRepository, Product>
@@ -21,7 +21,7 @@ public class GetProductByIdHandler :
     {
         var entity = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
-        if (entity == null)
+        if (entity is null)
         {
             return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
         }
