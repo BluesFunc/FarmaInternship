@@ -32,21 +32,21 @@ public class UpdateProductHandler :
     {
         var product = await _productRepository.GetByIdAsync(request.Id, cancellationToken);
 
-        if (product == null)
+        if (product is null)
         {
             return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
         }
 
         var medicine = await _medicineRepository.GetByIdAsync(request.MedicineId, cancellationToken);
 
-        if (medicine == null)
+        if (medicine is null)
         {
             return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
         }
 
         var merchant = await _merchantRepository.GetByIdAsync(request.MerchantId, cancellationToken);
 
-        if (merchant == null)
+        if (merchant is null)
         {
             return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
         }

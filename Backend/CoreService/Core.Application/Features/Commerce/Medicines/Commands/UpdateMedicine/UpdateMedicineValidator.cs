@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Core.Domain.EntitiesConstraints.Commerce;
+using FluentValidation;
 
 namespace Core.Application.Features.Commerce.Medicines.Commands.UpdateMedicine;
 
@@ -7,8 +8,9 @@ public class UpdateMedicineValidator : AbstractValidator<UpdateMedicineCommand>
     private UpdateMedicineValidator()
     {
         RuleFor(x => x.Name)
-            .MaximumLength(50)
-            .NotEmpty();
+            .NotEmpty()
+            .MinimumLength(MedicineConstraint.MinNameLength)
+            .MaximumLength(MedicineConstraint.MaxNameLength);
 
         RuleFor(x => x.Type)
             .IsInEnum();
@@ -17,15 +19,17 @@ public class UpdateMedicineValidator : AbstractValidator<UpdateMedicineCommand>
             .IsInEnum();
 
         RuleFor(x => x.Volume)
-            .GreaterThan(0)
-            .NotEmpty();
+            .GreaterThan(MedicineConstraint.MinVolume)
+            .LessThan(MedicineConstraint.MaxVolume);
 
         RuleFor(x => x.ManufacturerName)
-            .MaximumLength(50)
-            .NotEmpty();
+            .NotEmpty()
+            .MinimumLength(MedicineConstraint.MinManufacterNameLength)
+            .MaximumLength(MedicineConstraint.MaxManufacterNameLength);
 
         RuleFor(x => x.ManufacturerOrigin)
-            .MaximumLength(50)
-            .NotEmpty();
+            .NotEmpty()
+            .MinimumLength(MedicineConstraint.MinManufacterOriginLength)
+            .MaximumLength(MedicineConstraint.MaxManufacterOriginLength);
     }
 }

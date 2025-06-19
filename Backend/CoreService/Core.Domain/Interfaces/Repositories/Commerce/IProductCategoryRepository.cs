@@ -1,5 +1,6 @@
 ﻿using Core.Domain.Entities.Commerce;
+using Core.Domain.Models.QueryParams.Commerce;
 
 namespace Core.Domain.Interfaces.Repositories.Commerce;
 
-public interface IProductCategoryRepository : IFilteredRepository<ProductCategory>;
+public interface IProductCategoryRepository : IFilteredRepository<ProductCategoryQueryParams, ProductCategory>;

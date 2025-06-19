@@ -1,5 +1,12 @@
-﻿namespace Core.Application.Dtos.Trading;
+﻿using Core.Domain.Entities.Commerce;
+using Core.Domain.Entities.Trading;
+using Core.Domain.Enums.Trading;
+using Mapster;
 
-public class CartDto
+namespace Core.Application.Dtos.Trading;
+
+public record CartDto : IMapFrom<Cart>
 {
+    public CartStatus Status { get; set; }
+    public required IReadOnlyCollection<Product> Products { get; set; }
 }

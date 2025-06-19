@@ -11,7 +11,6 @@ public class CartItem : AuditableEntity
     public Product ProductObject { get; private set; }
     public int Quantity { get; set; }
 
-    private CartItem() { }
     public CartItem(Cart cart, Product product, int quantity = 1)
     {
         CartId = cart.Id;
@@ -19,5 +18,17 @@ public class CartItem : AuditableEntity
         ProductObject = product;
         ProductId = product.Id;
         Quantity = quantity;
+    }
+
+    public void SetProduct(Product product)
+    {
+        ProductObject = product;
+        ProductId = product.Id;
+    }
+
+    public void SetCart(Cart cart)
+    {
+        CartObject = cart;
+        CartId = cart.Id;
     }
 }

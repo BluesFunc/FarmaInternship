@@ -25,7 +25,7 @@ public class CreateMerchantHandler : SingleRepositoryHandlerBase<IMerchantReposi
 
         var newEntity = await _repository.AddAsync(merchant, cancellationToken);
 
-        if (newEntity == null)
+        if (newEntity is null)
         {
             return Result<MerchantDto>.Failed(ErrorTypeCode.EntityConflict, "Entity not created");
         }

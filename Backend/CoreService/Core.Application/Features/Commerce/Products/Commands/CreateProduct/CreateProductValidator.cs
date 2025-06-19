@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Core.Domain.EntitiesConstraints.Commerce;
+using FluentValidation;
 
 namespace Core.Application.Features.Commerce.Products.Commands.CreateProduct;
 
@@ -7,8 +8,9 @@ public class CreateProductValidator : AbstractValidator<CreateProductCommand>
     public CreateProductValidator()
     {
         RuleFor(x => x.Name)
-            .MaximumLength(50)
-            .MinimumLength(5);
+            .NotEmpty()
+            .MinimumLength(ProductConstraint.MinNameLength)
+            .MaximumLength(ProductConstraint.MaxNameLength);
 
         RuleFor(x => x.MerchantId)
             .NotEmpty();
@@ -18,10 +20,10 @@ public class CreateProductValidator : AbstractValidator<CreateProductCommand>
 
         RuleFor(x => x.Price)
             .NotEmpty()
-            .GreaterThan(0);
+            .GreaterThan(ProductConstraint.PriceGreaterThan);
 
         RuleFor(x => x.StockQuantity)
             .NotEmpty()
-            .GreaterThanOrEqualTo(0);
+            .GreaterThanOrEqualTo(ProductConstraint.QuantityGreaterThanOrEqualTo);
     }
 }
