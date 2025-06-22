@@ -5,7 +5,7 @@ namespace Core.Application.Features.Commerce.ProductCategories.Commands.Commands
 
 public class CreateProductCategoryValidator : AbstractValidator<CreateProductCategoryCommand>
 {
-    private CreateProductCategoryValidator()
+    public CreateProductCategoryValidator()
     {
         RuleFor(x => x.Name)
             .NotEmpty()

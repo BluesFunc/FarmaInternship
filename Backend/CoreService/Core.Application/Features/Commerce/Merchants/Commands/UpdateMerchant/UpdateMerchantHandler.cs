@@ -25,7 +25,10 @@ public class UpdateMerchantHandler :
         entity.Name = request.Name;
         entity.Description = request.Description ?? entity.Description;
 
-        var data = _mapper.Map<MerchantDto>(entity);
+        var updatedEntity = _repository.Update(entity);
+
+
+        var data = _mapper.Map<MerchantDto>(updatedEntity);
 
         return Result<MerchantDto>.Successful(data);
     }
