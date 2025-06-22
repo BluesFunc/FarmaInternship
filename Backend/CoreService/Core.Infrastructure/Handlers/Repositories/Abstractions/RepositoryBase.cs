@@ -17,7 +17,7 @@ public class RepositoryBase<TEntity>(DbContext context) : IGenericRepository<TEn
 
     public async Task<TEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        var entity = await context.Set<TEntity>().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        var entity = await context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         return entity;
     }
 

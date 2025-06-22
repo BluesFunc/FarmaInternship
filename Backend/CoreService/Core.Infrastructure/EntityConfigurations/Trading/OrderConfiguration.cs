@@ -1,6 +1,5 @@
 ﻿using Core.Domain.Entities.Trading;
 using Core.Domain.Enums.Trading;
-using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -16,10 +15,10 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
 
         builder.Property(x => x.Status)
             .HasDefaultValue(OrderStatus.New);
-        
+
         builder.HasOne<Cart>(x => x.CartObject)
             .WithOne();
-        
+
         builder.HasMany(x => x.OrderItems)
             .WithOne(x => x.OrderObject)
             .HasForeignKey(x => x.OrderId);

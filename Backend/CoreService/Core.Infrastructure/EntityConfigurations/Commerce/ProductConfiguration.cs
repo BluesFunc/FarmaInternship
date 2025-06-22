@@ -1,5 +1,4 @@
-﻿using Core.Application.Dtos.Commerce;
-using Core.Domain.Entities.Commerce;
+﻿using Core.Domain.Entities.Commerce;
 using Core.Domain.EntitiesConstraints.Commerce;
 using Core.Domain.Enums.Commerce;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +29,5 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 
         builder.HasMany(product => product.Categories)
             .WithMany(category => category.Products);
-        
     }
 }

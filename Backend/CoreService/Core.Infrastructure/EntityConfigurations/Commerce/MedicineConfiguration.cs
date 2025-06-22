@@ -22,7 +22,7 @@ public class MedicineConfiguration : IEntityTypeConfiguration<Medicine>
 
         builder.Property(x => x.MeasureUnit)
             .IsRequired();
-        
+
         builder.Property(x => x.Volume)
             .IsRequired();
 
@@ -33,7 +33,7 @@ public class MedicineConfiguration : IEntityTypeConfiguration<Medicine>
         builder.Property(x => x.ManufacturerOrigin)
             .HasMaxLength(MedicineConstraint.MaxManufacterOriginLength)
             .IsRequired();
-        
+
         builder.HasMany(medicine => medicine.ProductItem)
             .WithOne(product => product.MedicineItem)
             .HasForeignKey(product => product.MedicineId)

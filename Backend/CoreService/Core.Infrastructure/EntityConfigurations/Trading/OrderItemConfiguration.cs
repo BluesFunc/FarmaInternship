@@ -2,7 +2,6 @@
 using Core.Domain.Entities.Trading;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Core.Infrastructure.EntityConfigurations.Trading;
 
