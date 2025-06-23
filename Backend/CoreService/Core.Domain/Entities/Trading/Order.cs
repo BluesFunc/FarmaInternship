@@ -12,6 +12,10 @@ public class Order : AuditableEntity
     public OrderStatus Status { get; set; } = OrderStatus.New;
     public ICollection<OrderItem> OrderItems { get; private set; }
 
+    private Order()
+    {
+    }
+
     public Order(Cart cart, Guid userId)
     {
         UserId = userId;

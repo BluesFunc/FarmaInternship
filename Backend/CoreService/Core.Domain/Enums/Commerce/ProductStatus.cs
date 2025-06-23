@@ -2,8 +2,9 @@
 
 public enum ProductStatus
 {
-    Active,
-    Inactive,
     OnPending,
+    Inactive,
+    Active,
+    OutOfStock,
     Declined
 }

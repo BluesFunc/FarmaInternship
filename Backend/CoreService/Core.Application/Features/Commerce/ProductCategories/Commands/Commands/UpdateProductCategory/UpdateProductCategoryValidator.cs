@@ -5,7 +5,7 @@ namespace Core.Application.Features.Commerce.ProductCategories.Commands.Commands
 
 public class UpdateProductCategoryValidator : AbstractValidator<UpdateProductCategoryCommand>
 {
-    private UpdateProductCategoryValidator()
+    public UpdateProductCategoryValidator()
     {
         RuleFor(x => x.Name)
             .NotEmpty()

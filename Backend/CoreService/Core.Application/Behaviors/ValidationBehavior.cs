@@ -49,7 +49,7 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
             .MakeGenericType(typeof(TResponseType).GenericTypeArguments[0])
             .GetMethods()
             .First(m => m.Name.Equals(nameof(Result.Failed)))
-            .Invoke(null, [message, code])!;
+            .Invoke(null, [code, message])!;
 
         return (TResponseType)result;
     }

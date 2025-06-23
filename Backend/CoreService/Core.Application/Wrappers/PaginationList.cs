@@ -3,7 +3,7 @@
 public record PaginationList<TData>
     where TData : notnull
 {
-    private readonly IReadOnlyList<TData> _data;
+    public IReadOnlyList<TData> Data { get; }
     public int TotalElements { get; }
     public int ItemPerPage { get; }
     public int CurrentPage { get; }
@@ -11,8 +11,8 @@ public record PaginationList<TData>
 
     public PaginationList(IReadOnlyList<TData> list, int pageNo = 1, int itemPerPage = 5)
     {
-        _data = list;
-        TotalElements = _data.Count;
+        Data = list;
+        TotalElements = Data.Count;
         ItemPerPage = itemPerPage;
         CurrentPage = pageNo;
         MaxPages = (int)Math.Ceiling((double)TotalElements / ItemPerPage);

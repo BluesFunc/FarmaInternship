@@ -28,7 +28,10 @@ public class UpdateCartHandler :
 
         cart.Status = request.Status;
 
-        var data = _mapper.Map<CartDto>(cart);
+
+        var updatedCart = _repository.Update(cart);
+
+        var data = _mapper.Map<CartDto>(updatedCart);
 
         return Result<CartDto>.Successful(data);
     }

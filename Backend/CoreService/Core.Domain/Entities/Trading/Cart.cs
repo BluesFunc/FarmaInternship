@@ -9,6 +9,10 @@ public class Cart : AuditableEntity
     public CartStatus Status { get; set; } = CartStatus.Active;
     public ICollection<CartItem> CartItems { get; private set; } = [];
 
+    private Cart()
+    {
+    }
+
     public Cart(Guid userId)
     {
         UserId = userId;

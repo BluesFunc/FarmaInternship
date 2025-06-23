@@ -1,10 +1,11 @@
 ﻿using Core.Application.Dtos.Commerce;
+using Core.Application.Interfaces;
 using Core.Application.Wrappers;
 using MediatR;
 
 namespace Core.Application.Features.Commerce.Products.Commands.UpdateProduct;
 
-public record UpdateProductCommand : IRequest<Result<ProductDto>>
+public record UpdateProductCommand : IRequest<Result<ProductDto>>, ITransactionRequest
 {
     public Guid Id { get; init; }
     public required string Name { get; init; }

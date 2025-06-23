@@ -56,8 +56,9 @@ public class UpdateCartItemHandler : IRequestHandler<UpdateCartItemCommand, Resu
 
         cartItem.Quantity = request.Quantity;
 
-        var data = _mapper.Map<CartItemDto>(cartItem);
+        var updatedEntity = _cartItemRepository.Update(cartItem);
 
+        var data = _mapper.Map<CartItemDto>(updatedEntity);
         return Result<CartItemDto>.Successful(data);
     }
 }

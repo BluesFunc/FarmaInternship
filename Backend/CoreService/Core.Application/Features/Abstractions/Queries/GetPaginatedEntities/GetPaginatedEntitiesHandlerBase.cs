@@ -14,7 +14,7 @@ public abstract class GetPaginatedEntitiesHandlerBase<TRepository, TEntity, TReq
     , IRequestHandler<TRequest, Result<PaginationList<TResponse>>>
     where TRepository : IFilteredRepository<TFilter, TEntity>
     where TEntity : Entity
-    where TRequest : GetPaginatedEntitiesCommand<TResponse>
+    where TRequest : GetPaginatedEntitiesCommand<TResponse, TFilter>
     where TResponse : notnull
     where TFilter : PaginationQueryParams
 {
@@ -25,7 +25,7 @@ public abstract class GetPaginatedEntitiesHandlerBase<TRepository, TEntity, TReq
 
     public async Task<Result<PaginationList<TResponse>>> Handle(TRequest request, CancellationToken cancellationToken)
     {
-        var filter = request.Adapt<TFilter>();
+        var filter = request.Filter.Adapt<TFilter>();
 
         var entities = await _repository.GetPaginatedAsync(filter, cancellationToken);
 

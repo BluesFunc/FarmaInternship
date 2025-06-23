@@ -5,7 +5,7 @@ namespace Core.Domain.Interfaces.Repositories;
 
 public interface IFilteredRepository<in TFilter, TEntity> : IGenericRepository<TEntity>
     where TEntity : Entity
-    where TFilter : PaginationQueryParams
+    where TFilter : FilterParams
 {
     public Task<IReadOnlyCollection<TEntity>?> GetPaginatedAsync(TFilter filter,
         CancellationToken cancellationToken = default);

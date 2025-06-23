@@ -29,7 +29,10 @@ public class UpdateProductCategoryHandler :
         }
 
         entity.Name = request.Name;
-        var data = _mapper.Map<ProductCategoryDto>(entity);
+
+        var updatedEntity = _repository.Update(entity);
+
+        var data = _mapper.Map<ProductCategoryDto>(updatedEntity);
         return Result<ProductCategoryDto>.Successful(data);
     }
 }

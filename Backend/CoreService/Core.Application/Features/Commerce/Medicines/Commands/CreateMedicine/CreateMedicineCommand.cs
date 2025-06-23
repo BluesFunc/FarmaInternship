@@ -1,11 +1,12 @@
 ﻿using Core.Application.Dtos.Commerce;
+using Core.Application.Interfaces;
 using Core.Application.Wrappers;
 using Core.Domain.Enums.Commerce;
 using MediatR;
 
 namespace Core.Application.Features.Commerce.Medicines.Commands.CreateMedicine;
 
-public record CreateMedicineCommand : IRequest<Result<MedicineDto>>
+public record CreateMedicineCommand : IRequest<Result<MedicineDto>>, ITransactionRequest
 {
     public required string Name { get; init; }
     public MedicineType Type { get; init; }

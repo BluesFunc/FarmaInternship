@@ -5,7 +5,7 @@ namespace Core.Application.Features.Commerce.Medicines.Commands.UpdateMedicine;
 
 public class UpdateMedicineValidator : AbstractValidator<UpdateMedicineCommand>
 {
-    private UpdateMedicineValidator()
+    public UpdateMedicineValidator()
     {
         RuleFor(x => x.Name)
             .NotEmpty()

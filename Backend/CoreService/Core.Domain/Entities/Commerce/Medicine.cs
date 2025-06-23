@@ -11,4 +11,9 @@ public class Medicine : AuditableEntity
     public int Volume { get; set; }
     public required string ManufacturerOrigin { get; set; }
     public required string ManufacturerName { get; set; }
+    public List<Product> ProductItem { get; private set; }
+
+    public Medicine()
+    {
+    }
 }
