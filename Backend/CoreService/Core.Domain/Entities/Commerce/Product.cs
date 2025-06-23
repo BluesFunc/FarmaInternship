@@ -16,8 +16,10 @@ public class Product : AuditableEntity
     public decimal Price { get; set; }
     public int StockQuantity { get; set; }
     public IReadOnlyCollection<ProductCategory> Categories { get; private set; }
-    
-    private Product(){}
+
+    private Product()
+    {
+    }
 
     public Product(string name, string description, Medicine medicineItem, Merchant merchant,
         decimal price, int stockQuantity)
@@ -29,7 +31,7 @@ public class Product : AuditableEntity
         Price = price;
         StockQuantity = stockQuantity;
     }
-    
+
     public void SetMedicine(Medicine medicine)
     {
         MedicineId = medicine.Id;

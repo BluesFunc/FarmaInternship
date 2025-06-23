@@ -11,8 +11,10 @@ public class Order : AuditableEntity
     public decimal TotalAmount { get; init; }
     public OrderStatus Status { get; set; } = OrderStatus.New;
     public ICollection<OrderItem> OrderItems { get; private set; }
-    
-    private Order(){}
+
+    private Order()
+    {
+    }
 
     public Order(Cart cart, Guid userId)
     {
