@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebApi.Controllers.Abstractions;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public abstract class RestController(ISender sender) : ControllerBase
 
 {
