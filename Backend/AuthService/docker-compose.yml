@@ -1,0 +1,12 @@
+services:
+  users-database:
+    image: sha256:2b41d0be82839692f678a709e8b7dd6106ee4776b0e70759c59b067730058b04
+    env_file:
+      - userDB.env
+    volumes:
+      - userDB-volume:/var/opt/mssql
+    ports:
+      - "1433:1433"
+        
+volumes:
+  userDB-volume:

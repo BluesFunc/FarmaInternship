@@ -8,6 +8,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Domain", "Auth.Domain\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Infrastructure", "Auth.Infrastructure\Auth.Infrastructure.csproj", "{D7D55C65-5AAC-4472-ACA2-16051E3D9DFE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{AE6F16A4-B6BB-4FDB-9DD9-3F38EE597692}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		userDB.env = userDB.env
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
