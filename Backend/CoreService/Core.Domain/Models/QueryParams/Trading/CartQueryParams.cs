@@ -5,5 +5,6 @@ namespace Core.Domain.Models.QueryParams.Trading;
 
 public record CartQueryParams : PaginationQueryParams
 {
-    public List<CartStatus>? Status { get; init; }
+    public Guid? UserId { get; init; }
+    public CartStatus? Status { get; init; }
 }

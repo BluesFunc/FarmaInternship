@@ -29,7 +29,10 @@ public class UpdateOrderHandler :
 
         order.Status = request.Status;
 
-        var data = _mapper.Map<OrderDto>(order);
+
+        var updatedOrder = _repository.Update(order);
+
+        var data = _mapper.Map<OrderDto>(updatedOrder);
 
         return Result<OrderDto>.Successful(data);
     }

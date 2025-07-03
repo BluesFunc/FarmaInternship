@@ -31,6 +31,7 @@ public class CreateMerchantHandler : SingleRepositoryHandlerBase<IMerchantReposi
         }
 
         var data = _mapper.Map<MerchantDto>(newEntity);
+
         return Result<MerchantDto>.Successful(data);
     }
 }
