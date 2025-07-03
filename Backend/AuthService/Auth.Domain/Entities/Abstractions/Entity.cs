@@ -1,6 +1,9 @@
-﻿namespace Auth.Domain.Entities.Abstractions;
+﻿using System.Numerics;
+using Microsoft.AspNetCore.Identity;
 
-public abstract class Entity 
+namespace Auth.Domain.Entities.Abstractions;
+
+public abstract class Entity
 {
-    public virtual int Id { get; }
+    public virtual Guid Id { get; }
 }
