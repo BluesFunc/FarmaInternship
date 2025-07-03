@@ -1,10 +1,11 @@
 ﻿using Core.Application.Dtos.Commerce;
+using Core.Application.Interfaces;
 using Core.Application.Wrappers;
 using MediatR;
 
 namespace Core.Application.Features.Commerce.Products.Commands.CreateProduct;
 
-public record CreateProductCommand : IRequest<Result<ProductDto>>
+public record CreateProductCommand : IRequest<Result<ProductDto>>, ITransactionRequest
 {
     public required string Name { get; init; }
     public string? Description { get; init; }

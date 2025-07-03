@@ -5,17 +5,6 @@ namespace Core.Domain.Entities.Commerce;
 
 public class Product : AuditableEntity
 {
-    public Product(string name, string description, Medicine medicineItem, Merchant merchant,
-        decimal price, int stockQuantity)
-    {
-        Name = name;
-        Description = description;
-        SetMedicine(medicineItem);
-        SetMerchant(merchant);
-        Price = price;
-        StockQuantity = stockQuantity;
-    }
-
     public string Name { get; set; }
     public string? Description { get; set; }
     public string? ImageUrl { get; set; }
@@ -27,6 +16,21 @@ public class Product : AuditableEntity
     public decimal Price { get; set; }
     public int StockQuantity { get; set; }
     public IReadOnlyCollection<ProductCategory> Categories { get; private set; }
+
+    private Product()
+    {
+    }
+
+    public Product(string name, string description, Medicine medicineItem, Merchant merchant,
+        decimal price, int stockQuantity)
+    {
+        Name = name;
+        Description = description;
+        SetMedicine(medicineItem);
+        SetMerchant(merchant);
+        Price = price;
+        StockQuantity = stockQuantity;
+    }
 
     public void SetMedicine(Medicine medicine)
     {

@@ -59,8 +59,9 @@ public class UpdateProductHandler :
         product.Price = request.Price;
         product.StockQuantity = request.StockQuantity;
 
-        var data = _mapper.Map<ProductDto>(product);
+        var updatedProduct = _productRepository.Update(product);
 
+        var data = _mapper.Map<ProductDto>(updatedProduct);
         return Result<ProductDto>.Successful(data);
     }
 }
