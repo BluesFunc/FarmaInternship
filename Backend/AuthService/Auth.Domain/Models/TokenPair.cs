@@ -4,7 +4,7 @@ namespace Auth.Domain.Models;
 
 public record TokenPair
 {
-    public  string? AccessToken { get; init; }
-    public  string? RefreshToken { get; init; }
+    public required  string AccessToken { get; init; }
+    public  required string RefreshToken { get; init; }
 }
 

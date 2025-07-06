@@ -1,6 +1,34 @@
-﻿namespace Auth.Application.Features.Auth.Commands.LoginUser;
+﻿using Auth.Application.Interfaces.Services;
+using Auth.Application.Wrappers;
+using Auth.Application.Wrappers.Enums;
+using Auth.Domain.Interfaces;
+using Auth.Domain.Models;
+using MediatR;
+using Microsoft.AspNetCore.Identity;
 
-public class LoginUserHandler
+namespace Auth.Application.Features.Auth.Commands.LoginUser;
+
+public class LoginUserHandler(IUserRepository repository, IJwtService jwtService, IPasswordService passwordService)
+    : IRequestHandler<LoginUserCommand, Result<TokenPair>>
 {
-    
+    public async Task<Result<TokenPair>> Handle(LoginUserCommand request, CancellationToken cancellationToken)
+    {
+        var user = await repository.GetEntityAsync(x => x.Mail == request.Mail, cancellationToken);
+        if (user is null)
+        {
+            return Result<TokenPair>.Failed(ErrorStatusCode.EntityConflict, "Wrong email or password");
+        }
+
+        if (passwordService.VerifyHashedPassword(user, user.Password, request.Password) ==
+            PasswordVerificationResult.Failed)
+        {
+            return Result<TokenPair>.Failed(ErrorStatusCode.EntityConflict, "Wrong email or password");
+        }
+
+        var tokenPair = jwtService.GenerateTokenPair(user);
+
+        var data = tokenPair with { RefreshToken = user.RefreshToken };
+
+        return Result<TokenPair>.Succeed(data);
+    }
 }

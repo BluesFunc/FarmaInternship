@@ -18,24 +18,18 @@ public class RegisterUserHandler(
 {
     public async Task<Result<TokenPair>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
-        var emailAlreadyInUse = await repository.EntityExistAsync(x => x.Mail == request.Mail, cancellationToken);
+        var emailAlreadyInUse = await repository.IsExistAsync(x => x.Mail == request.Mail, cancellationToken);
         if (emailAlreadyInUse)
         {
             return Result<TokenPair>.Failed(ErrorStatusCode.EntityConflict, "Email already in use");
         }
 
-        var user = new User(request.Mail) { Username = request.Username };
+        var user = new User(request.Mail, request.Role) { Username = request.Username };
         user.Password = passwordService.HashPassword(user, request.Password);
 
         var entity = repository.AddEntity(user);
 
-        var claims = new Dictionary<string, object>()
-        {
-            { "user_mail", entity.Mail },
-            { "user_id", entity.Id }
-        };
-
-        var tokens = jwtService.GenerateTokenPair(claims);
+        var tokens = jwtService.GenerateTokenPair(entity);
         user.RefreshToken = tokens.RefreshToken;
 
         await repository.SaveChangesAsync(cancellationToken);

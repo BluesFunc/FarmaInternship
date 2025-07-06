@@ -1,10 +1,17 @@
-﻿using System.Security.Claims;
+﻿using System.IdentityModel.Tokens.Jwt;
+
+using Auth.Domain.Entities;
 using Auth.Domain.Models;
 
 namespace Auth.Application.Interfaces.Services;
 
 public interface IJwtService 
 {
-    public TokenPair GenerateTokenPair(IDictionary<string,object> claims);
+    public TokenPair GenerateTokenPair(User user);
     public bool CanDecodeToken(string encodedToken);
+    public bool IsTokenExpired(string encodedToken);
+
+    public JwtSecurityToken? ParseToken(string token);
+
+    
 }

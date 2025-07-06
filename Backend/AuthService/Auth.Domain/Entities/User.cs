@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Auth.Domain.Entities.Abstractions;
+using Auth.Domain.Entities.Enums;
 
 namespace Auth.Domain.Entities;
 
@@ -9,6 +10,7 @@ public class User : Entity, IAuditableEntity
     public string Password { get; set; }
     [EmailAddress] public string Mail { get; }
     public string RefreshToken { get; set; }
+    public UserRole UserRole { get; set; } = UserRole.Customer;
     public DateTime CreatedAt { get; set; }
     public DateTime ModifiedAt { get; set; }
 
@@ -16,7 +18,7 @@ public class User : Entity, IAuditableEntity
     {
     }
 
-    public User( string mail)
+    public User( string mail, UserRole role)
     {
         Mail = mail;
     }

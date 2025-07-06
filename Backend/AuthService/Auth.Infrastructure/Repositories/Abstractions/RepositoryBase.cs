@@ -36,7 +36,7 @@ public abstract class RepositoryBase<T>(DbContext context) : IFilterRepository<T
         await context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<bool> EntityExistAsync(Expression<Func<T, bool>> filter,
+    public async Task<bool> IsExistAsync(Expression<Func<T, bool>> filter,
         CancellationToken cancellationToken = default)
     {
         return await context.Set<T>().AsNoTracking()

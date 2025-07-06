@@ -1,4 +1,5 @@
-﻿using Auth.Application.Features.Auth.Commands.RegisterUser;
+﻿using Auth.Application.Features.Auth.Commands.LoginUser;
+using Auth.Application.Features.Auth.Commands.RegisterUser;
 using Auth.Application.Interfaces.Services;
 using AuthApi.Controllers.Abstractions;
 using MediatR;
@@ -12,4 +13,8 @@ public class AuthController(ISender sender) : RestController(sender)
     [HttpPost("[action]")]
     public async Task<IActionResult> Register(RegisterUserCommand command,
         CancellationToken cancellationToken = default) => await ExecuteMediatrCommandAsync(command, cancellationToken);
+
+    [HttpPost("[action]")]
+    public async Task<IActionResult> Login(LoginUserCommand command, CancellationToken cancellationToken = default)
+        => await ExecuteMediatrCommandAsync(command, cancellationToken);
 }
