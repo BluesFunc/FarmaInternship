@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Auth.Application;
@@ -9,6 +10,9 @@ public static class ApplicationConfiguration
     {
         serviceCollection.AddMediatR((configuration =>
             configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly())));
+        serviceCollection.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+        
         return serviceCollection;
+        
     }
 }

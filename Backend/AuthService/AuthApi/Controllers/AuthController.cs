@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthApi.Controllers;
 
-
+[ApiController]
+[Route("[controller]/[action]")]
 public class AuthController(ISender sender) : RestController(sender)
 {
-    [HttpPost("[action]")]
+    [HttpPost]
     public async Task<IActionResult> Register(RegisterUserCommand command,
         CancellationToken cancellationToken = default) => await ExecuteMediatrCommandAsync(command, cancellationToken);
 
-    [HttpPost("[action]")]
+    [HttpPost]
     public async Task<IActionResult> Login(LoginUserCommand command, CancellationToken cancellationToken = default)
         => await ExecuteMediatrCommandAsync(command, cancellationToken);
 }

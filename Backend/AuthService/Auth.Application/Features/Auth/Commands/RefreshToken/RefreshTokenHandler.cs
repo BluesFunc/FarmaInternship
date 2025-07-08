@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using Auth.Application.Extensions;
+﻿using Auth.Application.Extensions;
 using Auth.Application.Interfaces.Services;
 using Auth.Application.Wrappers;
 using Auth.Application.Wrappers.Enums;
@@ -18,52 +17,36 @@ public class
         IJwtService jwtService
     ) : IRequestHandler<RefreshTokenCommand, Result<TokenPair>>
 {
-    private readonly HttpContext _httpContext = httpContextAccessor.HttpContext!;
+    private readonly HttpContext
+        _httpContext = httpContextAccessor.HttpContext ?? throw new InvalidOperationException();
 
     public async Task<Result<TokenPair>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
     {
-        if (!jwtService.CanDecodeToken(request.RefreshToken))
+        var userId = _httpContext.GetUserIdFromClaims();
+
+        if (userId is null)
         {
-            return Result<TokenPair>.Failed(ErrorStatusCode.EntityConflict, "Invalid refresh token");
+            return Result<TokenPair>.Failed(ErrorStatusCode.NotAuthorized, "User Id is missing");
         }
 
-        var authorizationToken = _httpContext.GetAuthorizationToken();
-        if (authorizationToken.IsNullOrEmpty())
-        {
-            return Result<TokenPair>.Failed(ErrorStatusCode.NotAuthorized, "Authorization header is missing");
-        }
-
-        var token = jwtService.ParseToken(authorizationToken);
-        if (token == null)
-        {
-            return Result<TokenPair>.Failed(ErrorStatusCode.NotAuthorized, "Invalid jwt token format");
-        }
-
-        var userId = token.Claims
-            .FirstOrDefault(x => x.Type == ClaimsIdentity.DefaultNameClaimType)?.Value;
-        if (jwtService.IsTokenExpired(request.RefreshToken))
-        {
-            return Result<TokenPair>.Failed(ErrorStatusCode.NotAuthorized, "Refresh token is expired");
-        }
-
-        if (userId == null)
-        {
-            return Result<TokenPair>.Failed(ErrorStatusCode.NotAuthorized, "User is not authorized");
-        }
-
-        var user = await repository.GetEntityByIdAsync((Guid.Parse(userId)), cancellationToken);
+        var user = await repository.GetEntityByIdAsync(userId.Value, cancellationToken);
         if (user == null)
         {
             return Result<TokenPair>.Failed(ErrorStatusCode.NotFound, "User is not exists");
         }
 
-        if (user.RefreshToken != request.RefreshToken)
+        var token = _httpContext.GetAuthorizationToken();
+
+        if (user.RefreshToken != token)
         {
             return Result<TokenPair>.Failed(ErrorStatusCode.NotAuthorized, "Incorrect refresh token");
         }
 
         var tokenPair = jwtService.GenerateTokenPair(user);
         user.RefreshToken = tokenPair.RefreshToken;
+        repository.UpdateEntity(user);
+        await repository.SaveChangesAsync(cancellationToken);
+        
         return Result<TokenPair>.Succeed(tokenPair);
     }
 }

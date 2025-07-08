@@ -27,8 +27,10 @@ public class LoginUserHandler(IUserRepository repository, IJwtService jwtService
 
         var tokenPair = jwtService.GenerateTokenPair(user);
 
-        var data = tokenPair with { RefreshToken = user.RefreshToken };
-
-        return Result<TokenPair>.Succeed(data);
+        user.RefreshToken = tokenPair.RefreshToken;
+        repository.UpdateEntity(user);
+        await repository.SaveChangesAsync(cancellationToken);
+        
+        return Result<TokenPair>.Succeed(tokenPair);
     }
 }

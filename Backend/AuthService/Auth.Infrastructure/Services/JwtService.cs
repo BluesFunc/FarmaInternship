@@ -18,7 +18,7 @@ public class JwtService(JwtSecurityTokenHandler tokenHandler) : IJwtService
         var encodedAccessToken = GenerateEncodedToken(accessExpireAt, user);
 
         var refreshExpireAt = DateTime.UtcNow + AuthOptions.RefreshTokenLifeTime;
-        var encodedRefreshToken = GenerateEncodedToken(refreshExpireAt);
+        var encodedRefreshToken = GenerateEncodedToken(refreshExpireAt, user);
 
 
         var pair = new TokenPair()
@@ -45,16 +45,15 @@ public class JwtService(JwtSecurityTokenHandler tokenHandler) : IJwtService
     }
 
 
-    private string? GenerateEncodedToken(DateTime expireAt, User? user = null)
+    private string? GenerateEncodedToken(DateTime expireAt, User user )
     {
-        var claims =  new Dictionary<string, object>();
-        
-        if (user is not null)
+        var claims = new Dictionary<string, object>()
         {
-            claims.Add(ClaimsIdentity.DefaultRoleClaimType, user.UserRole.ToString());
-            claims.Add(ClaimsIdentity.DefaultNameClaimType, user.Id.ToString());
-        }
-        
+            { ClaimsIdentity.DefaultRoleClaimType, user.UserRole.ToString() },
+            { ClaimsIdentity.DefaultNameClaimType, user.Id.ToString() }
+        };
+
+
         var tokenDescriptor = new SecurityTokenDescriptor()
         {
             Audience = AuthOptions.Audience,

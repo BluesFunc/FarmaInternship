@@ -8,7 +8,7 @@ public static class AuthOptions
     public static string Audience { get; } = "Farmacio";
 
     public static SymmetricSecurityKey SecurityKey { get; }
-        = new SymmetricSecurityKey(Encoding.UTF8.GetBytes
+        = new (Encoding.UTF8.GetBytes
         (
             Environment.GetEnvironmentVariable("SECRET_KEY")
             ?? throw new InvalidOperationException()

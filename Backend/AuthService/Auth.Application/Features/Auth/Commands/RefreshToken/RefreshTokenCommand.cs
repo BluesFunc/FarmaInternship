@@ -6,5 +6,4 @@ namespace Auth.Application.Features.Auth.Commands.RefreshToken;
 
 public record RefreshTokenCommand : IRequest<Result<TokenPair>>
 {
-    public required string RefreshToken;
 }

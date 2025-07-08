@@ -29,10 +29,11 @@ public class RegisterUserHandler(
 
         var entity = repository.AddEntity(user);
 
-        var tokens = jwtService.GenerateTokenPair(entity);
-        user.RefreshToken = tokens.RefreshToken;
-
+        var tokenPair = jwtService.GenerateTokenPair(entity);
+        user.RefreshToken = tokenPair.RefreshToken;
+        repository.UpdateEntity(user);
         await repository.SaveChangesAsync(cancellationToken);
-        return Result<TokenPair>.Succeed(tokens);
+        
+        return Result<TokenPair>.Succeed(tokenPair);
     }
 }

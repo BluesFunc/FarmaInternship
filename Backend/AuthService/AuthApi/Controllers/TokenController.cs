@@ -1,14 +1,17 @@
-﻿using Auth.Application.Interfaces.Services;
-using Auth.Domain.Entities;
-using Auth.Infrastructure.Services;
-using Microsoft.AspNetCore.Identity;
+﻿using Auth.Application.Features.Auth.Commands.RefreshToken;
+using AuthApi.Controllers.Abstractions;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
-public class TokenController(IJwtService service, IPasswordService passwordService) : ControllerBase
+[Route("[controller]/[action]")]
+public class TokenController(ISender sender) : RestController(sender)
 {
- 
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> Refresh(RefreshTokenCommand command)
+        => await ExecuteMediatrCommandAsync(command);
 }

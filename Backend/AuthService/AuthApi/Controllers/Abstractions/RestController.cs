@@ -34,6 +34,7 @@ public class RestController(ISender sender) : ControllerBase
             ErrorStatusCode.NotAnError => Ok(result),
             ErrorStatusCode.EntityConflict => BadRequest(result.Message),
             ErrorStatusCode.NotFound => NotFound(result.Message),
+            ErrorStatusCode.NotAuthorized => Unauthorized(result.Message),
             ErrorStatusCode.ValidationError => UnprocessableEntity(result.Message),
             _ => throw new ArgumentOutOfRangeException()
         };
