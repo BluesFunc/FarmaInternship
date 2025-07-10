@@ -16,7 +16,7 @@ public abstract class GetPaginatedEntitiesHandlerBase<TRepository, TEntity, TReq
     where TEntity : Entity
     where TRequest : GetPaginatedEntitiesCommand<TResponse, TFilter>
     where TResponse : notnull
-    where TFilter : PaginationQueryParams
+    where TFilter : PaginationQueryParams, new()
 {
     protected GetPaginatedEntitiesHandlerBase(IMapper mapper, TRepository repository) : base(mapper, repository)
     {
@@ -35,7 +35,7 @@ public abstract class GetPaginatedEntitiesHandlerBase<TRepository, TEntity, TReq
         }
 
         var data = _mapper.Map<IReadOnlyList<TResponse>>(entities);
-        var paginationList = new PaginationList<TResponse>(data, request.PageNo, request.PageSize);
+        var paginationList = new PaginationList<TResponse>(data, request.Filter.PageNo, request.Filter.PageSize);
 
 
         return Result<PaginationList<TResponse>>.Successful(paginationList);

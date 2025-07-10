@@ -5,6 +5,8 @@ using Core.Application.Features.Commerce.Merchants.Commands.DeleteMerchantById;
 using Core.Application.Features.Commerce.Merchants.Commands.UpdateMerchant;
 using Core.Application.Features.Commerce.Merchants.Queries.GetMerchantById;
 using Core.Application.Features.Commerce.Merchants.Queries.GetPaginatedMedicine;
+using Core.Domain.Models.QueryParams.Abstractions;
+using Core.Domain.Models.QueryParams.Commerce;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Abstractions;
@@ -33,7 +35,7 @@ public class MerchantController(ISender sender) : RestController(sender)
         => await ExecuteMediatrCommand(command);
 
     [HttpGet]
-    public async Task<IActionResult> Get([FromQuery] GetPaginatedMerchantCommand command)
+    public async Task<IActionResult> Get([FromQuery] GetPaginatedMerchantCommand command = null)
         => await ExecuteMediatrCommand(command);
 
 

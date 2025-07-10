@@ -1,9 +1,6 @@
+using Core.Application;
 using Core.Infrastructure;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Identity.Web;
-using Microsoft.Identity.Abstractions;
-using Microsoft.Identity.Web.Resource;
+
 
 namespace WebApi;
 
@@ -13,6 +10,7 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        builder.Services.ConfigureApplicationLayer();
         builder.Services.AddInfrastructure();
         builder.Services.AddControllers();
       
