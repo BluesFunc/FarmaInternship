@@ -25,18 +25,26 @@ public class ProductController(ISender sender) : RestController(sender)
     }
 
     [HttpPost()]
-    public async Task<IActionResult> Create(CreateProductCommand  command)
-        => await ExecuteMediatrCommand(command);
-    
+    public async Task<IActionResult> Create(CreateProductCommand command)
+    {
+        return await ExecuteMediatrCommand(command);
+    }
+
     [HttpDelete()]
     public async Task<IActionResult> Delete(DeleteProductByIdCommand command)
-        => await ExecuteMediatrCommand(command);
-    
+    {
+        return await ExecuteMediatrCommand(command);
+    }
+
     [HttpPut()]
     public async Task<IActionResult> Update(UpdateProductCommand command)
-        => await ExecuteMediatrCommand(command);
-    
+    {
+        return await ExecuteMediatrCommand(command);
+    }
+
     [HttpGet]
     public async Task<IActionResult> Get([FromQuery] GetPaginatedProductsCommand command)
-        => await ExecuteMediatrCommand(command);
+    {
+        return await ExecuteMediatrCommand(command);
+    }
 }

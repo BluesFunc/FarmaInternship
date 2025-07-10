@@ -20,18 +20,26 @@ public class CartItemController(ISender sender) : RestController(sender)
     }
 
     [HttpPost()]
-    public async Task<IActionResult> Create(CreateCartItemCommand  command)
-        => await ExecuteMediatrCommand(command);
-    
+    public async Task<IActionResult> Create(CreateCartItemCommand command)
+    {
+        return await ExecuteMediatrCommand(command);
+    }
+
     [HttpDelete()]
     public async Task<IActionResult> Delete(DeleteCartItemByIdCommand command)
-        => await ExecuteMediatrCommand(command);
-    
+    {
+        return await ExecuteMediatrCommand(command);
+    }
+
     [HttpPut()]
     public async Task<IActionResult> Update(UpdateCartItemCommand command)
-        => await ExecuteMediatrCommand(command);
-    
+    {
+        return await ExecuteMediatrCommand(command);
+    }
+
     [HttpGet]
     public async Task<IActionResult> Get([FromQuery] GetPaginatedCartItemsCommand command)
-        => await ExecuteMediatrCommand(command);
+    {
+        return await ExecuteMediatrCommand(command);
+    }
 }

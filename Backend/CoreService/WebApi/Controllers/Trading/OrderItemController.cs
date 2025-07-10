@@ -16,12 +16,16 @@ public class OrderItemController(ISender sender) : RestController(sender)
         var command = new GetOrderItemByIdCommand() { Id = id };
         return await ExecuteMediatrCommand(command);
     }
-    
+
     [HttpDelete()]
     public async Task<IActionResult> Delete(DeleteOrderItemByIdCommand command)
-        => await ExecuteMediatrCommand(command);
-    
+    {
+        return await ExecuteMediatrCommand(command);
+    }
+
     [HttpGet]
     public async Task<IActionResult> Get([FromQuery] GetPaginatedOrderItemsCommand command)
-        => await ExecuteMediatrCommand(command);
+    {
+        return await ExecuteMediatrCommand(command);
+    }
 }

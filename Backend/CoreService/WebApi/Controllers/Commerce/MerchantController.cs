@@ -24,20 +24,25 @@ public class MerchantController(ISender sender) : RestController(sender)
 
     [HttpPost()]
     public async Task<IActionResult> Create(CreateMerchantCommand command)
-        => await ExecuteMediatrCommand(command);
-    
+    {
+        return await ExecuteMediatrCommand(command);
+    }
+
     [HttpDelete()]
     public async Task<IActionResult> Delete(DeleteMerchantByIdCommand command)
-        => await ExecuteMediatrCommand(command);
-    
+    {
+        return await ExecuteMediatrCommand(command);
+    }
+
     [HttpPut()]
     public async Task<IActionResult> Update(UpdateMerchantCommand command)
-        => await ExecuteMediatrCommand(command);
+    {
+        return await ExecuteMediatrCommand(command);
+    }
 
     [HttpGet]
     public async Task<IActionResult> Get([FromQuery] GetPaginatedMerchantCommand command = null)
-        => await ExecuteMediatrCommand(command);
-
-
-
+    {
+        return await ExecuteMediatrCommand(command);
+    }
 }

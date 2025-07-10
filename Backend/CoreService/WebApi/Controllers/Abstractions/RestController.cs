@@ -14,7 +14,6 @@ public abstract class RestController(ISender sender) : ControllerBase
 {
     protected IActionResult ToActionResult(Result result)
     {
-        
         return result.ErrorCode switch
         {
             ErrorTypeCode.NotFound => NotFound(result.Message),
@@ -26,7 +25,7 @@ public abstract class RestController(ISender sender) : ControllerBase
         };
     }
 
-    protected IActionResult ToActionResult<T> (Result<T> result)
+    protected IActionResult ToActionResult<T>(Result<T> result)
     {
         return result.ErrorCode switch
         {
@@ -44,9 +43,9 @@ public abstract class RestController(ISender sender) : ControllerBase
         var result = await sender.Send(command, HttpContext.RequestAborted);
         return ToActionResult(result);
     }
-    
-    
-    protected async Task<IActionResult> ExecuteMediatrCommand<T> (IRequest<Result<T>> command)
+
+
+    protected async Task<IActionResult> ExecuteMediatrCommand<T>(IRequest<Result<T>> command)
     {
         var result = await sender.Send(command, HttpContext.RequestAborted);
         return ToActionResult(result);
