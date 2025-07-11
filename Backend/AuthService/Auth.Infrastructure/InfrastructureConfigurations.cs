@@ -16,6 +16,7 @@ public static class InfrastructureConfigurations
 {
     public static IServiceCollection ConfigureInfrastructure(this IServiceCollection serviceCollection)
     {
+        serviceCollection.AddMail();
         serviceCollection.AddDatabase();
         serviceCollection.AddAuth();
         serviceCollection.AddScoped<JwtSecurityTokenHandler>();

@@ -31,7 +31,7 @@ public class RegisterUserHandler(
 
         var tokenPair = jwtService.GenerateTokenPair(entity);
         user.RefreshToken = tokenPair.RefreshToken;
-        repository.UpdateEntity(user);
+        repository.AddEntity(user);
         await repository.SaveChangesAsync(cancellationToken);
         
         return Result<TokenPair>.Succeed(tokenPair);
