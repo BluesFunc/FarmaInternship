@@ -1,4 +1,12 @@
 services:
+  auth-application:
+    build:
+      dockerfile: AuthApi/Dockerfile 
+    env_file:
+      - userDB.env
+    ports:
+      - "8080:8080"
+    
   users-database:
     image: sha256:2b41d0be82839692f678a709e8b7dd6106ee4776b0e70759c59b067730058b04
     env_file:
@@ -7,6 +15,13 @@ services:
       - userDB-volume:/var/opt/mssql
     ports:
       - "1433:1433"
+  rabbit-broker:
+    image: sha256:b69b6b9a4f459586aae9b278bf9bccb62b51b922a499291d17c23b658b736ab7
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    ports:
+      - '5672:5672'
+      - '15672:15672'
         
 volumes:
   userDB-volume:

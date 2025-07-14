@@ -12,7 +12,8 @@ internal static class AuthConfigurations
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
                 options.TokenValidationParameters = new TokenValidationParameters
-                {ValidateIssuer = false,
+                {
+                    ValidateIssuer = false,
                     ValidateAudience = true,
                     ValidAudience = AuthOptions.Audience,
                     ValidateLifetime = true,
@@ -22,7 +23,6 @@ internal static class AuthConfigurations
             );
 
         services.AddAuthorization();
-       
 
 
         return services;

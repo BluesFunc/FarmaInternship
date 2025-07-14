@@ -13,6 +13,7 @@ namespace AuthApi.Controllers;
 [Route("[controller]/[action]")]
 public class AuthController(ISender sender) : RestController(sender)
 {
+    
     [HttpPost]
     public async Task<IActionResult> Register(RegisterUserCommand command,
         CancellationToken cancellationToken = default) => await ExecuteMediatrCommandAsync(command, cancellationToken);

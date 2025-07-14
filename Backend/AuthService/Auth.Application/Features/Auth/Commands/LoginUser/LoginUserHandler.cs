@@ -14,12 +14,9 @@ public class LoginUserHandler(IUserRepository repository, IJwtService jwtService
     public async Task<Result<TokenPair>> Handle(LoginUserCommand request, CancellationToken cancellationToken)
     {
         var user = await repository.GetEntityAsync(x => x.Mail == request.Mail, cancellationToken);
-        if (user is null)
-        {
-            return Result<TokenPair>.Failed(ErrorStatusCode.EntityConflict, "Wrong email or password");
-        }
-
-        if (passwordService.VerifyHashedPassword(user, user.Password, request.Password) ==
+       
+        if (user is not null && 
+            passwordService.VerifyHashedPassword(user, user.Password, request.Password) ==
             PasswordVerificationResult.Failed)
         {
             return Result<TokenPair>.Failed(ErrorStatusCode.EntityConflict, "Wrong email or password");
