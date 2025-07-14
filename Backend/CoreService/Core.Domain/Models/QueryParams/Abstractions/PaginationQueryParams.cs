@@ -2,6 +2,6 @@
 
 public abstract record PaginationQueryParams : FilterParams
 {
-    public int PageNo { get; set; } = 1;
+    public int PageNo { get; init; } = 1;
     public int PageSize { get; init; } = 10;
 }

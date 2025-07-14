@@ -9,9 +9,7 @@ public abstract record GetPaginatedEntitiesCommand<TResponse, TFilter>
     : IRequest<Result<PaginationList<TResponse>>>,
         ITransactionRequest
     where TResponse : notnull
-    where TFilter : FilterParams
+    where TFilter : PaginationQueryParams, new()
 {
-    public int PageNo { get; init; } = 1;
-    public int PageSize { get; init; } = 5;
-    public TFilter? Filter { get; init; }
+    public required TFilter Filter { get; init; } = new() { PageNo = 1, PageSize = 5 };
 }
