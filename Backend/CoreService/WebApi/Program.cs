@@ -1,8 +1,6 @@
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Identity.Web;
-using Microsoft.Identity.Abstractions;
-using Microsoft.Identity.Web.Resource;
+using Core.Application;
+using Core.Infrastructure;
+
 
 namespace WebApi;
 
@@ -11,17 +9,17 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        
-        
 
+        builder.Services.ConfigureApplicationLayer();
+        builder.Services.AddInfrastructure();
         builder.Services.AddControllers();
-      
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
         var app = builder.Build();
 
- 
+
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
