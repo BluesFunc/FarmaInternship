@@ -1,4 +1,4 @@
-﻿using Auth.Application.Features.Auth.Commands.RefreshToken;
+﻿using Application.Features.Auth.Commands.RefreshToken;
 using AuthApi.Controllers.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -13,5 +13,7 @@ public class TokenController(ISender sender) : RestController(sender)
     [HttpPost]
     [Authorize]
     public async Task<IActionResult> Refresh(RefreshTokenCommand command)
-        => await ExecuteMediatrCommandAsync(command);
+    {
+        return await ExecuteMediatrCommandAsync(command);
+    }
 }

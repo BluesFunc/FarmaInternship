@@ -1,5 +1,5 @@
-﻿using Auth.Application.Wrappers;
-using Auth.Application.Wrappers.Enums;
+﻿using Application.Wrappers;
+using Application.Wrappers.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +23,8 @@ public class RestController(ISender sender) : ControllerBase
         return response;
     }
 
-    protected async Task<IActionResult> ExecuteMediatrCommandAsync(IRequest<Result> command, CancellationToken cancellationToken = default)
+    protected async Task<IActionResult> ExecuteMediatrCommandAsync(IRequest<Result> command,
+        CancellationToken cancellationToken = default)
     {
         var result = await sender.Send(command, cancellationToken);
         return CreateResponse(result);
@@ -43,7 +44,8 @@ public class RestController(ISender sender) : ControllerBase
         return response;
     }
 
-    protected  async Task<IActionResult> ExecuteMediatrCommandAsync<T>(IRequest<Result<T>> command, CancellationToken cancellationToken = default)
+    protected async Task<IActionResult> ExecuteMediatrCommandAsync<T>(IRequest<Result<T>> command,
+        CancellationToken cancellationToken = default)
     {
         var result = await sender.Send(command, cancellationToken);
         return CreateResponse(result);

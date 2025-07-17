@@ -5,11 +5,11 @@ namespace AuthApi.Extensions;
 
 public static class DatabaseMigrationExtension
 {
-    public static async Task ApplyMigrations (this WebApplication app)
+    public static async Task ApplyMigrations(this WebApplication app)
     {
         using var scope = app.Services.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<UserDbContext>();
-       
+
         await MigrateAsync(context);
     }
 

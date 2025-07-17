@@ -3,7 +3,7 @@ using Microsoft.OpenApi.Models;
 
 namespace AuthApi.Extensions;
 
-public static class OpenApiExtensions 
+public static class OpenApiExtensions
 {
     public static IServiceCollection AddOpenApiAuth(this IServiceCollection services)
     {
@@ -13,8 +13,7 @@ public static class OpenApiExtensions
             swagger.SwaggerDoc("v1", new OpenApiInfo
             {
                 Version = "v1",
-                Title = "Farmacio API",
-
+                Title = "Farmacio API"
             });
             swagger.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
             {
@@ -25,7 +24,7 @@ public static class OpenApiExtensions
                 In = ParameterLocation.Header,
                 Description = "JWT Authorization header using the Bearer scheme. " +
                               "\r\n\r\n Enter 'Bearer' [space] and then your token in the text input below." +
-                              "\r\n\r\nExample: \"Bearer 12345abcdef\"",
+                              "\r\n\r\nExample: \"Bearer 12345abcdef\""
             });
 
             var (securityScheme, array) = new ValueTuple<OpenApiSecurityScheme, IList<string>>(
@@ -34,14 +33,14 @@ public static class OpenApiExtensions
                     Reference = new OpenApiReference
                     {
                         Type = ReferenceType.SecurityScheme,
-                        Id = JwtBearerDefaults.AuthenticationScheme,
-                    },
+                        Id = JwtBearerDefaults.AuthenticationScheme
+                    }
                 },
                 Array.Empty<string>());
 
             swagger.AddSecurityRequirement(new OpenApiSecurityRequirement()
             {
-                { securityScheme, array },
+                { securityScheme, array }
             });
         });
 

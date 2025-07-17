@@ -1,7 +1,4 @@
-using Auth.Infrastructure;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Serilog;
-
 
 namespace AuthApi;
 
