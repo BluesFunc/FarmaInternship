@@ -55,12 +55,8 @@ public class CreateOrderHandler :
     {
         IList<OrderItem> orderItems = [];
 
-        foreach (var item in cartItems)
-        {
-            var priceAtOrder = item.Quantity * item.ProductObject.Price;
-            var orderItem = new OrderItem(order, item.ProductObject, item.Quantity, priceAtOrder);
-            orderItems.Add(orderItem); // LINQ  
-        }
+        var items = cartItems.Select(x =>
+            new OrderItem(order, x.ProductObject, x.Quantity, x.Quantity * x.ProductObject.Price)).ToList();
 
         return orderItems;
     }

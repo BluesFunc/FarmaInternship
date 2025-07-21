@@ -8,6 +8,7 @@ public static class InfrastructureConfiguration
     public static IServiceCollection AddInfrastructure(this IServiceCollection serviceCollection)
     {
         serviceCollection.InjectDatabase();
+        serviceCollection.InjectGrcp();
         return serviceCollection;
     }
 }

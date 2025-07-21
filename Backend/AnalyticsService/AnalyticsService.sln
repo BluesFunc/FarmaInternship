@@ -6,6 +6,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analytics.BLL", "Analytics.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analytics.Presentation", "Analytics.Presentation\Analytics.Presentation.csproj", "{A60CD957-444A-4E4A-BEF4-6FA219853F95}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{32831A75-8538-4700-9411-F017A70716D8}"
+	ProjectSection(SolutionItems) = preProject
+		app.env = app.env
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
