@@ -16,7 +16,9 @@
       "launchBrowser": false,
       "applicationUrl": "https://localhost:7215;http://localhost:5077",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "STATISTIC_DB": "mongodb://aleks:asdfg1234@localhost:27017/",
+        "STATISTIC_DB_NAME": "statistics"
       }
     }
   }
