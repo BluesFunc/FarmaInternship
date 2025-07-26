@@ -31,7 +31,7 @@ public class RepositoriesTest
         medicine.ModifiedAt = DateTime.UtcNow;
         var entry = await _medicineRepository.AddAsync(medicine);
         
-        entry.Should().NotBeNull();
+        entry.Should().NotBeNull(); // Invalid test structure
 
         await _testingContext.SaveChangesAsync();
 

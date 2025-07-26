@@ -18,21 +18,25 @@ public class CreateMedicineHandlerTest
     }
 
     [Fact]
-    public async void Handle_CreateNewInstance_AssumeSucceed()
+    public async Task Handle_CreateNewInstance_AssumeSucceed() // Replace void with Task
     {
+        
+        //Arrange
         var instance = _fixture.MedicineInstance;
-
         var command = new CreateMedicineCommand()
         {
             ManufacturerName = instance.ManufacturerName, ManufacturerOrigin = instance.ManufacturerOrigin,
             MeasureUnit = instance.MeasureUnit,
             Volume = instance.Volume, Name = instance.Name, Type = instance.Type
         };
-
-        var handler = new CreateMedicineHandler(_fixture.Mapper.Object, _fixture.Repository.Object);
+        var handler = new CreateMedicineHandler(_fixture.Mapper.Object, _fixture.Repository.Object); // rename handlers with SAT(system under test)
+        
+        
+        //Act
         var result = await handler.Handle(command);
 
-
+            
+        //Assert
         result.IsSucceed.Should().BeTrue();
         _fixture.Repository.Verify(
             x => x.AddAsync(
