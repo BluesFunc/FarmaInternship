@@ -3,13 +3,4 @@ using MongoDB.Driver;
 
 namespace Analytics.DAL.Collections;
 
-public class ProductService
-{
-    
-    public readonly IMongoCollection<ProductService> Collection;
-
-    public ProductService(IMongoDatabase database)
-    {
-        Collection = database.GetCollection<ProductService>("users");
-    }
-}
+public class ProductService(IMongoDatabase database) : RepositoryBase<ProductStatistic>(database, "products");

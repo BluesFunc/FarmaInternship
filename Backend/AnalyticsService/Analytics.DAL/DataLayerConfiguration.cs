@@ -1,4 +1,5 @@
 ﻿using Analytics.DAL.Collections;
+using Analytics.DAL.Models;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
@@ -15,7 +16,7 @@ public  static class DataLayerConfiguration
             new MongoClient(Environment.GetEnvironmentVariable("STATISTIC_DB"))
                 .GetDatabase(Environment.GetEnvironmentVariable("STATISTIC_DB_NAME")));
         BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
-        serviceCollection.AddScoped<UserService>();
+        serviceCollection.AddScoped<IRepository<UserStatistic>, UserService>();
         return serviceCollection;
     } 
 }

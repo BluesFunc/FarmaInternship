@@ -32,43 +32,76 @@ services:
     ports:
       - '5434:5432'
   
-  statistic-broker:
-    image: confluentinc/cp-kafka:7.2.15
+  statistic-broker1:
+    image: confluentinc/cp-kafka:8.0.0
     environment:
+      KAFKA_NODE_ID: 1
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://statistic-broker:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@statistic-broker1:29093,2@statistic-broker2:29093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://statistic-broker1:29092,CONTROLLER://statistic-broker1:29093,PLAINTEXT_HOST://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://statistic-broker1:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      CLUSTER_ID: EmptNWtoR4GGWx-BH6nGLQ
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
-    
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 2
+    ports:
+      - "29092:29092"
+      - "29093:29093"
+      - "9092:9092"
     volumes:
-      - statistic-message-volume:/bitnami/kafka
-    ports:
-      - '29092:29092'
+      - statistic-message-volume1:/var/lib/kafka/data
+    networks:
+      - statistic-net
   
-  zookeeper:
-    image: confluentinc/cp-zookeeper:7.2.15
+  statistic-broker2:
+    image: confluentinc/cp-kafka:8.0.0
     environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
+      KAFKA_NODE_ID: 2
+      KAFKA_BROKER_ID: 2
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@statistic-broker1:29093,2@statistic-broker2:29093
+      KAFKA_LISTENERS: PLAINTEXT://statistic-broker2:29092,CONTROLLER://statistic-broker2:29093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://statistic-broker2:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      CLUSTER_ID: EmptNWtoR4GGWx-BH6nGLQ
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 2
     ports:
-      - '22181:2181'
+      - "29094:29092"
+      - "29095:29093"
+    volumes:
+      - statistic-message-volume2:/var/lib/kafka/data
+    networks:
+      - statistic-net
   
   kafka-ui:
     image: provectuslabs/kafka-ui:v0.7.2
     container_name: kafka-ui
     ports:
-      - 8090:8080
+      - 8080:8080
     restart: always
     environment:
       - KAFKA_CLUSTERS_0_NAME=local
-      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=statistic-broker:29092
-      - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
-    links:
-      - statistic-broker
-      - zookeeper
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=statistic-broker1:29092,statistic-broker2:29092
+    depends_on:
+      - statistic-broker1
+      - statistic-broker2
+    networks:
+      - statistic-net
+
+
+networks:
+  statistic-net:
+    driver: bridge
 
 volumes:
   core_db_volume:
-  statistic-message-volume:
+  statistic-message-volume1:
+  statistic-message-volume2:

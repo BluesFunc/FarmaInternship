@@ -1,5 +1,7 @@
-﻿using Core.Application.Dtos.Commerce;
+﻿using Core.Application.Configurations;
+using Core.Application.Dtos.Commerce;
 using Core.Application.Features.Abstractions;
+using Core.Application.Interfaces;
 using Core.Application.Wrappers;
 using Core.Application.Wrappers.Enums;
 using Core.Domain.Entities.Commerce;
@@ -13,8 +15,12 @@ public class GetProductByIdHandler :
     SingleRepositoryHandlerBase<IProductRepository, Product>
     , IRequestHandler<GetProductByIdCommand, Result<ProductDto>>
 {
-    public GetProductByIdHandler(IMapper mapper, IProductRepository repository) : base(mapper, repository)
+    private IStatisticMessageProducer MessageProducer { get; set; }
+
+    public GetProductByIdHandler(IMapper mapper, IProductRepository repository,
+        IStatisticMessageProducer messageProducer) : base(mapper, repository)
     {
+        MessageProducer = messageProducer;
     }
 
     public async Task<Result<ProductDto>> Handle(GetProductByIdCommand request, CancellationToken cancellationToken)
@@ -25,7 +31,7 @@ public class GetProductByIdHandler :
         {
             return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
         }
-
+        
         var data = _mapper.Map<ProductDto>(entity);
 
         return Result<ProductDto>.Successful(data);

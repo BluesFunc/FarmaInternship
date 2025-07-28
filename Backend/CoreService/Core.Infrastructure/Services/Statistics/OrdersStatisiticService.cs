@@ -8,7 +8,7 @@ using Grpc.Core;
 namespace Core.Infrastructure.Services.Statistics;
 
 public class OrdersStatisticService(  OrderStatistic.OrderStatisticClient client) : 
-    OrderStatistic.OrderStatisticBase, IStatisticService<Order> 
+    OrderStatistic.OrderStatisticBase
 {
 
     public async Task<OrderStatisticDto> CalculateStatistic(Order[] entities)
@@ -18,7 +18,7 @@ public class OrdersStatisticService(  OrderStatistic.OrderStatisticClient client
         {
             await call.RequestStream.WriteAsync(new OrderData() {OrderRevenue = (double)order.TotalAmount});            
         }
-
+        
         await call.RequestStream.CompleteAsync();
         var data = await call.ResponseAsync;
         var result = new OrderStatisticDto() { Var = data.Var, Deviation = data.Deviation, Mean = data.Mean };

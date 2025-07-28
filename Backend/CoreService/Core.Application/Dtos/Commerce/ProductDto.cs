@@ -10,9 +10,8 @@ public class ProductDto : IMapFrom<Product>
     public string? Description { get; init; }
     public string? ImageUrl { get; init; }
     public ProductStatus Status { get; init; }
-    public required Medicine MedicineItem { get; init; }
-    public required Merchant MerchantCompany { get; init; }
+    public required MedicineDto MedicineItem { get; init; }
+    public required MerchantDto MerchantCompany { get; init; }
     public decimal Price { get; init; }
     public int StockQuantity { get; init; }
-    public required IReadOnlyCollection<ProductCategory> Categories { get; init; }
 }

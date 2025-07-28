@@ -12,7 +12,6 @@ public static class GrpcInjection
     {
         serviceCollection.AddGrpcClient<OrderStatistic.OrderStatisticClient>(options => 
             options.Address = new Uri("https://localhost:7215"));
-        serviceCollection.AddScoped<IStatisticService<Order>, OrdersStatisticService >();
-        return serviceCollection;
+      return serviceCollection;
     }
 }

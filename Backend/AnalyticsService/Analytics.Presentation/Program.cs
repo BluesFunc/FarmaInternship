@@ -1,3 +1,4 @@
+using Analytics.BLL;
 using Analytics.BLL.Services;
 using Analytics.DAL;
 using Analytics.DAL.Collections;
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services
+    .ConfigureBusinessLogicLayer()
     .ConfigureDal()
     .AddGrpc();
 
@@ -19,29 +21,30 @@ var app = builder.Build();
 
 app.MapGrpcService<OrderStatisticService>();
 
-app.MapPost("/users", async (UserService collection) =>
+
+app.MapPost("/users", async (IRepository<UserStatistic> collection) =>
 {
     var user = new UserStatistic(new Guid());
 
-    await collection.Collection.InsertOneAsync(user);
+    await collection.AddModelAsync(user);
     return Results.Json(user);
 });
 
-app.MapGet("/users", async (UserService collection) =>
+app.MapGet("/users", async (IRepository<UserStatistic> service) =>
 {
    
-    var result = await collection.Collection.FindAsync(statistic => true);
+    var result = await service.GetModelsByFilterAsync(x => true);
 
-    return await result.ToListAsync();
+    return result;
 });
 
 
 
-app.MapGet("/users/{id:guid}", async (UserService collection, Guid id) =>
+app.MapGet("/users/{id:guid}", async (IRepository<UserStatistic> collection, Guid id) =>
 {
-    var user = await collection.Collection.FindAsync(x => x.UserId == id);
-    return Results.Json(await user.FirstAsync());
+    var user = await collection.GetModelByIdAsync(id);
+    return Results.Json(user);
 });
 
-app.Run();
+await app.RunAsync();
 
