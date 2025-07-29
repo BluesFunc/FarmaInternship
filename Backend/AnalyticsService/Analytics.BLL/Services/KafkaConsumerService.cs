@@ -1,7 +1,5 @@
 ﻿using Analytics.BLL.Handlers.Brokers;
 using Confluent.Kafka;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -29,8 +27,8 @@ public class KafkaConsumerService : BackgroundService
         Task.Run(() => ConsumeLoop(stoppingToken), stoppingToken);
         return Task.CompletedTask;
     }
-    
-    private  async Task ConsumeLoop(CancellationToken stoppingToken)
+
+    private async Task ConsumeLoop(CancellationToken stoppingToken)
     {
         var config = new ConsumerConfig
         {
@@ -40,7 +38,7 @@ public class KafkaConsumerService : BackgroundService
         };
 
         using var consumer = new ConsumerBuilder<string, string>(config).Build();
-        
+
 
         var topics = _handlers.Select(h => h.Topic).Distinct().ToList();
         consumer.Subscribe(topics);

@@ -2,17 +2,16 @@
 using Analytics.DAL.Models;
 using MongoDB.Driver;
 
-namespace Analytics.DAL.Collections;
+namespace Analytics.DAL.Collections.Abstractions;
 
-public class RepositoryBase<TModel> : IRepository<TModel> where TModel : IModel
+public class RepositoryBase<TModel> : IRepository<TModel> where TModel : class, IModel
 {
-
     private IMongoCollection<TModel> _Collection { get; }
 
-    
+
     public RepositoryBase(IMongoDatabase database, string collectionName)
     {
-        _Collection = database.GetCollection<TModel>(collectionName);
+        _Collection =  database.GetCollection<TModel>(collectionName);
     }
 
     public async Task<IList<TModel>> GetModelsByFilterAsync(Expression<Func<TModel, bool>>? filter = null)
@@ -25,14 +24,16 @@ public class RepositoryBase<TModel> : IRepository<TModel> where TModel : IModel
     public async Task<TModel?> GetModelByIdAsync(Guid id)
     {
         var idFilter = Builders<TModel>.Filter.Eq("_id", id);
-        var res = await _Collection.FindAsync(idFilter).Result.FirstAsync();
+        var collection = await _Collection.FindAsync(idFilter);
+        var res = await collection.FirstOrDefaultAsync();
         return res;
     }
 
     public async Task UpdateModelAsync(TModel model)
     {
         var filter = GenerateIdFilter(model);
-        await _Collection.ReplaceOneAsync(filter, model); ;
+        await _Collection.ReplaceOneAsync(filter, model);
+        ;
     }
 
     public async Task AddModelAsync(TModel model)
@@ -50,4 +51,5 @@ public class RepositoryBase<TModel> : IRepository<TModel> where TModel : IModel
     {
         return Builders<TModel>.Filter.Eq("_id", model.GetId());
     }
+
 }

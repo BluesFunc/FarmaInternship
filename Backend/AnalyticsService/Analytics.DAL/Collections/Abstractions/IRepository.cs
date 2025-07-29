@@ -1,9 +1,9 @@
 ﻿using System.Linq.Expressions;
 using Analytics.DAL.Models;
 
-namespace Analytics.DAL.Collections;
+namespace Analytics.DAL.Collections.Abstractions;
 
-public interface IRepository<TModel> where TModel : IModel
+public interface IRepository<TModel> where TModel : class, IModel
 {
     public Task<IList<TModel>> GetModelsByFilterAsync(Expression<Func<TModel, bool>>? filter);
     public Task<TModel?> GetModelByIdAsync(Guid id);

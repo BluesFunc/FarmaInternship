@@ -1,19 +1,20 @@
 ﻿using System.Text.Json;
-using Analytics.DAL.Collections;
+using Analytics.DAL.Collections.Abstractions;
 using Analytics.DAL.Models;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Analytics.BLL.Handlers.Brokers;
+namespace Analytics.BLL.Handlers.Brokers.Users;
 
 public class UserConsumerHandler : IKafkaMessageHandler
 {
+    public string Topic { get; } = "user_statistic";
+    private IServiceProvider ServiceProvider { get; }
+
+
     public UserConsumerHandler(IServiceProvider serviceProvider)
     {
         ServiceProvider = serviceProvider;
     }
-
-    public string Topic { get; } = "user_statistic";
-    private IServiceProvider ServiceProvider { get; }
 
     public async Task HandleAsync(string key, string message, CancellationToken cancellationToken)
     {
@@ -25,7 +26,7 @@ public class UserConsumerHandler : IKafkaMessageHandler
 
         if (userStatistic is null)
         {
-            var newModel = new UserStatistic(messageData.UserId);
+            var newModel = new UserStatistic(messageData.UserId) { TotalOrders = 1 };
             await service.AddModelAsync(newModel);
         }
         else

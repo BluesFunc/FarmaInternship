@@ -8,12 +8,12 @@
 
     <ItemGroup>
         <PackageReference Include="Grpc.AspNetCore" Version="2.57.0"/>
-        <PackageReference Include="MongoDB.Bson" Version="3.4.1" />
-        <PackageReference Include="MongoDB.Driver" Version="3.4.1" />
+        <PackageReference Include="MongoDB.Bson" Version="3.4.1"/>
+        <PackageReference Include="MongoDB.Driver" Version="3.4.1"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Analytics.BLL\Analytics.BLL.csproj" />
+        <ProjectReference Include="..\Analytics.BLL\Analytics.BLL.csproj"/>
     </ItemGroup>
 
 </Project>
