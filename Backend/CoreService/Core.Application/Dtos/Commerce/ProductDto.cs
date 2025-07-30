@@ -6,6 +6,7 @@ namespace Core.Application.Dtos.Commerce;
 
 public class ProductDto : IMapFrom<Product>
 {
+    public Guid Id { get; init; }
     public required string Name { get; init; }
     public string? Description { get; init; }
     public string? ImageUrl { get; init; }

@@ -1,4 +1,4 @@
-﻿namespace Core.Application.Dtos.Statistics;
+﻿namespace Core.Application.Dtos.Statistics.Messages;
 
 public class UserStatisticMessage : IBrokerMessage
 {

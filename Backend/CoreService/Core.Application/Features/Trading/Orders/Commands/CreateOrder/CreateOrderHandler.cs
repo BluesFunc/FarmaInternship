@@ -2,6 +2,7 @@
 using System.Text.Json.Nodes;
 using Core.Application.Configurations;
 using Core.Application.Dtos.Statistics;
+using Core.Application.Dtos.Statistics.Messages;
 using Core.Application.Dtos.Trading;
 using Core.Application.Interfaces;
 using Core.Application.Wrappers;
@@ -53,12 +54,11 @@ public class CreateOrderHandler :
         
         var data = _mapper.Map<OrderDto>(newOrder);
 
-        var totalAmount = new Random().Next(1, 200);
-        var message = new UserStatisticMessage() {UserId = request.UserId, OrderCreated = 1, TotalRevenue = (int)data.TotalAmount };
-        var jsonMessage = JsonSerializer.Serialize(message, JsonSerializerOptions.Default);
+      
+        var userStatisticMessage = new UserStatisticMessage() {UserId = request.UserId, OrderCreated = 1, TotalRevenue = (int)data.TotalAmount };
+        var userJsonMessage = JsonSerializer.Serialize(userStatisticMessage, JsonSerializerOptions.Default);
         
-        await _messageProducer.SendMessageAsync(StatisticBrokerConfiguration.UserStatisticTopic, jsonMessage);
-        
+        await _messageProducer.SendMessageAsync(StatisticBrokerConfiguration.UserTopic, userJsonMessage, cancellationToken);
         
         return Result<OrderDto>.Successful(data);
     }
@@ -67,7 +67,8 @@ public class CreateOrderHandler :
     {
        
         var items = cartItems.Select(x =>
-            new OrderItem(order, x.ProductObject, x.Quantity, x.Quantity * x.ProductObject.Price)).ToList();
+            new OrderItem(order, x.ProductObject, x.Quantity, x.Quantity * x.ProductObject.Price))
+            .ToList();
 
         return items;
     }

@@ -1,4 +1,5 @@
 ﻿using Core.Application.Dtos.Statistics;
+using Core.Application.Dtos.Statistics.Messages;
 using Core.Application.Interfaces;
 using Core.Domain.Entities.Trading;
 using Grpc.Net.Client;

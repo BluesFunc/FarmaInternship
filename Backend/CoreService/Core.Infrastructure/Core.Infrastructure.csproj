@@ -40,6 +40,7 @@
 
     <ItemGroup>
         <Folder Include="Handlers\"/>
+        <Folder Include="Services\MessageConsumers\" />
         <Protobuf Include="Services\Statistics\Protos\order.proto" GrpcService="Client"/>
     </ItemGroup>
 

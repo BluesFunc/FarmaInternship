@@ -2,5 +2,5 @@
 
 public interface IStatisticMessageProducer
 {
-    public Task SendMessageAsync(string topic, string message);
+    public Task SendMessageAsync(string topic, string message, CancellationToken cancellationToken);
 }
