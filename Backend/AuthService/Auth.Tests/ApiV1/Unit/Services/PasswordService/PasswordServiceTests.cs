@@ -1,10 +1,8 @@
-﻿using Auth.Infrastructure.Services;
-using AutoFixture;
-using AutoFixture.Xunit2;
+﻿using AutoFixture;
 using Domain.Entities;
 using Moq;
 
-namespace Auth.Tests.ApiV1.Unit.Services.EmailService;
+namespace Auth.Tests.ApiV1.Unit.Services.PasswordService;
 
 [Collection("PasswordService")]
 public class PasswordServiceTests
@@ -23,8 +21,7 @@ public class PasswordServiceTests
     public async Task Verify_That_PasswordHasher_HashPassword_Executed_Once()
     {
         // Arrange
-        var service = new PasswordService(_fixture.PasswordHasher.Object);
-
+        var service = new Infrastructure.Services.PasswordService(_fixture.PasswordHasher.Object);
 
         // Act
         service.HashPassword(It.IsAny<User>(), It.IsAny<string>());
@@ -37,8 +34,7 @@ public class PasswordServiceTests
     public async Task Verify_That_PasswordHasher_VerifyPassword_Executed_Once()
     {
         // Arrange
-        var service = new PasswordService(_fixture.PasswordHasher.Object);
-
+        var service = new Infrastructure.Services.PasswordService(_fixture.PasswordHasher.Object);
 
         // Act
         service.VerifyHashedPassword(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>());
