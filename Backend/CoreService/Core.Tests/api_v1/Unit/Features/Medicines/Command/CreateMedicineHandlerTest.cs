@@ -29,11 +29,11 @@ public class CreateMedicineHandlerTest
             MeasureUnit = instance.MeasureUnit,
             Volume = instance.Volume, Name = instance.Name, Type = instance.Type
         };
-        var handler = new CreateMedicineHandler(_fixture.Mapper.Object, _fixture.Repository.Object); // rename handlers with SAT(system under test)
+        var SUT = new CreateMedicineHandler(_fixture.Mapper.Object, _fixture.Repository.Object); // rename handlers with SAT(system under test)
         
         
         //Act
-        var result = await handler.Handle(command);
+        var result = await SUT.Handle(command);
 
             
         //Assert

@@ -19,13 +19,16 @@ public class TestGetByIdMedicine
     }
 
     [Fact]
-    public async void Handle_GetEntityById_AssumeSucceed()
+    public async Task Handle_GetEntityById_AssumeSucceed()
     {
+        //Arange
         var command = new GetMedicineByIdCommand() { Id = new Guid() };
         var handler = new GetMedicineByIdHandler(_fixture.Mapper.Object, _fixture.Repository.Object);
 
+        //Act
         var result = await handler.Handle(command);
 
+        //Assert
         result.IsSucceed.Should().BeTrue();
         _fixture.Mapper.Verify(x =>
             x.Map<MedicineDto>(
@@ -35,17 +38,18 @@ public class TestGetByIdMedicine
     }
 
     [Fact]
-    public async void Handle_GetEntityByIdThatDoesntExist_ExpectResultFailed()
+    public async Task Handle_GetEntityByIdThatDoesntExist_ExpectResultFailed()
     {
+        //Arrange
         var command = new GetMedicineByIdCommand() { Id = new Guid() };
         var repository = new Mock<IMedicineRepository>(MockBehavior.Strict);
         
-        
+        //Act
         repository.Setup(x => x.GetByIdAsync(command.Id, default)).ReturnsAsync((Medicine?)null);
         var handler = new GetMedicineByIdHandler(_fixture.Mapper.Object, repository.Object);
         var result = await handler.Handle(command);
         
-
+        // Assert
         result.IsFailed.Should().BeTrue();
         _fixture.Mapper.Verify(x => x.Map<MedicineDto>(It.IsAny<Medicine>()), Times.Never);
     }

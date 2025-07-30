@@ -14,8 +14,9 @@ public class UpdateMedicineHandlerTest
     }
 
     [Fact]
-    public async void Handle_UpdateInstance_AssumeSucceed()
+    public async Task Handle_UpdateInstance_AssumeSucceed()
     {
+        //Arrange
         var instance = _fixture.MedicineInstance;
         var command = new UpdateMedicineCommand()
         {
@@ -28,9 +29,12 @@ public class UpdateMedicineHandlerTest
             Type = instance.Type
         };
 
+        //Act
         var handler = new UpdateMedicineHandler(_fixture.Mapper.Object, _fixture.Repository.Object);
         var result = await handler.Handle(command, default);
 
+        
+        //Assert
         result.IsSucceed.Should().BeTrue();
         _fixture.Repository.Verify();
     }

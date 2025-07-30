@@ -18,15 +18,16 @@ public class DeleteMedicineByIdHandlerTest
     }
 
     [Fact]
-    public async void Handle_DeleteInstance_AssumeSucceed()
+    public async Task Handle_DeleteInstance_AssumeSucceed()
     {
+        //Arange
         var command = new DeleteMedicineByIdCommand() { Id = new Guid() };
-        
         var handler = new DeleteMedicineByIdHandler(_fixture.Mapper.Object, _fixture.Repository.Object);
 
-
+        //Act
         var result = await handler.Handle(command);
 
+        //Assert
         result.IsSucceed.Should().BeTrue();
         result.ErrorCode.Should().Be(ErrorTypeCode.None);
         _fixture.Repository.Verify(x => x.Delete(It.Is<Medicine>(med => med.Id == command.Id)));

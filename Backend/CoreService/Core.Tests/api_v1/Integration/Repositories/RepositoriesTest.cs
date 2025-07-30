@@ -25,62 +25,59 @@ public class RepositoriesTest
     }
 
     [Theory, AutoData]
-    public async void AddAsync_CreateNewInstance_EnsureCreatedAtDatabase(Medicine medicine)
+    public async Task AddAsync_CreateNewInstance_EnsureCreatedAtDatabase(Medicine medicine)
     {
+        // Assert
         medicine.CreatedAt = DateTime.UtcNow;
         medicine.ModifiedAt = DateTime.UtcNow;
-        var entry = await _medicineRepository.AddAsync(medicine);
         
-        entry.Should().NotBeNull(); // Invalid test structure
-
+        //Act
+        var entry = await _medicineRepository.AddAsync(medicine);
         await _testingContext.SaveChangesAsync();
 
         var isCreated = await _medicineRepository.IsExistAsync(x => x.Id == medicine.Id);
 
+        // Assert
         isCreated.Should().BeTrue();
     }
     
     [Theory, AutoData]
-    public async void Delete_CreateNewInstance_ThenDeleteThat_EnsureDeletedAtDatabase(Medicine medicine)
+    public async Task Delete_CreateNewInstance_ThenDeleteThat_EnsureDeletedAtDatabase(Medicine medicine)
     {
+        
+        // Arrange
         medicine.CreatedAt = DateTime.UtcNow;
         medicine.ModifiedAt = DateTime.UtcNow;
         var entry = await _medicineRepository.AddAsync(medicine);
-        
         await _testingContext.SaveChangesAsync();
-
-        var isCreated = await _medicineRepository.IsExistAsync(x => x.Id == medicine.Id);
         
-        isCreated.Should().BeTrue();
-        
+        // Act
         var result = _medicineRepository.Delete(entry);
-        
-        result.Should().BeTrue();
-
         await _testingContext.SaveChangesAsync();
-        
         var isExist = await _medicineRepository.IsExistAsync(x => x.Id == medicine.Id);
 
+        // Assert
+        result.Should().BeTrue();
         isExist.Should().BeFalse();
     }
     
     [Theory, AutoData]
-    public async void Update_CreateNewInstance_ThenUpdateData_EnsureEntryUpdatedAtDatabase(Medicine originMedicine)
+    public async Task Update_CreateNewInstance_ThenUpdateData_EnsureEntryUpdatedAtDatabase(Medicine originMedicine)
     {
+        // Arrange
         originMedicine.CreatedAt = DateTime.UtcNow;
         originMedicine.ModifiedAt = DateTime.UtcNow;
         
         var entry = await _medicineRepository.AddAsync(originMedicine);
-        entry.Should().NotBeNull();
         await _testingContext.SaveChangesAsync();
 
+        // Act
         var originName = entry.Name;
         entry.Name = _dataBakery.Create<string>();
-        
         var result = _medicineRepository.Update(entry);
-        
         await _testingContext.SaveChangesAsync();
         
+        // Assert
         result.Name.Should().NotBe(originName);
     }
     

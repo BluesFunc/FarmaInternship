@@ -14,21 +14,20 @@ public class TestGetPaginatedMedicine
     public TestGetPaginatedMedicine(MedicineFeaturesFixture fixture)
     {
         _fixture = fixture;
-        
     }
 
     [Fact]
-    public async void Handle_GetPaginatedList_ContainsEntity()
+    public async Task Handle_GetPaginatedList_ContainsEntity()
     {
+        //Arrange
         var filter = new MedicineQueryParams();
         var command = new GetPaginatedMedicineCommand() { Filter = filter };
 
-       
+        //Act
         var handler = new GetPaginatedMedicineHandler(_fixture.Mapper.Object, _fixture.Repository.Object);
-
         var result = await handler.Handle(command);
 
+        //Assert
         result.Data.TotalElements.Should().BePositive();
-
     }
 }
