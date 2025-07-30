@@ -12,21 +12,22 @@ public class JwtServiceTests
     private Fixture _dataBakery { get; set; }
     private JwtServiceFixture _fixture { get; set; }
 
-    public JwtServiceTests( JwtServiceFixture fixture)
+    public JwtServiceTests(JwtServiceFixture fixture)
     {
         _dataBakery = new Fixture();
         _fixture = fixture;
     }
 
-    [Theory, AutoData]
+    [Theory]
+    [AutoData]
     public void Create_TokenPair_And_Check_Their_Inequality(User user)
     {
         //Arrange
         var service = new JwtService(_fixture.Handler);
-        
+
         //Act
         var tokenPair = service.GenerateTokenPair(user);
-        
+
         //Assert
         tokenPair.RefreshToken.Should().NotBe(tokenPair.AccessToken);
     }

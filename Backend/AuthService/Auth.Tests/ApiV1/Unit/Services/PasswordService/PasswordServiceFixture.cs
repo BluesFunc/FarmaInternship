@@ -2,10 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Moq;
 
-namespace Auth.Tests.ApiV1.Unit.Services.EmailService;
+namespace Auth.Tests.ApiV1.Unit.Services.PasswordService;
 
-
-public class PasswordServiceFixture 
+public class PasswordServiceFixture
 {
     public Mock<IPasswordHasher<User>> PasswordHasher { get; init; }
 
@@ -16,4 +15,4 @@ public class PasswordServiceFixture
 }
 
 [CollectionDefinition("PasswordService")]
-public class PasswordFixtureCollection: ICollectionFixture<PasswordServiceFixture>;
+public class PasswordFixtureCollection : ICollectionFixture<PasswordServiceFixture>;
