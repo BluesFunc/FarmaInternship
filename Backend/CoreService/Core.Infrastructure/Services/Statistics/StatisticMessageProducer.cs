@@ -1,5 +1,5 @@
 ﻿using Confluent.Kafka;
-using Core.Application.Interfaces;
+using Core.Application.Interfaces.Statistics;
 
 namespace Core.Infrastructure.Services.Statistics;
 

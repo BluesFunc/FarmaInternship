@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using Analytics.DAL.Collections;
 using Analytics.DAL.Collections.Abstractions;
 using Analytics.DAL.Models;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +26,8 @@ public class MerchantConsumerHandler : IKafkaMessageHandler
 
         if (merchandiserStatistic is null)
         {
-            var newModel = new MerchandiserStatistic(messageData.MerchandiserId){MonthlyRevenue = (decimal)messageData.MonthlyRevenue};
+            var newModel = new MerchandiserStatistic(messageData.MerchandiserId)
+                { MonthlyRevenue = (decimal)messageData.MonthlyRevenue };
             await service.AddModelAsync(newModel);
         }
         else
@@ -35,6 +35,5 @@ public class MerchantConsumerHandler : IKafkaMessageHandler
             merchandiserStatistic.MonthlyRevenue += (decimal)messageData.MonthlyRevenue;
             await service.UpdateModelAsync(merchandiserStatistic);
         }
-        
     }
 }

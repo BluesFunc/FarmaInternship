@@ -1,8 +1,4 @@
-﻿using Core.Application.Features.Commerce.Medicines.Commands.CreateMedicine;
-using Core.Application.Features.Commerce.Medicines.Commands.DeleteMedicineById;
-using Core.Application.Features.Commerce.Medicines.Commands.UpdateMedicine;
-using Core.Application.Features.Commerce.Medicines.Queries.GetMedicineById;
-using Core.Application.Features.Trading.Carts.Commands.CreateCart;
+﻿using Core.Application.Features.Trading.Carts.Commands.CreateCart;
 using Core.Application.Features.Trading.Carts.Commands.DeleteCartById;
 using Core.Application.Features.Trading.Carts.Commands.UpdateCart;
 using Core.Application.Features.Trading.Carts.Queries.GetCartById;

@@ -1,7 +1,6 @@
 using Core.Application;
 using Core.Infrastructure;
 
-
 namespace WebApi;
 
 public class Program

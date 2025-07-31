@@ -1,6 +1,4 @@
-﻿using Core.Application.Dtos.Commerce;
-using Core.Domain.Entities.Commerce;
-using Core.Domain.Entities.Trading;
+﻿using Core.Domain.Entities.Trading;
 using Core.Domain.Enums.Trading;
 using Mapster;
 

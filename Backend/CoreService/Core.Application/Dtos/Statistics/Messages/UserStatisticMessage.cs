@@ -3,6 +3,6 @@
 public class UserStatisticMessage : IBrokerMessage
 {
     public Guid UserId { get; init; }
-    public int TotalRevenue { get; set;} 
-    public int OrderCreated { get; set; }
+    public ulong TotalRevenue { get; set; }
+    public ulong OrderCreated { get; set; }
 }

@@ -1,5 +1,4 @@
-﻿using Core.Application.Dtos.Statistics;
-using Core.Application.Dtos.Statistics.Messages;
+﻿using Core.Application.Dtos.Statistics.Messages;
 using Core.Application.Wrappers;
 using MediatR;
 

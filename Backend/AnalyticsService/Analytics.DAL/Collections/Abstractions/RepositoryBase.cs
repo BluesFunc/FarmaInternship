@@ -11,7 +11,7 @@ public class RepositoryBase<TModel> : IRepository<TModel> where TModel : class, 
 
     public RepositoryBase(IMongoDatabase database, string collectionName)
     {
-        _Collection =  database.GetCollection<TModel>(collectionName);
+        _Collection = database.GetCollection<TModel>(collectionName);
     }
 
     public async Task<IList<TModel>> GetModelsByFilterAsync(Expression<Func<TModel, bool>>? filter = null)
@@ -51,5 +51,4 @@ public class RepositoryBase<TModel> : IRepository<TModel> where TModel : class, 
     {
         return Builders<TModel>.Filter.Eq("_id", model.GetId());
     }
-
 }

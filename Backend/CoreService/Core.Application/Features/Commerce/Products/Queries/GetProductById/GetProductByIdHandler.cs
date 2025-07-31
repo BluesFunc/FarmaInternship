@@ -1,10 +1,9 @@
 ﻿using System.Text.Json;
 using Core.Application.Configurations;
 using Core.Application.Dtos.Commerce;
-using Core.Application.Dtos.Statistics;
 using Core.Application.Dtos.Statistics.Messages;
 using Core.Application.Features.Abstractions;
-using Core.Application.Interfaces;
+using Core.Application.Interfaces.Statistics;
 using Core.Application.Wrappers;
 using Core.Application.Wrappers.Enums;
 using Core.Domain.Entities.Commerce;
@@ -19,11 +18,10 @@ public class GetProductByIdHandler :
     , IRequestHandler<GetProductByIdCommand, Result<ProductDto>>
 {
     private IStatisticMessageProducer MessageProducer { get; set; }
-    
+
     public GetProductByIdHandler(IMapper mapper, IProductRepository repository,
         IStatisticMessageProducer messageProducer) : base(mapper, repository)
     {
-        
         MessageProducer = messageProducer;
     }
 
@@ -35,14 +33,15 @@ public class GetProductByIdHandler :
         {
             return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
         }
-        
+
         var data = _mapper.Map<ProductDto>(entity);
 
         var message = new ProductStatisticMessage() { ProductId = data.Id };
         var jsonMessage = JsonSerializer.Serialize(message, JsonSerializerOptions.Default);
-        
-        await MessageProducer.SendMessageAsync(StatisticBrokerConfiguration.ProductTopic, jsonMessage, cancellationToken);
-        
+
+        await MessageProducer.SendMessageAsync(StatisticBrokerConfiguration.ProductTopic, jsonMessage,
+            cancellationToken);
+
         return Result<ProductDto>.Successful(data);
     }
 }

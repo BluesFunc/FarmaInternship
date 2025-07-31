@@ -1,5 +1,5 @@
 using Analytics.BLL;
-using Analytics.BLL.Services;
+using Analytics.BLL.Configurations;
 using Analytics.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +13,6 @@ builder.Services
 
 var app = builder.Build();
 
-app.MapGrpcService<OrderStatisticService>();
-
+app.MapGrcpServices();
 
 await app.RunAsync();

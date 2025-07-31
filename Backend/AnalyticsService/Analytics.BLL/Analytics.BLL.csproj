@@ -10,6 +10,8 @@
         <Protobuf Include="Protos\order.proto">
             <Generator>MSBuild:Compile</Generator>
         </Protobuf>
+        <Protobuf Include="Protos\product.proto" GrpcServices="Server"/>
+        <Protobuf Include="Protos\user.proto" GrpcServices="Server"/>
     </ItemGroup>
 
     <ItemGroup>
