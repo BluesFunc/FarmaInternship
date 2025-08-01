@@ -20,7 +20,7 @@ public abstract class DeleteEntityByIdHandlerBase<TRepository, TEntity, TCommand
     }
 
 
-    public virtual async Task<TResponse> Handle(TCommand request, CancellationToken cancellationToken)
+    public virtual async Task<TResponse> Handle(TCommand request, CancellationToken cancellationToken = default)
     {
         var entity = await _repository.GetByIdAsync(request.Id, cancellationToken);
 

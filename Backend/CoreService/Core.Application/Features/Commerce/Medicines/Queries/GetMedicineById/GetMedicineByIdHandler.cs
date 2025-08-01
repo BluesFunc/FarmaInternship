@@ -17,7 +17,7 @@ public class GetMedicineByIdHandler : SingleRepositoryHandlerBase<IMedicineRepos
     {
     }
 
-    public async Task<Result<MedicineDto>> Handle(GetMedicineByIdCommand request, CancellationToken cancellationToken)
+    public async Task<Result<MedicineDto>> Handle(GetMedicineByIdCommand request, CancellationToken cancellationToken = default)
     {
         var entity = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
