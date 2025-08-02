@@ -40,7 +40,7 @@ public class GetProductByIdHandler :
         var jsonMessage = JsonSerializer.Serialize(message, JsonSerializerOptions.Default);
 
         await MessageProducer.SendMessageAsync(StatisticBrokerConfiguration.ProductTopic, jsonMessage,
-            cancellationToken);
+            cancellationToken); // Producer should serialize data
 
         return Result<ProductDto>.Successful(data);
     }

@@ -11,9 +11,11 @@ public static class InfrastructureConfiguration
     public static IServiceCollection AddInfrastructure(this IServiceCollection serviceCollection)
     {
         TypeAdapterConfig.GlobalSettings.ScanInheritedTypes(Assembly.GetExecutingAssembly());
-        serviceCollection.InjectDatabase();
-        serviceCollection.InjectGrcp();
-        serviceCollection.InjectBroker();
+        serviceCollection.InjectDatabase()
+            .InjectGrcp()
+            .InjectBroker()
+            .InjectNotification();
+
         return serviceCollection;
     }
 }

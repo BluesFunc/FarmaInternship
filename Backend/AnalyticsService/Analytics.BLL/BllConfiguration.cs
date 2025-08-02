@@ -13,7 +13,7 @@ public static class BllConfiguration
     {
         serviceCollection.AddHostedService<KafkaConsumerService>();
         serviceCollection.AddSingleton<IKafkaMessageHandler, UserConsumerHandler>();
-        serviceCollection.AddSingleton<IKafkaMessageHandler, MerchantConsumerHandler>();
+       
         serviceCollection.AddSingleton<IKafkaMessageHandler, ProductConsumerHandler>();
 
         return serviceCollection;

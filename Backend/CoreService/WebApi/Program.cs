@@ -1,8 +1,11 @@
 using Core.Application;
+using Core.Domain.Entities.Trading;
 using Core.Infrastructure;
+using Core.Infrastructure.Services.Notifications;
+using Core.Infrastructure.Services.Notifications.Abstractions;
 using Serilog;
 using Serilog.Formatting.Json;
-using Serilog.Sinks.Http;
+
 
 namespace WebApi;
 
@@ -22,7 +25,8 @@ public class Program
             .CreateLogger();
             
         var builder = WebApplication.CreateBuilder(args);
-
+        
+    
       
         
         builder.Services.ConfigureApplicationLayer();
@@ -31,7 +35,7 @@ public class Program
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-
+        
         builder.Host.UseSerilog();
 
         var app = builder.Build();
@@ -43,11 +47,11 @@ public class Program
             app.UseSwaggerUI();
         }
         app.UseSerilogRequestLogging();
-        app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
         app.UseAuthorization();
 
-
+        app.MapHub<OrderNotificationHub>("/hubs/marketplace");
         app.MapControllers();
         
         app.Run();

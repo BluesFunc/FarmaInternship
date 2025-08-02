@@ -36,6 +36,7 @@
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Handlers\"/>
+        <Folder Include="Services\Notifications\Abstractions\" />
         <Protobuf Include="Services/Statistics/Protos/user.proto" GrpcServices="Client"/>
         <Protobuf Include="Services/Statistics/Protos/product.proto" GrpcServices="Client"/>
     </ItemGroup>
