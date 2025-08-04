@@ -23,7 +23,7 @@ public abstract class GetPaginatedEntitiesHandlerBase<TRepository, TEntity, TReq
     }
 
 
-    public async Task<Result<PaginationList<TResponse>>> Handle(TRequest request, CancellationToken cancellationToken)
+    public async Task<Result<PaginationList<TResponse>>> Handle(TRequest request, CancellationToken cancellationToken = default)
     {
         var filter = request.Filter.Adapt<TFilter>();
 

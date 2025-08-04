@@ -11,7 +11,7 @@ public static class AuthOptions
         = new(Encoding.UTF8.GetBytes
         (
             Environment.GetEnvironmentVariable("SECRET_KEY")
-            ?? throw new InvalidOperationException()
+            ?? "af6fec8aa43fa80a22fd3471ab09c803a7b6e91fbc99a3a54ebdc09ddfa2b306"
         ));
 
     public static string SecurityAlgorithm { get; } = SecurityAlgorithms.HmacSha256;
@@ -20,13 +20,12 @@ public static class AuthOptions
         = TimeSpan.FromDays(
             int.Parse(
                 Environment.GetEnvironmentVariable("REFRESH_TOKEN_LIFETIME")
-                ?? throw new InvalidOperationException()
+                ?? "30"
             ));
 
     public static TimeSpan AccessTokenLifeTime { get; }
         = TimeSpan.FromMinutes(
             int.Parse(
-                Environment.GetEnvironmentVariable("ACCESS_TOKEN_LIFETIME")
-                ?? throw new InvalidOperationException()
+                Environment.GetEnvironmentVariable("ACCESS_TOKEN_LIFETIME") ?? "15"
             ));
 }
