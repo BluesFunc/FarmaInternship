@@ -17,7 +17,11 @@
       "applicationUrl": "https://localhost:7022;http://localhost:5201",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "CONNECTION_STRING": "host=localhost;port=5434;database=farmacio;username=aleks;password=1234"
+        "CONNECTION_STRING": "host=localhost;port=5434;database=farmacio;username=aleks;password=1234",
+        "KAFKA_HOST": "localhost:9092",
+        "KAFKA_MESSAGE_TIMEOUT": "5000",
+        "LOGISTASH_URL": "http://localhost:8080",
+        "GRPC_URL": "https://localhost:8001"
       }
     },
     "IIS Express": {

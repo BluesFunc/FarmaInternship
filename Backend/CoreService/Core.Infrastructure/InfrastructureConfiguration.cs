@@ -2,18 +2,20 @@
 using Core.Infrastructure.Injections;
 using Mapster;
 using Mapster.Utils;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.Infrastructure;
 
 public static class InfrastructureConfiguration
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection serviceCollection)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection serviceCollection, IConfiguration config)
     {
         TypeAdapterConfig.GlobalSettings.ScanInheritedTypes(Assembly.GetExecutingAssembly());
+
         serviceCollection.InjectDatabase()
             .InjectGrcp()
-            .InjectBroker()
+            .InjectBroker(config)
             .InjectNotification();
 
         return serviceCollection;

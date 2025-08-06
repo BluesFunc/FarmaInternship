@@ -8,7 +8,10 @@ namespace Analytics.BLL.Services;
 public class KafkaConsumerService : BackgroundService
 {
     private readonly IServiceProvider _serviceProvider;
-    private readonly string bootstrapServers = "localhost:9092";
+
+    private readonly string bootstrapServers = Environment.GetEnvironmentVariable("KAFKA_URL")
+                                               ?? throw new InvalidOperationException();
+
     private readonly ILogger<KafkaConsumerService> _logger;
     private readonly IEnumerable<IKafkaMessageHandler> _handlers;
 

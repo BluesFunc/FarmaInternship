@@ -1,8 +1,6 @@
-﻿using Core.Domain.Entities.Trading;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 
-namespace Core.Infrastructure.Services.Notifications.Abstractions;
+namespace Core.Infrastructure.Services.Notifications;
 
 public class OrderNotificationHub : NotificationHub
 {

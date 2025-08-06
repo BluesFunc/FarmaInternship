@@ -10,12 +10,18 @@ public static class GrpcInjection
 {
     public static IServiceCollection InjectGrcp(this IServiceCollection serviceCollection)
     {
+        var serverUri =
+            new Uri(Environment.GetEnvironmentVariable("GRPC_URL") ?? throw new InvalidOperationException());
+
         serviceCollection.AddGrpcClient<UserStatisticService.UserStatisticServiceClient>(options =>
-            options.Address = new Uri("https://localhost:7215"));
+            options.Address = serverUri);
+
         serviceCollection.AddGrpcClient<ProductStatisticService.ProductStatisticServiceClient>(options =>
-            options.Address = new Uri("https://localhost:7215"));
+            options.Address = serverUri);
+
         serviceCollection.AddScoped<IUserAnalyticService, UserAnalyticService>();
         serviceCollection.AddScoped<IProductAnalyticService, ProductAnalyticsService>();
+
         return serviceCollection;
     }
 }

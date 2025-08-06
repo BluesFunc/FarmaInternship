@@ -1,10 +1,9 @@
-﻿using Core.Domain.Entities.Abstractions;
-using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 
 namespace Core.Infrastructure.Services.Notifications;
 
-public  class NotificationHub: Hub 
+public class NotificationHub : Hub
 {
     private readonly ILogger<NotificationHub> _logger;
 
@@ -15,10 +14,9 @@ public  class NotificationHub: Hub
 
     public async Task Subscribe(Guid userId)
     {
-        
         var groupName = $"user:{userId}";
-         await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
-         _logger.LogInformation($"[{Context.ConnectionId}] subscribed to group {groupName}");
+        await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+        _logger.LogInformation($"[{Context.ConnectionId}] subscribed to group {groupName}");
     }
 
     public async Task Unsubscribe(Guid userId)

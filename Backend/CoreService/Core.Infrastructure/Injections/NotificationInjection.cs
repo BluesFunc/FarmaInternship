@@ -1,5 +1,4 @@
 ﻿using Core.Application.Interfaces;
-using Core.Domain.Entities.Trading;
 using Core.Infrastructure.Services.Notifications;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,13 +13,13 @@ public static class NotificationInjection
                 .AllowAnyMethod()
                 .AllowAnyOrigin()
                 .AllowCredentials()));
-        
+
         serviceCollection.AddSignalR(options =>
         {
             options.KeepAliveInterval = TimeSpan.FromSeconds(10);
             options.ClientTimeoutInterval = TimeSpan.FromSeconds(30);
         });
-        
+
         serviceCollection.AddScoped<IOrderNotificationService, OrderNotificationService>();
         return serviceCollection;
     }

@@ -1,7 +1,4 @@
-﻿using System.Text.Json;
-using Core.Application.Configurations;
-using Core.Application.Dtos.Statistics.Messages;
-using Core.Application.Dtos.Trading;
+﻿using Core.Application.Dtos.Trading;
 using Core.Application.Interfaces;
 using Core.Application.Interfaces.Statistics;
 using Core.Application.Wrappers;
@@ -10,7 +7,6 @@ using Core.Domain.Entities.Trading;
 using Core.Domain.Interfaces.Repositories.Trading;
 using MapsterMapper;
 using MediatR;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 
 namespace Core.Application.Features.Trading.Orders.Commands.CreateOrder;
@@ -24,13 +20,15 @@ public class CreateOrderHandler :
     private readonly IStatisticMessageProducer _messageProducer;
     private readonly IOrderNotificationService _notificationService;
     private readonly ILogger<CreateOrderHandler> _logger;
+
     public CreateOrderHandler(ICartRepository cartRepository, IOrderRepository orderRepository, IMapper mapper,
-        IStatisticMessageProducer messageProducer, IOrderNotificationService notificationService, ILogger<CreateOrderHandler> logger)
+        IStatisticMessageProducer messageProducer, IOrderNotificationService notificationService,
+        ILogger<CreateOrderHandler> logger)
     {
         _cartRepository = cartRepository;
         _orderRepository = orderRepository;
         _mapper = mapper;
-            //    _messageProducer = messageProducer;
+        //    _messageProducer = messageProducer;
         _notificationService = notificationService;
         _logger = logger;
     }
@@ -74,8 +72,7 @@ public class CreateOrderHandler :
         // {
         //     _logger.LogError($"Kafka brokers do not receive message {order.Id} creation");
         // }
-        
-        
+
 
         return Result<OrderDto>.Successful(data);
     }

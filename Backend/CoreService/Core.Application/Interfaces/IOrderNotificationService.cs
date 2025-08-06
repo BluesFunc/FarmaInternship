@@ -2,4 +2,4 @@
 
 namespace Core.Application.Interfaces;
 
-public interface IOrderNotificationService: INotificationService<Order>;
+public interface IOrderNotificationService : INotificationService<Order>;
