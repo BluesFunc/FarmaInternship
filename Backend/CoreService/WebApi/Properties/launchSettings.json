@@ -21,7 +21,10 @@
         "KAFKA_HOST": "localhost:9092",
         "KAFKA_MESSAGE_TIMEOUT": "5000",
         "LOGISTASH_URL": "http://localhost:8080",
-        "GRPC_URL": "https://localhost:8001"
+        "GRPC_URL": "https://localhost:8001",
+        "SECRET_KEY": "af6fec8aa43fa80a22fd3471ab09c803a7b6e91fbc99a3a54ebdc09ddfa2b306",
+        "AUTH_AUDIENCE": "Farmacio",
+        "CLIENT_URL": "http://localhost:4200"
       }
     },
     "IIS Express": {

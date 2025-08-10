@@ -1,16 +1,13 @@
 services:
   
-  nginx:
-    image: nginx:latest
+
+  
+  frontend:
+    image: farmacio-client:0.1
     ports:
-      - "80:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-    depends_on:
-      - core-app
+      - "4200:80"
     networks:
       - backend
-      - statistic-net
   
   core-app:
     image: farmacio-app:0.1
@@ -25,6 +22,53 @@ services:
       - core
       - backend
       - statistic-net
+  
+  auth-app:
+    image: farmacio-auth:0.1
+    env_file:
+      - ../AuthService/auth-app.env
+    ports:
+      - "5001:5001"
+    
+    networks:
+      - backend
+      - auth
+  
+  statistic-app:
+    image: farmacio-statistic:0.1
+    env_file:
+      - ../AnalyticsService/statistic-app.env
+    ports:
+      - "9000:9000"
+
+    networks:
+      - backend
+      - statistic-net
+    
+  users-database:
+    image: sha256:2b41d0be82839692f678a709e8b7dd6106ee4776b0e70759c59b067730058b04
+    env_file:
+      - ../AuthService/auth-app.env
+    
+    volumes:
+      - userDB-volume:/var/opt/mssql
+    ports:
+      - "1433:1433"
+    networks:
+      - auth
+
+  statistic-database:
+    image: sha256:dc5625b96e2f902e639ace95673207cebf11e5f69cd8031451f023238339f64a
+    env_file:
+      - ../AnalyticsService/statistic-app.env
+    ports:
+      - "27017:27017"
+    volumes:
+      - statistic_db_volume:/data/db
+    networks:
+      - statistic-net
+  
+  
   
   farmacio-core-database:
     image: postgres:16
@@ -49,9 +93,9 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
       KAFKA_CONTROLLER_QUORUM_VOTERS: 1@statistic-broker1:29093,2@statistic-broker2:29093
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
-      KAFKA_LISTENERS: PLAINTEXT://statistic-broker1:29092,CONTROLLER://statistic-broker1:29093
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://statistic-broker1:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://statistic-broker1:29092,CONTROLLER://statistic-broker1:29093,PLAINTEXT_HOST://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://statistic-broker1:29092,PLAINTEXT_HOST://localhost:9092
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       CLUSTER_ID: EmptNWtoR4GGWx-BH6nGLQ
@@ -62,7 +106,6 @@ services:
     ports:
       - "29092:29092"
       - "29093:29093"
-      - "9092:9092"
     volumes:
       - statistic-message-volume1:/var/lib/kafka/data
     networks:
@@ -167,6 +210,7 @@ services:
     networks:
       - core
 
+
 networks:
   core:
     driver: bridge
@@ -174,9 +218,14 @@ networks:
     driver: bridge
   statistic-net:
     driver: bridge
+  auth:
+    driver: bridge
 
 volumes:
+  userDB-volume:
   esdata:
+  statistic_db_volume:
   core_db_volume:
   statistic-message-volume1:
   statistic-message-volume2:
+  

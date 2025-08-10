@@ -4,11 +4,13 @@ using Core.Application.Features.Commerce.Medicines.Commands.UpdateMedicine;
 using Core.Application.Features.Commerce.Medicines.Queries.GetMedicineById;
 using Core.Application.Features.Commerce.Medicines.Queries.GetPaginatedMedicine;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Abstractions;
 
 namespace WebApi.Controllers.Commerce;
 
+[Authorize]
 public class MedicineController(ISender sender) : RestController(sender)
 {
     [HttpGet("{id:guid}")]

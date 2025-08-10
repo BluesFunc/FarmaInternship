@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analytics.Presentation", "A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{32831A75-8538-4700-9411-F017A70716D8}"
 	ProjectSection(SolutionItems) = preProject
-		app.env = app.env
+		statistic-app.env = statistic-app.env
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
