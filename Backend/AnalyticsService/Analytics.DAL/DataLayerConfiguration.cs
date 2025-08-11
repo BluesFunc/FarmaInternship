@@ -13,9 +13,12 @@ public static class DataLayerConfiguration
 {
     public static IServiceCollection ConfigureDal(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddSingleton(
-            new MongoClient(Environment.GetEnvironmentVariable("STATISTIC_DB"))
-                .GetDatabase(Environment.GetEnvironmentVariable("STATISTIC_DB_NAME")));
+        serviceCollection.AddSingleton
+            (
+                    new MongoClient(Environment.GetEnvironmentVariable("STATISTIC_DB"))
+                        .GetDatabase(Environment.GetEnvironmentVariable("STATISTIC_DB_NAME"))
+            );
+        
         BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
         serviceCollection.AddScoped<IRepository<UserStatistic>, UserService>();
         serviceCollection.AddScoped<IRepository<MerchandiserStatistic>, MerchantService>();

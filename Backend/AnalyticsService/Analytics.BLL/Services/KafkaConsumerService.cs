@@ -1,4 +1,5 @@
-﻿using Analytics.BLL.Handlers.Brokers;
+﻿using System.Text.Json;
+using Analytics.BLL.Handlers.Brokers;
 using Confluent.Kafka;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -68,6 +69,10 @@ public class KafkaConsumerService : BackgroundService
                     _logger.LogWarning("No handler found for topic: {Topic}", topic);
                 }
             }
+            catch (JsonException ex)
+            {
+                _logger.LogError(ex, "Could not serialize/deserialize message");
+            }
             catch (ConsumeException ex)
             {
                 _logger.LogError(ex, "Error consuming Kafka message.");
@@ -76,6 +81,7 @@ public class KafkaConsumerService : BackgroundService
             {
                 _logger.LogInformation("Kafka consumer shutting down...");
             }
+         
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Unhandled error in Kafka consumer loop.");
