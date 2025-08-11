@@ -1,13 +1,24 @@
-﻿using Core.Infrastructure.Injections;
+﻿using System.Reflection;
+using Core.Infrastructure.Injections;
+using Mapster;
+using Mapster.Utils;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.Infrastructure;
 
 public static class InfrastructureConfiguration
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection serviceCollection)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection serviceCollection, IConfiguration config)
     {
-        serviceCollection.InjectDatabase();
+        TypeAdapterConfig.GlobalSettings.ScanInheritedTypes(Assembly.GetExecutingAssembly());
+
+        serviceCollection.InjectAuth()
+            .InjectDatabase()
+            .InjectGrcp()
+            .InjectBroker(config)
+            .InjectNotification();
+
         return serviceCollection;
     }
 }

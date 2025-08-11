@@ -15,6 +15,8 @@ public class OrderRepository(DbContext context) : RepositoryBase<Order>(context)
     {
         var query = Context.Set<Order>().AsNoTracking();
 
+        query = query.Include(x => x.OrderItems);
+
         var builder = new OrderQueryBuilder(query)
             .ByStatus(filter.Status)
             .ByUserId(filter.UserId);

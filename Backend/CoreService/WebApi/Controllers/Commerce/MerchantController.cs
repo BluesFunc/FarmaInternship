@@ -1,12 +1,8 @@
-﻿using Core.Application.Dtos.Commerce;
-using Core.Application.Features.Commerce.Medicines.Queries.GetPaginatedMedicine;
-using Core.Application.Features.Commerce.Merchants.Commands.CreateMerchant;
+﻿using Core.Application.Features.Commerce.Merchants.Commands.CreateMerchant;
 using Core.Application.Features.Commerce.Merchants.Commands.DeleteMerchantById;
 using Core.Application.Features.Commerce.Merchants.Commands.UpdateMerchant;
 using Core.Application.Features.Commerce.Merchants.Queries.GetMerchantById;
 using Core.Application.Features.Commerce.Merchants.Queries.GetPaginatedMedicine;
-using Core.Domain.Models.QueryParams.Abstractions;
-using Core.Domain.Models.QueryParams.Commerce;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Abstractions;

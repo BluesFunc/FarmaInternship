@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "Core.Infrastructure.Services.Statistics.Base";
+
+package product;
+
+service ProductStatisticService {
+  rpc GetProductStatistic(ProductData) returns (ProductStatisticData);
+}
+
+
+message ProductData {
+  string ProductGuid = 1;
+}
+
+message ProductStatisticData {
+  string ProductGuid = 1;
+  int64 ViewCount = 2;
+}

@@ -1,7 +1,5 @@
 ﻿using Core.Application.Wrappers;
 using Core.Application.Wrappers.Enums;
-using Core.Domain.Entities.Abstractions;
-using Core.Domain.Interfaces.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,0 +1,16 @@
+﻿### GET request to example server
+POST https://localhost:7215/users
+
+###
+
+###
+GET https://localhost:7215/users
+
+###
+
+###
+GET https://localhost:7215/users/70ffe017-5dd8-48d4-971c-28276ef1c32d
+
+###
+
+

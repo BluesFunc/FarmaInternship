@@ -1,0 +1,4 @@
+{
+    "entityframework.project": "Core.Infrastructure",
+    "entityframework.startupProject": "WebApi"
+}

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option csharp_namespace = "Analytics.BLL.ProtoBase";
+
+package user;
+
+service UserStatisticService {
+  rpc GetUserStatistic(UserData) returns (UserStatisticData);
+}
+
+message UserData
+{
+  string UserGuid = 1;
+}
+
+message UserStatisticData
+{
+  uint64 OrdersCount = 1;
+  uint64 TotalRevenue = 2;
+}

@@ -1,0 +1,18 @@
+# Use root/example as user/password credentials
+
+services:
+
+  statistic-database:
+    image: sha256:dc5625b96e2f902e639ace95673207cebf11e5f69cd8031451f023238339f64a
+    env_file:
+      - app.env
+    ports:
+      - "27017:27017"
+
+#  mongo-express:
+#    image: mongo-express:1.0.2-20-alpine3.19
+#    restart: always
+#    ports:
+#      - 8081:8081
+#    env_file:
+#      app.env

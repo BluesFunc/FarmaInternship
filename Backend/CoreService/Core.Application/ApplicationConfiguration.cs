@@ -17,8 +17,8 @@ public static class ApplicationConfiguration
             cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-            // Add behavior here. MediatR pipeline is placed like stack items
         });
+
         serviceCollection.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 

@@ -16,10 +16,23 @@ public static class HostingExtension
             .AddOpenApiAuth()
             .ConfigureInfrastructure()
             .AddControllers();
+        
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAngularApp", policy =>
+            {
+                policy.WithOrigins(Environment.GetEnvironmentVariable("CLIENT_URL")) 
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials(); 
+            });
+        });
+            
     }
 
     public static async Task UseExtensionsAsync(this WebApplication app)
     {
+        app.UseCors("AllowAngularApp");
         app.UseSerilogRequestLogging();
 
         if (app.Environment.IsDevelopment())

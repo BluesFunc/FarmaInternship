@@ -5,7 +5,7 @@ namespace Auth.Infrastructure.Options;
 
 public static class AuthOptions
 {
-    public static string Audience { get; } = "Farmacio";
+    public static string Audience { get; } = Environment.GetEnvironmentVariable("AUTH_AUDIENCE");
 
     public static SymmetricSecurityKey SecurityKey { get; }
         = new(Encoding.UTF8.GetBytes

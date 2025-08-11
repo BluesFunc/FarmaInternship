@@ -9,7 +9,7 @@ public static class DatabaseMigrationExtension
     {
         using var scope = app.Services.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<UserDbContext>();
-
+        
         await MigrateAsync(context);
     }
 

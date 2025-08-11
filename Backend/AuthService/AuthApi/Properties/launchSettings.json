@@ -21,7 +21,13 @@
         "REFRESH_TOKEN_LIFETIME": "30",
         "ACCESS_TOKEN_LIFETIME": "15",
         "USER_DB_CONNECTION": "Server=localhost; Database=user_db;User Id=sa;Password=Zxc!23asdfg; TrustServerCertificate=True",
-        "HANGFIRE_CONNECTION": "Server=localhost; Database=BackgroundJobs;User Id=sa;Password=Zxc!23asdfg; TrustServerCertificate=True"
+        "HANGFIRE_CONNECTION": "Server=localhost; Database=BackgroundJobs;User Id=sa;Password=Zxc!23asdfg; TrustServerCertificate=True",
+        "AUTH_AUDIENCE": "Farmacio",
+        "MAIL_HOST_ADDRESS": "smtp.gmail.com",
+        "MAIL_HOST_PORT": "587",
+        "EMAIL_USERNAME": "farmacioservice@gmail.com",
+        "EMAIL_PASSWORD": "eiqn kdwr qwxw ymqt",
+        "CLIENT_URL": "http://localhost:4200"
       }
     },
     "IIS Express": {

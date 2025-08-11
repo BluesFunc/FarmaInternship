@@ -16,6 +16,9 @@ public class ProductRepository(DbContext context)
     {
         var query = Context.Set<Product>().AsNoTracking();
 
+        query = query.Include(x => x.MedicineItem);
+
+
         var builder = new ProductQueryBuilder(query)
             .NameStartsWith(filter.Name)
             .ByStatus(filter.Status);
@@ -30,6 +33,9 @@ public class ProductRepository(DbContext context)
     public async Task<Product?> GetEntityAsync(ProductQueryParams filter, CancellationToken cancellationToken = default)
     {
         var query = Context.Set<Product>().AsNoTracking();
+
+        query = query.Include(x => x.MedicineItem);
+
 
         var builder = new ProductQueryBuilder(query)
             .NameStartsWith(filter.Name)
