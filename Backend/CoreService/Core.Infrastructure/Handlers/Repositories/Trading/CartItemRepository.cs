@@ -16,7 +16,7 @@ public class CartItemRepository(DbContext context) : RepositoryBase<CartItem>(co
         var query = Context.Set<CartItem>().AsNoTracking();
 
         query = query.Include(x => x.ProductObject);
-        
+
         var builder = new CartItemQueryBuilder(query)
             .ByCartId(filter.CartId)
             .ByProductId(filter.UserId);

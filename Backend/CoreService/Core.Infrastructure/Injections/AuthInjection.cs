@@ -15,7 +15,7 @@ public static class AuthInjection
             Environment.GetEnvironmentVariable("SECRET_KEY")
             ?? throw new InvalidOperationException()
         ));
-        
+
         serviceCollection.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -30,7 +30,7 @@ public static class AuthInjection
             );
 
         serviceCollection.AddAuthorization();
-        
+
         return serviceCollection;
     }
 }

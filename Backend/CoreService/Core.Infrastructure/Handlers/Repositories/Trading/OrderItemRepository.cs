@@ -16,7 +16,7 @@ public class OrderItemRepository(DbContext context) : RepositoryBase<OrderItem>(
         var query = Context.Set<OrderItem>().AsNoTracking();
 
         query = query.Include(x => x.ProductObject);
-        
+
         var builder = new OrderItemQueryBuilder(query)
             .ByProductId(filter.ProductId)
             .ByOrderId(filter.OrderId);
@@ -32,7 +32,7 @@ public class OrderItemRepository(DbContext context) : RepositoryBase<OrderItem>(
         CancellationToken cancellationToken = default)
     {
         var query = Context.Set<OrderItem>().AsNoTracking();
-        
+
         query = query.Include(x => x.ProductObject);
 
         var builder = new OrderItemQueryBuilder(query)

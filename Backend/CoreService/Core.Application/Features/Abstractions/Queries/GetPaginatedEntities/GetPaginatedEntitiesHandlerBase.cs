@@ -28,7 +28,7 @@ public abstract class GetPaginatedEntitiesHandlerBase<TRepository, TEntity, TReq
         var filter = request.Filter.Adapt<TFilter>();
 
         var entities = await _repository.GetPaginatedAsync(filter, cancellationToken);
-        
+
         if (entities is null)
         {
             return Result<PaginationList<TResponse>>.Failed(ErrorTypeCode.EntityConflict);

@@ -1,11 +1,15 @@
 services:
   
-
   
   frontend:
     image: farmacio-client:0.1
     ports:
       - "4200:80"
+    depends_on:
+      core-app:
+        condition: service_started
+      auth-app:
+        condition: service_started
     networks:
       - backend
   
@@ -27,6 +31,9 @@ services:
     image: farmacio-auth:0.1
     env_file:
       - ../AuthService/auth-app.env
+    depends_on:
+      users-database:
+        condition: service_healthy
     ports:
       - "5001:5001"
     
@@ -44,12 +51,17 @@ services:
     networks:
       - backend
       - statistic-net
-    
+  
   users-database:
     image: sha256:2b41d0be82839692f678a709e8b7dd6106ee4776b0e70759c59b067730058b04
     env_file:
       - ../AuthService/auth-app.env
-    
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -S localhost -C -U sa -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1" -b -o /dev/null
+      interval: 1s
+      timeout: 45s
+      retries: 45
+      start_period: 3s
     volumes:
       - userDB-volume:/var/opt/mssql
     ports:

@@ -16,7 +16,7 @@ public class CartRepository(DbContext context) : RepositoryBase<Cart>(context), 
         var query = Context.Set<Cart>().AsNoTracking();
 
         query = query.Include(x => x.CartItems);
-        
+
         var builder = new CartQueryBuilder(query)
             .ByStatus(filter.Status)
             .ByUserId(filter.UserId);
@@ -31,15 +31,13 @@ public class CartRepository(DbContext context) : RepositoryBase<Cart>(context), 
     public async Task<Cart?> GetEntityAsync(CartQueryParams filter, CancellationToken cancellationToken = default)
     {
         var query = Context.Set<Cart>().AsNoTracking();
-        
+
         query = query.Include(x => x.CartItems);
-        
+
         var builder = new CartQueryBuilder(query)
             .ByStatus(filter.Status)
             .ByUserId(filter.UserId);
 
         return await builder.GetEntityAsync(cancellationToken);
-        
-
     }
 }
