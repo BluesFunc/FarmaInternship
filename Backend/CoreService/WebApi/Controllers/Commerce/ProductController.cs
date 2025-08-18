@@ -1,10 +1,4 @@
-﻿using Core.Application.Features.Commerce.Medicines.Commands.CreateMedicine;
-using Core.Application.Features.Commerce.Medicines.Commands.DeleteMedicineById;
-using Core.Application.Features.Commerce.Medicines.Commands.UpdateMedicine;
-using Core.Application.Features.Commerce.Medicines.Queries.GetMedicineById;
-using Core.Application.Features.Commerce.ProductCategories.Commands.Commands.DeleteProductCategory;
-using Core.Application.Features.Commerce.ProductCategories.Commands.Commands.UpdateProductCategory;
-using Core.Application.Features.Commerce.Products.Commands.CreateProduct;
+﻿using Core.Application.Features.Commerce.Products.Commands.CreateProduct;
 using Core.Application.Features.Commerce.Products.Commands.DeleteProductById;
 using Core.Application.Features.Commerce.Products.Commands.UpdateProduct;
 using Core.Application.Features.Commerce.Products.Queries.GetPaginatedProducts;

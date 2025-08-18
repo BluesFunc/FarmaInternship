@@ -1,16 +1,18 @@
-using Analytics.Presentation.Services;
+using Analytics.BLL;
+using Analytics.BLL.Configurations;
+using Analytics.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddGrpc();
+builder.Services
+    .ConfigureBusinessLogicLayer()
+    .ConfigureDal()
+    .AddGrpc();
+
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-app.MapGrpcService<GreeterService>();
-app.MapGet("/",
-    () =>
-        "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+app.MapGrcpServices();
 
-app.Run();
+await app.RunAsync();

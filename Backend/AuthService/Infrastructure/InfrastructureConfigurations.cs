@@ -16,7 +16,6 @@ public static class InfrastructureConfigurations
         serviceCollection.AddMail();
         serviceCollection.AddDatabase();
         serviceCollection.AddAuth();
-        serviceCollection.ConfigureRabbit();
         serviceCollection.AddTransient<IBackgroundTaskService, BackgroundTaskService>();
         serviceCollection.AddScoped<JwtSecurityTokenHandler>();
         serviceCollection.AddScoped<IPasswordService, PasswordService>();

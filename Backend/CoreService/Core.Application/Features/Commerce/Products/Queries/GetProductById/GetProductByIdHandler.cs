@@ -1,5 +1,9 @@
-﻿using Core.Application.Dtos.Commerce;
+﻿using System.Text.Json;
+using Core.Application.Configurations;
+using Core.Application.Dtos.Commerce;
+using Core.Application.Dtos.Statistics.Messages;
 using Core.Application.Features.Abstractions;
+using Core.Application.Interfaces.Statistics;
 using Core.Application.Wrappers;
 using Core.Application.Wrappers.Enums;
 using Core.Domain.Entities.Commerce;
@@ -13,8 +17,12 @@ public class GetProductByIdHandler :
     SingleRepositoryHandlerBase<IProductRepository, Product>
     , IRequestHandler<GetProductByIdCommand, Result<ProductDto>>
 {
-    public GetProductByIdHandler(IMapper mapper, IProductRepository repository) : base(mapper, repository)
+    private IStatisticMessageProducer MessageProducer { get; set; }
+
+    public GetProductByIdHandler(IMapper mapper, IProductRepository repository,
+        IStatisticMessageProducer messageProducer) : base(mapper, repository)
     {
+        MessageProducer = messageProducer;
     }
 
     public async Task<Result<ProductDto>> Handle(GetProductByIdCommand request, CancellationToken cancellationToken)
@@ -27,6 +35,19 @@ public class GetProductByIdHandler :
         }
 
         var data = _mapper.Map<ProductDto>(entity);
+
+        var message = new ProductStatisticMessage() { ProductId = data.Id };
+        var jsonMessage = JsonSerializer.Serialize(message, JsonSerializerOptions.Default);
+
+        try
+        {
+            await MessageProducer.SendMessageAsync(StatisticBrokerConfiguration.ProductTopic, jsonMessage,
+                cancellationToken); // Producer should serialize data
+        }
+        catch
+        {
+            // ignored
+        }
 
         return Result<ProductDto>.Successful(data);
     }

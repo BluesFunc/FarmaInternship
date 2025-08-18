@@ -1,6 +1,23 @@
-@WebApi_HostAddress = http://localhost:5201
+POST http://localhost:80/auth/Register
+Content-Type: application/json
 
-GET {{WebApi_HostAddress}}/weatherforecast/
+{
+  "username": "borow",
+  "mail": "bogdan@gmail.com",
+  "password": "asdfg1234",
+  "role": 0
+}
+
+###
+Content-Type: application/json
+
+{}
+
+###
+@WebApi_HostAddress = http://localhost/auth/Login
+
+POST {{WebApi_HostAddress}}
+
 Accept: application/json
 
 ###
