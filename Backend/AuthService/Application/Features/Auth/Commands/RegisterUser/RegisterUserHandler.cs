@@ -22,13 +22,13 @@ public class RegisterUserHandler(
             return Result<TokenPair>.Failed(ErrorStatusCode.EntityConflict, "Email already in use");
         }
 
-        var user = new User(request.Mail, request.Role) { Username = request.Username };
+        var user = new User(Guid.NewGuid(), request.Mail, request.Role) { Username = request.Username };
         user.Password = passwordService.HashPassword(user, request.Password);
 
-        var entity = repository.AddEntity(user);
 
-        var tokenPair = jwtService.GenerateTokenPair(entity);
+        var tokenPair = jwtService.GenerateTokenPair(user);
         user.RefreshToken = tokenPair.RefreshToken;
+
         repository.AddEntity(user);
         await repository.SaveChangesAsync(cancellationToken);
 

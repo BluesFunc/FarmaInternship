@@ -16,18 +16,17 @@ public static class HostingExtension
             .AddOpenApiAuth()
             .ConfigureInfrastructure()
             .AddControllers();
-        
+
         builder.Services.AddCors(options =>
         {
             options.AddPolicy("AllowAngularApp", policy =>
             {
-                policy.WithOrigins(Environment.GetEnvironmentVariable("CLIENT_URL")) 
+                policy.WithOrigins(Environment.GetEnvironmentVariable("CLIENT_URL"))
                     .AllowAnyHeader()
                     .AllowAnyMethod()
-                    .AllowCredentials(); 
+                    .AllowCredentials();
             });
         });
-            
     }
 
     public static async Task UseExtensionsAsync(this WebApplication app)
@@ -40,7 +39,7 @@ public static class HostingExtension
             app.UseSwagger();
             app.UseSwaggerUI();
             app.UseDeveloperExceptionPage();
-            await app.ApplyMigrations();
+            await DatabaseConfigurationExtension.ConfigureDatabase();
         }
 
         app.UseHangfireDashboard();

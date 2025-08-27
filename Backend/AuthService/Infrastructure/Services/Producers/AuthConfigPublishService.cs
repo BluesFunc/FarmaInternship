@@ -9,7 +9,7 @@ public class AuthConfigPublishService(IPublishEndpoint publishEndpoint) : IHoste
 {
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        var message = new AuthConfigMessage()
+        var message = new AuthConfigMessage
         {
             Audience = AuthOptions.Audience,
             SecretKeyData = AuthOptions.SecurityKey.Key,

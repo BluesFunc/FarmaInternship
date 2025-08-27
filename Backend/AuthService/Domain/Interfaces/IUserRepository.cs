@@ -3,4 +3,4 @@ using Domain.Interfaces.Abstractions;
 
 namespace Domain.Interfaces;
 
-public interface IUserRepository : IFilterRepository<User>;
+public interface IUserRepository : IFilterRepository<User>, IGenericRepository<User>;

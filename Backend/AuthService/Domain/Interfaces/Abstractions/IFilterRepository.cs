@@ -3,7 +3,7 @@ using Domain.Entities.Abstractions;
 
 namespace Domain.Interfaces.Abstractions;
 
-public interface IFilterRepository<T> : IGenericRepository<T>
+public interface IFilterRepository<T>
     where T : Entity
 {
     public Task<bool> IsExistAsync(Expression<Func<T, bool>> filter, CancellationToken cancellationToken = default);
