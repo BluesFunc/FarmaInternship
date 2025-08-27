@@ -6,5 +6,6 @@ public enum ErrorTypeCode
     NotFound,
     EntityConflict,
     ValidationError,
-    NotAuthorized
+    AuthenticationError,
+    AuthorizationError
 }

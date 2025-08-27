@@ -13,11 +13,14 @@ public static class InfrastructureConfiguration
     {
         TypeAdapterConfig.GlobalSettings.ScanInheritedTypes(Assembly.GetExecutingAssembly());
 
-        serviceCollection.InjectAuth()
+        serviceCollection.InjectAuthentication()
+            .InjectAuthorization()
             .InjectDatabase()
             .InjectGrcp()
             .InjectBroker(config)
-            .InjectNotification();
+            .InjectNotification()
+            .AddMemoryCache()
+            ;
 
         return serviceCollection;
     }

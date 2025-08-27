@@ -8,7 +8,7 @@ public class UserAnalyticService(UserStatisticService.UserStatisticServiceClient
 {
     public async Task<UserStatisticMessage?> CollectInstanceStatistic(Guid id)
     {
-        var request = new UserData() { UserGuid = id.ToString() };
+        var request = new UserData { UserGuid = id.ToString() };
         var response = client.GetUserStatistic(request);
 
         if (response is null)
@@ -16,7 +16,7 @@ public class UserAnalyticService(UserStatisticService.UserStatisticServiceClient
             return null;
         }
 
-        var result = new UserStatisticMessage()
+        var result = new UserStatisticMessage
         {
             UserId = id,
             TotalRevenue = response.TotalRevenue,

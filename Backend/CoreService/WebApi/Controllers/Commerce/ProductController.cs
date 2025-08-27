@@ -4,39 +4,43 @@ using Core.Application.Features.Commerce.Products.Commands.UpdateProduct;
 using Core.Application.Features.Commerce.Products.Queries.GetPaginatedProducts;
 using Core.Application.Features.Commerce.Products.Queries.GetProductById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Abstractions;
 
 namespace WebApi.Controllers.Commerce;
 
+[Authorize]
 public class ProductController(ISender sender) : RestController(sender)
 {
     [HttpGet("{id:guid}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetById(Guid id)
     {
-        var command = new GetProductByIdCommand() { Id = id };
+        var command = new GetProductByIdCommand { Id = id };
         return await ExecuteMediatrCommand(command);
     }
 
-    [HttpPost()]
+    [HttpPost]
     public async Task<IActionResult> Create(CreateProductCommand command)
     {
         return await ExecuteMediatrCommand(command);
     }
 
-    [HttpDelete()]
+    [HttpDelete]
     public async Task<IActionResult> Delete(DeleteProductByIdCommand command)
     {
         return await ExecuteMediatrCommand(command);
     }
 
-    [HttpPut()]
+    [HttpPut]
     public async Task<IActionResult> Update(UpdateProductCommand command)
     {
         return await ExecuteMediatrCommand(command);
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> Get([FromQuery] GetPaginatedProductsCommand command)
     {
         return await ExecuteMediatrCommand(command);

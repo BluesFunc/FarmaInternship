@@ -1,6 +1,7 @@
 ﻿using Core.Application.Wrappers;
 using Core.Application.Wrappers.Enums;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.Abstractions;
@@ -17,7 +18,8 @@ public abstract class RestController(ISender sender) : ControllerBase
             ErrorTypeCode.NotFound => NotFound(result.Message),
             ErrorTypeCode.EntityConflict => BadRequest(result.Message),
             ErrorTypeCode.ValidationError => UnprocessableEntity(result.Message),
-            ErrorTypeCode.NotAuthorized => Unauthorized(result.Message),
+            ErrorTypeCode.AuthenticationError => Unauthorized(result.Message),
+            ErrorTypeCode.AuthorizationError => Forbid(JwtBearerDefaults.AuthenticationScheme),
             ErrorTypeCode.None => Ok(result),
             _ => throw new ArgumentOutOfRangeException()
         };
@@ -30,7 +32,8 @@ public abstract class RestController(ISender sender) : ControllerBase
             ErrorTypeCode.NotFound => NotFound(result.Message),
             ErrorTypeCode.EntityConflict => BadRequest(result.Message),
             ErrorTypeCode.ValidationError => UnprocessableEntity(result.Message),
-            ErrorTypeCode.NotAuthorized => Unauthorized(result.Message),
+            ErrorTypeCode.AuthenticationError => Unauthorized(result.Message),
+            ErrorTypeCode.AuthorizationError => Forbid(JwtBearerDefaults.AuthenticationScheme),
             ErrorTypeCode.None => Ok(result),
             _ => throw new ArgumentOutOfRangeException()
         };

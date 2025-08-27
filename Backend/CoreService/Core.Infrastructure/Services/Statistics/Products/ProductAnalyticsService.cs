@@ -9,11 +9,11 @@ public class ProductAnalyticsService(ProductStatisticService.ProductStatisticSer
 {
     public async Task<ProductStatisticMessage> CollectInstanceStatistic(Guid id)
     {
-        var request = new ProductData() { ProductGuid = id.ToString() };
+        var request = new ProductData { ProductGuid = id.ToString() };
 
         var response = client.GetProductStatistic(request);
 
-        var result = new ProductStatisticMessage() { ProductId = id, ViewCount = response.ViewCount };
+        var result = new ProductStatisticMessage { ProductId = id, ViewCount = response.ViewCount };
         return result;
     }
 }
