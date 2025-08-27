@@ -10,6 +10,8 @@ using Core.Domain.Entities.Commerce;
 using Core.Domain.Interfaces.Repositories.Commerce;
 using MapsterMapper;
 using MediatR;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 
 namespace Core.Application.Features.Commerce.Products.Queries.GetProductById;
 
@@ -18,36 +20,50 @@ public class GetProductByIdHandler :
     , IRequestHandler<GetProductByIdCommand, Result<ProductDto>>
 {
     private IStatisticMessageProducer MessageProducer { get; set; }
+    private IMemoryCache _memoryCache;
+    private ILogger<GetProductByIdHandler> _logger;
 
     public GetProductByIdHandler(IMapper mapper, IProductRepository repository,
-        IStatisticMessageProducer messageProducer) : base(mapper, repository)
+        IStatisticMessageProducer messageProducer, IMemoryCache memoryCache,
+        ILogger<GetProductByIdHandler> logger) : base(mapper, repository)
     {
         MessageProducer = messageProducer;
+        _memoryCache = memoryCache;
+        _logger = logger;
     }
 
     public async Task<Result<ProductDto>> Handle(GetProductByIdCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _repository.GetByIdAsync(request.Id, cancellationToken);
+        Product? entity;
+        var isCached = _memoryCache.TryGetValue(request.Id, out entity);
 
-        if (entity is null)
+        if (!isCached)
         {
-            return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
+            entity = await _repository.GetByIdAsync(request.Id, cancellationToken);
+
+            if (entity is null)
+            {
+                return Result<ProductDto>.Failed(ErrorTypeCode.NotFound);
+            }
+
+            _memoryCache.Set(entity.Id, entity, DateTimeOffset.Now.Add(CachingConfigurations.ProductCacheLifetime));
         }
 
         var data = _mapper.Map<ProductDto>(entity);
 
-        var message = new ProductStatisticMessage() { ProductId = data.Id };
+        var message = new ProductStatisticMessage { ProductId = data.Id };
         var jsonMessage = JsonSerializer.Serialize(message, JsonSerializerOptions.Default);
 
         try
         {
             await MessageProducer.SendMessageAsync(StatisticBrokerConfiguration.ProductTopic, jsonMessage,
-                cancellationToken); // Producer should serialize data
+                cancellationToken);
         }
-        catch
+        catch (Exception ex)
         {
-            // ignored
+            _logger.LogError(ex.StackTrace);
         }
+
 
         return Result<ProductDto>.Successful(data);
     }

@@ -38,7 +38,7 @@ public static class OpenApiExtensions
                 },
                 Array.Empty<string>());
 
-            swagger.AddSecurityRequirement(new OpenApiSecurityRequirement()
+            swagger.AddSecurityRequirement(new OpenApiSecurityRequirement
             {
                 { securityScheme, array }
             });

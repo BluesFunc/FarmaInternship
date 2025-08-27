@@ -6,6 +6,7 @@ namespace Domain.Entities;
 
 public class User : Entity, IAuditableEntity
 {
+    public override Guid Id { get; }
     public string Username { get; set; }
     public string Password { get; set; }
     [EmailAddress] public string Mail { get; }
@@ -18,9 +19,11 @@ public class User : Entity, IAuditableEntity
     {
     }
 
-    public User(string mail, UserRole role)
+    public User(Guid id, string mail, UserRole role)
     {
+        Id = id;
         Mail = mail;
+        UserRole = role;
     }
 
     public void Deconstruct(out string mail, out string username, out string password)

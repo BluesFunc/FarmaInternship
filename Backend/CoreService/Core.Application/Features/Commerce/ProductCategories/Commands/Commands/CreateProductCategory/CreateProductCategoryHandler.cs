@@ -21,7 +21,7 @@ public class CreateProductCategoryHandler :
     public async Task<Result<ProductCategoryDto>> Handle(CreateProductCategoryCommand request,
         CancellationToken cancellationToken)
     {
-        var entity = new ProductCategory() { Name = request.Name };
+        var entity = new ProductCategory { Name = request.Name };
 
         var newEntity = await _repository.AddAsync(entity, cancellationToken);
 

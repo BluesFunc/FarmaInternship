@@ -20,7 +20,7 @@ public class CreateMedicineHandler : SingleRepositoryHandlerBase<IMedicineReposi
     public async Task<Result<MedicineDto>> Handle(CreateMedicineCommand request,
         CancellationToken cancellationToken = default)
     {
-        var newEntity = new Medicine()
+        var newEntity = new Medicine
         {
             Name = request.Name,
             Type = request.Type,

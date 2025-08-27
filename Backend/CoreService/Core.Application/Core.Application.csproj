@@ -9,6 +9,7 @@
     <ItemGroup>
         <Folder Include="Features\Abstractions\Queries\"/>
         <Folder Include="Features\Trading\OrderItems\Commands\UpdateOrderItem\"/>
+        <Folder Include="Requirements\"/>
     </ItemGroup>
 
     <ItemGroup>

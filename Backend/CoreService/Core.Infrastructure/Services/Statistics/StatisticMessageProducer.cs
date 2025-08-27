@@ -14,6 +14,6 @@ public class StatisticMessageProducer : IStatisticMessageProducer
 
     public async Task SendMessageAsync(string topic, string message, CancellationToken cancellationToken)
     {
-        await _producer.ProduceAsync(topic, new Message<string, string>() { Value = message }, cancellationToken);
+        await _producer.ProduceAsync(topic, new Message<string, string> { Value = message }, cancellationToken);
     }
 }

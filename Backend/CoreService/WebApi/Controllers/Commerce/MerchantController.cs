@@ -3,39 +3,46 @@ using Core.Application.Features.Commerce.Merchants.Commands.DeleteMerchantById;
 using Core.Application.Features.Commerce.Merchants.Commands.UpdateMerchant;
 using Core.Application.Features.Commerce.Merchants.Queries.GetMerchantById;
 using Core.Application.Features.Commerce.Merchants.Queries.GetPaginatedMedicine;
+using Core.Infrastructure.Configurations;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Abstractions;
 
 namespace WebApi.Controllers.Commerce;
 
+[Authorize(Policy = AuthorizationConfigurations.AdminOrMerchandiserPolicy)]
 public class MerchantController(ISender sender) : RestController(sender)
 {
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
     {
-        var command = new GetMerchantByIdCommand() { Id = id };
+        var command = new GetMerchantByIdCommand { Id = id };
         return await ExecuteMediatrCommand(command);
     }
 
-    [HttpPost()]
+    [Authorize(Policy = AuthorizationConfigurations.AdminPolicy)]
+    [HttpPost]
     public async Task<IActionResult> Create(CreateMerchantCommand command)
     {
         return await ExecuteMediatrCommand(command);
     }
 
-    [HttpDelete()]
+    [Authorize(AuthorizationConfigurations.AdminPolicy)]
+    [HttpDelete]
     public async Task<IActionResult> Delete(DeleteMerchantByIdCommand command)
     {
         return await ExecuteMediatrCommand(command);
     }
 
-    [HttpPut()]
+
+    [HttpPut]
     public async Task<IActionResult> Update(UpdateMerchantCommand command)
     {
         return await ExecuteMediatrCommand(command);
     }
 
+    [Authorize(AuthorizationConfigurations.AdminPolicy)]
     [HttpGet]
     public async Task<IActionResult> Get([FromQuery] GetPaginatedMerchantCommand command = null)
     {

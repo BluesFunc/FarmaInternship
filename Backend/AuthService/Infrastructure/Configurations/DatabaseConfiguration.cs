@@ -1,5 +1,5 @@
 ﻿using Auth.Infrastructure.Contexts;
-using Auth.Infrastructure.Repositories;
+using Auth.Infrastructure.Repositories.Dapper;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +12,9 @@ internal static class DatabaseConfiguration
     {
         serviceCollection.AddDbContext<DbContext, UserDbContext>(builder =>
             builder.UseSqlServer(Environment.GetEnvironmentVariable("USER_DB_CONNECTION")));
-        serviceCollection.AddScoped<IUserRepository, UserRepository>();
+        // serviceCollection.AddScoped<IUserRepository, UserRepository>();
+        serviceCollection.AddScoped<IUserRepository, UserRepository>(builder
+            => new UserRepository(Environment.GetEnvironmentVariable("USER_DB_CONNECTION")));
         return serviceCollection;
     }
 }

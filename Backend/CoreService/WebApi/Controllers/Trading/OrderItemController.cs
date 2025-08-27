@@ -2,22 +2,24 @@
 using Core.Application.Features.Trading.OrderItems.Queries.GetOrderItemById;
 using Core.Application.Features.Trading.OrderItems.Queries.GetPaginatedOrderItems;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Abstractions;
 
 namespace WebApi.Controllers.Trading;
 
+[Authorize]
 [Route("api/Order/{orderId:guid}/[controller]")]
 public class OrderItemController(ISender sender) : RestController(sender)
 {
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
     {
-        var command = new GetOrderItemByIdCommand() { Id = id };
+        var command = new GetOrderItemByIdCommand { Id = id };
         return await ExecuteMediatrCommand(command);
     }
 
-    [HttpDelete()]
+    [HttpDelete]
     public async Task<IActionResult> Delete(DeleteOrderItemByIdCommand command)
     {
         return await ExecuteMediatrCommand(command);

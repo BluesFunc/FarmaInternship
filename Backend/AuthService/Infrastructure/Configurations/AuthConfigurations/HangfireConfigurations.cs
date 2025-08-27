@@ -11,7 +11,7 @@ public static class HangfireConfigurations
         var connectionString = Environment.GetEnvironmentVariable("HANGFIRE_CONNECTION");
 
         EnsureDatabaseExists(connectionString);
-        
+
         serviceCollection.AddHangfire(config => config
             .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
             .UseSimpleAssemblyNameTypeSerializer()
